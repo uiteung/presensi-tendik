@@ -6,51 +6,59 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi")
         if (response && response.data && response.data.length > 0) {
             let tableData = "";
 
-            response.data.forEach((entry) => {
-                // Akses objek biodata di dalam objek entry
-                const biodata = entry.biodata;
+            const masukData = {}; // Menyimpan data jam masuk berdasarkan tanggal
+            const pulangData = {}; // Menyimpan data jam pulang berdasarkan tanggal
 
-                // Mendapatkan data checkin dan datetime
+            response.data.forEach((entry) => {
+                const biodata = entry.biodata;
                 const checkin = entry.checkin;
                 const datetime = entry.datetime;
-
-                // Mengubah string datetime menjadi objek Date
                 const dateObject = new Date(datetime);
-                
-                // Mendapatkan tanggal dalam format yyyy-mm-dd
                 const formattedDate = dateObject.toISOString().split('T')[0];
-                // Mendapatkan format jam, menit, dan detik (hh:mm:ss)
                 const formattedTime = `${dateObject.getHours()}:${String(dateObject.getMinutes()).padStart(2, '0')}:${String(dateObject.getSeconds()).padStart(2, '0')}`;
+
+                if (checkin === "masuk") {
+                    masukData[formattedDate] = formattedTime;
+                } else if (checkin === "pulang") {
+                    pulangData[formattedDate] = formattedTime;
+                }
 
                 tableData += `
                 <tr>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div class="ms-3">
-                        <p class="fw-bold mb-1">${biodata.nama}</p>
-                        <p class="text-muted mb-0">${biodata.phone_number}</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p class="fw-normal mb-1">${biodata.jabatan}</p>
-                  </td>
-                  <td>
-                    <p class="fw-normal mb-1"><b>${checkin === "masuk" ? "Masuk" : "Pulang"}</b>, ${formattedTime}</p>
-                  </td>
-                  <td>
-                      <p class="fw-normal mb-1">${formattedDate}</p>
-                  </td>
-                  <td>
-                      8 Jam 30 menit 4 detik
-                  </td>
-                  <td>
-                      102%
-                  </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">${biodata.nama}</p>
+                                <p class="text-muted mb-0">${biodata.phone_number}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">${biodata.jabatan}</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1"><b>${checkin === "masuk" ? "Masuk" : "Pulang"}</b>, ${formattedTime}</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">${formattedDate}</p>
+                    </td>
+                    <td>
+                        ${
+                            checkin === "pulang" && masukData[formattedDate]
+                            ? calculateDuration(masukData[formattedDate], formattedTime)
+                            : "0 Jam 0 Menit 0 Detik"
+                        }
+                    </td>
+                    <td>
+                        ${
+                            checkin === "pulang" && masukData[formattedDate]
+                            ? calculatePercentage(masukData[formattedDate], formattedTime)
+                            : "0%"
+                        }
+                    </td>
                 </tr>`;
             });
 
-            // Tampilkan data pegawai ke dalam tabel
             document.getElementById("tablebody").innerHTML = tableData;
         } else {
             console.log("Data tidak tersedia atau struktur data tidak sesuai.");
@@ -59,3 +67,27 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi")
     .catch(error => {
         console.log('error', error);
     });
+
+function calculateDuration(masukTime, pulangTime) {
+    const masuk = new Date(`2000-01-01T${masukTime}`);
+    const pulang = new Date(`2000-01-01T${pulangTime}`);
+    const durasi = pulang - masuk;
+
+    const durasiJam = Math.floor(durasi / (1000 * 60 * 60));
+    const durasiMenit = Math.floor((durasi % (1000 * 60 * 60)) / (1000 * 60));
+    const durasiDetik = Math.floor((durasi % (1000 * 60)) / 1000);
+
+    return `${durasiJam} Jam ${durasiMenit} Menit ${durasiDetik} Detik`;
+}
+
+function calculatePercentage(masukTime, pulangTime) {
+    const durasi = calculateDuration(masukTime, pulangTime);
+    const [durasiJam, durasiMenit, durasiDetik] = durasi.split(" ")[0].split("Jam").map(str => parseInt(str));
+    
+    const totalDetik = (durasiJam * 60 * 60) + (durasiMenit * 60) + durasiDetik;
+    const totalDetikHadir = (8 * 60 * 60);
+
+    const persentase = (totalDetik / totalDetikHadir) * 100;
+
+    return persentase.toFixed(2) + "%";
+}

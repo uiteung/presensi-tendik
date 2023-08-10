@@ -81,13 +81,14 @@ function calculateDuration(masukTime, pulangTime) {
 }
 
 function calculatePercentage(masukTime, pulangTime) {
-    const durasi = calculateDuration(masukTime, pulangTime);
-    const [durasiJam, durasiMenit, durasiDetik] = durasi.split(" ")[0].split("Jam").map(str => parseInt(str));
-    
-    const totalDetik = (durasiJam * 60 * 60) + (durasiMenit * 60) + durasiDetik;
-    const totalDetikHadir = (8 * 60 * 60);
+  const masuk = new Date(`2000-01-01T${masukTime}`);
+  const pulang = new Date(`2000-01-01T${pulangTime}`);
+  const durasi = pulang - masuk;
 
-    const persentase = (totalDetik / totalDetikHadir) * 100;
+  const durasiDetik = durasi / 1000;
+  const totalDetikHadir = 8 * 60 * 60;
 
-    return persentase.toFixed(2) + "%";
+  const persentase = (durasiDetik / totalDetikHadir) * 100;
+
+  return persentase.toFixed(2) + "%";
 }

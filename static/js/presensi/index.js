@@ -31,53 +31,69 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi")
             });
 
             let tableData = "";
-            // Di dalam loop tempat Anda menghasilkan data tabel
-            for (const nama in combinedData) {
-                for (const date in combinedData[nama]) {
-                    const { masuk, pulang } = combinedData[nama][date];
-                    const masukTime = masuk ? masuk.toLocaleTimeString("id-ID", { timeZone: "Asia/Jakarta", timeStyle: "medium" }) : "Tidak absen masuk";
-                    const pulangTime = pulang ? pulang.toLocaleTimeString("id-ID", { timeZone: "Asia/Jakarta", timeStyle: "medium" }) : "Tidak absen pulang";
-                    const masukStatus = masuk ? "Masuk" : "";
-                    const pulangStatus = pulang ? "Pulang" : "";
-                    const biodata = response.data.find(entry => entry.biodata.nama === nama).biodata;
+              for (const nama in combinedData) {
+                  for (const date in combinedData[nama]) {
+                      const { masuk, pulang } = combinedData[nama][date];
+                      const masukTime = masuk ? masuk.toLocaleTimeString("id-ID", { timeZone: "Asia/Jakarta", timeStyle: "medium" }) : "Tidak Absen Masuk";
+                      const pulangTime = pulang ? pulang.toLocaleTimeString("id-ID", { timeZone: "Asia/Jakarta", timeStyle: "medium" }) : "Tidak Absen Pulang";
+                      const masukStatus = masuk ? "Masuk" : "";
+                      const pulangStatus = pulang ? "Pulang" : "";
+                      const biodata = response.data.find(entry => entry.biodata.nama === nama).biodata;
 
-                    // Sisanya kode pembuatan data tabel
-                    tableData += `
-                  <tr>
-                      <td>
-                          <div class="d-flex align-items-center">
-                              <div class="ms-3">
-                                  <p class="fw-bold mb-1">${nama}</p>
+                      // Tentukan keterangan badge "Masuk Kerja" jika sudah pulang
+                      const keterangan = pulangStatus
+                      ? '<span class="badge-blue" style="background-color: blue; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Kerja</span>' 
+                      : '<a class="btn btn-primary" href="#">Action</a>';
+
+                      // Tentukan apakah tombol "Uploud" akan muncul atau tidak
+                      const uploudButton = pulangStatus 
+                      ? '<span class="badge-blue" style="background-color: blue; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Kerja</span>' 
+                      : '<a class="btn btn-info" style="color: white" href="#">Uploud</a>';
+
+                      // Sisanya kode pembuatan data tabel
+                      tableData += `
+                      <tr>
+                          <td>
+                              <div class="d-flex align-items-center">
+                                  <div class="ms-3">
+                                      <p class="fw-bold mb-1">${nama}</p>
+                                      <p class="text-muted mb-0">${biodata.phone_number}</p>
+                                  </div>
                               </div>
-                          </div>
-                      </td>
-                      <td>
-                          <p class="fw-normal mb-1">${biodata.jabatan}</p>
-                      </td>
-                      <td>
-                          <p class="fw-normal mb-1"><b>${masukStatus}</b> ${masukTime}</p>
-                          <p class="fw-normal mb-1"><b>${pulangStatus}</b> ${pulangTime}</p>
-                      </td>
-                      <td>
-                          <p class="fw-normal mb-1">${date}</p>
-                      </td>
-                      <td>
-                          ${
-                            pulang && masuk
-                              ? calculateDuration(masuk, pulang)
-                              : "0 Jam 0 Menit 0 Detik"
-                          }
-                      </td>
-                      <td>
-                          ${
-                            pulang && masuk
-                              ? calculatePercentage(masuk, pulang)
-                              : "0%"
-                          }
-                      </td>
-                  </tr>`;
-                }
-            }
+                          </td>
+                          <td>
+                              <p class="fw-normal mb-1">${biodata.jabatan}</p>
+                          </td>
+                          <td>
+                              <p class="fw-normal mb-1"><b>${masukStatus}</b> ${masukTime}</p>
+                              <p class="fw-normal mb-1"><b>${pulangStatus}</b> ${pulangTime}</p>
+                          </td>
+                          <td>
+                              <p class="fw-normal mb-1">${date}</p>
+                          </td>
+                          <td>
+                              ${
+                                  pulang && masuk
+                                  ? calculateDuration(masuk, pulang)
+                                  : "0 Jam 0 Menit 0 Detik"
+                              }
+                          </td>
+                          <td>
+                              ${
+                                  pulang && masuk
+                                  ? calculatePercentage(masuk, pulang)
+                                  : "0%"
+                              }
+                          </td>
+                          <td>
+                              ${keterangan}
+                          </td>
+                          <td>
+                             ${uploudButton}
+                          </td>
+                      </tr>`;
+                  }
+              }
 
             document.getElementById("tablebody").innerHTML = tableData;
         } else {
@@ -102,7 +118,7 @@ function calculatePercentage(masukTime, pulangTime) {
     const durasi = pulangTime - masukTime;
 
     const durasiDetik = durasi / 1000;
-    const totalDetikHadir = 8 * 60 * 60;
+    const totalDetikHadir = 8.5 * 60 * 60;
 
     const persentase = (durasiDetik / totalDetikHadir) * 100;
 

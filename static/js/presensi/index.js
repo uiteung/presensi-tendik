@@ -4,60 +4,80 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi")
     })
     .then((response) => {
         if (response && response.data && response.data.length > 0) {
-            let tableData = "";
-
-            const masukData = {}; // Menyimpan data jam masuk berdasarkan tanggal
-            const pulangData = {}; // Menyimpan data jam pulang berdasarkan tanggal
+            let combinedData = {}; // Combined data of masuk and pulang records
 
             response.data.forEach((entry) => {
                 const biodata = entry.biodata;
                 const checkin = entry.checkin;
                 const datetime = entry.datetime;
-                const dateObject = new Date(datetime);
-                const formattedDate = dateObject.toISOString().split('T')[0];
-                const formattedTime = `${dateObject.getHours()}:${String(dateObject.getMinutes()).padStart(2, '0')}:${String(dateObject.getSeconds()).padStart(2, '0')}`;
+                const formattedDate = new Date(datetime).toISOString().split('T')[0];
 
-                if (checkin === "masuk") {
-                    masukData[formattedDate] = formattedTime;
-                } else if (checkin === "pulang") {
-                    pulangData[formattedDate] = formattedTime;
+                if (!combinedData[biodata.nama]) {
+                    combinedData[biodata.nama] = {};
                 }
 
-                tableData += `
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="ms-3">
-                                <p class="fw-bold mb-1">${biodata.nama}</p>
-                                <p class="text-muted mb-0">${biodata.phone_number}</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">${biodata.jabatan}</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1"><b>${checkin === "masuk" ? "Masuk" : "Pulang"}</b>, ${formattedTime}</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">${formattedDate}</p>
-                    </td>
-                    <td>
-                        ${
-                            checkin === "pulang" && masukData[formattedDate]
-                            ? calculateDuration(masukData[formattedDate], formattedTime)
-                            : "0 Jam 0 Menit 0 Detik"
-                        }
-                    </td>
-                    <td>
-                        ${
-                            checkin === "pulang" && masukData[formattedDate]
-                            ? calculatePercentage(masukData[formattedDate], formattedTime)
-                            : "0%"
-                        }
-                    </td>
-                </tr>`;
+                if (!combinedData[biodata.nama][formattedDate]) {
+                    combinedData[biodata.nama][formattedDate] = {
+                        masuk: null,
+                        pulang: null,
+                    };
+                }
+
+                if (checkin === "masuk") {
+                    combinedData[biodata.nama][formattedDate].masuk = new Date(datetime);
+                } else if (checkin === "pulang") {
+                    combinedData[biodata.nama][formattedDate].pulang = new Date(datetime);
+                }
             });
+
+            let tableData = "";
+            // Di dalam loop tempat Anda menghasilkan data tabel
+            for (const nama in combinedData) {
+                for (const date in combinedData[nama]) {
+                    const { masuk, pulang } = combinedData[nama][date];
+                    const masukTime = masuk ? masuk.toLocaleTimeString("id-ID", { timeZone: "Asia/Jakarta", timeStyle: "medium" }) : "Tidak absen masuk";
+                    const pulangTime = pulang ? pulang.toLocaleTimeString("id-ID", { timeZone: "Asia/Jakarta", timeStyle: "medium" }) : "Tidak absen pulang";
+                    const masukStatus = masuk ? "Masuk" : "";
+                    const pulangStatus = pulang ? "Pulang" : "";
+                    const biodata = response.data.find(entry => entry.biodata.nama === nama).biodata;
+
+                    // Sisanya kode pembuatan data tabel
+                    tableData += `
+                  <tr>
+                      <td>
+                          <div class="d-flex align-items-center">
+                              <div class="ms-3">
+                                  <p class="fw-bold mb-1">${nama}</p>
+                              </div>
+                          </div>
+                      </td>
+                      <td>
+                          <p class="fw-normal mb-1">${biodata.jabatan}</p>
+                      </td>
+                      <td>
+                          <p class="fw-normal mb-1"><b>${masukStatus}</b> ${masukTime}</p>
+                          <p class="fw-normal mb-1"><b>${pulangStatus}</b> ${pulangTime}</p>
+                      </td>
+                      <td>
+                          <p class="fw-normal mb-1">${date}</p>
+                      </td>
+                      <td>
+                          ${
+                            pulang && masuk
+                              ? calculateDuration(masuk, pulang)
+                              : "0 Jam 0 Menit 0 Detik"
+                          }
+                      </td>
+                      <td>
+                          ${
+                            pulang && masuk
+                              ? calculatePercentage(masuk, pulang)
+                              : "0%"
+                          }
+                      </td>
+                  </tr>`;
+                }
+            }
 
             document.getElementById("tablebody").innerHTML = tableData;
         } else {
@@ -69,9 +89,7 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi")
     });
 
 function calculateDuration(masukTime, pulangTime) {
-    const masuk = new Date(`2000-01-01T${masukTime}`);
-    const pulang = new Date(`2000-01-01T${pulangTime}`);
-    const durasi = pulang - masuk;
+    const durasi = pulangTime - masukTime;
 
     const durasiJam = Math.floor(durasi / (1000 * 60 * 60));
     const durasiMenit = Math.floor((durasi % (1000 * 60 * 60)) / (1000 * 60));
@@ -81,14 +99,12 @@ function calculateDuration(masukTime, pulangTime) {
 }
 
 function calculatePercentage(masukTime, pulangTime) {
-  const masuk = new Date(`2000-01-01T${masukTime}`);
-  const pulang = new Date(`2000-01-01T${pulangTime}`);
-  const durasi = pulang - masuk;
+    const durasi = pulangTime - masukTime;
 
-  const durasiDetik = durasi / 1000;
-  const totalDetikHadir = 8 * 60 * 60;
+    const durasiDetik = durasi / 1000;
+    const totalDetikHadir = 8 * 60 * 60;
 
-  const persentase = (durasiDetik / totalDetikHadir) * 100;
+    const persentase = (durasiDetik / totalDetikHadir) * 100;
 
-  return persentase.toFixed(2) + "%";
+    return persentase.toFixed(2) + "%";
 }

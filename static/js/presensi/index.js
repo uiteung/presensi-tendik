@@ -96,9 +96,10 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi")
               }
 
             document.getElementById("tablebody").innerHTML = tableData;
-        } else {
-            console.log("Data tidak tersedia atau struktur data tidak sesuai.");
-        }
+        } 
+        // else {
+        //     console.log("Data tidak tersedia atau struktur data tidak sesuai.");
+        // }
     })
     .catch(error => {
         console.log('error', error);

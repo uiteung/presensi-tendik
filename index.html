@@ -32,7 +32,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
 
 </head>
-
+  
 <body>
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar js-sidebar">
@@ -103,7 +103,7 @@
 					<h1 class="h3 mb-3">Dashboard Presensi Karyawan</h1>
 					<button type="button" id="exportExcelBtn" class="btn btn-success mb-2">Export To Excel</button>
 					<button type="button" id="exportPdfBtn" class="btn btn-danger mb-2" style="color: white;">Export To PDF</button>
-					<div class="row">
+					<div class="row justify-content-center">
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
@@ -120,15 +120,15 @@
 									</div> -->
 									<table id="example" class="table table-striped" style="width:100%">
 										<thead>
-											<tr>
+											<tr style="text-align: center; vertical-align: middle;">
 												<th>Nama</th>
 												<th>Posisi</th>
 												<th>Status</th>
 												<th>Tanggal</th>
-												<th>Durasi di Tempat Kerja</th>
-												<th>Persentase Durasi di Tempat Kerja</th>
+												<th>Durasi Kerja</th>
+												<th>Persentase Durasi Kerja</th>
 												<th>Keterangan</th>
-												<th>Catatan</th>
+												<th>Lampiran</th>
 											</tr>
 										</thead>
 										<tbody id="tablebody">
@@ -143,7 +143,7 @@
 												<th>Durasi Kerja</th>
 												<th>Persentase Durasi Kerja</th>
 												<th>Keterangan</th>
-												<th>Catatan</th>
+												<th>Lampiran</th>
 											</tr>
 										</tfoot>
 									</table>

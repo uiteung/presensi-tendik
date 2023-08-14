@@ -1,5 +1,5 @@
-import { token } from "./cookies.js";
+import { token } from "cookies.js";
 
 if (token === "") {
-	window.location.assign("https://iteung.ulbi.ac.id");
+	window.location.assign("https://euis.ulbi.ac.id");
 }

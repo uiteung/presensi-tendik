@@ -155,7 +155,7 @@ function html_table_to_excel(type)
 		});
 
     // const startDateInput = document.getElementById('startDate');
-    // const endDateInput = document.getElementById('endDate');
+    // const endDateInput = document.getElementByI d('endDate');
     
     // const applyFilterBtn = document.getElementById('applyFilterBtn');
     

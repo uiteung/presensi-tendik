@@ -1,3 +1,5 @@
+import { token } from "../controller/cookies.js";
+
 fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi")
     .then((result) => {
         return result.json();

@@ -1,10 +1,9 @@
-import { token } from "../controller/cookies";
-
 fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi")
     .then((result) => {
         return result.json();
     })
     .then((response) => {
+      console.log(token);
         if (response && response.data && response.data.length > 0) {
             let combinedData = {}; // Combined data of masuk and pulang records
 
@@ -99,7 +98,7 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi")
 
             document.getElementById("tablebody").innerHTML = tableData;
         } else {
-            console.log(token);
+            console.log('Sabar gblg');
         }
     })
     .catch(error => {

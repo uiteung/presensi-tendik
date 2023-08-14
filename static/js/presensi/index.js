@@ -1,9 +1,5 @@
 import { token } from "../controller/cookies.js";
 
-// const headers = new Headers({
-//   'Authorization': `Bearer ${token}`,
-//   'Content-Type': 'application/json'
-// });
 var header = new Headers();
 header.append("login", token);
 header.append("Content-Type", "application/json");

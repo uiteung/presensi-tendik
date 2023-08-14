@@ -42,12 +42,12 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi")
 
                       // Tentukan keterangan badge "Masuk Kerja" jika sudah pulang
                       const keterangan = pulangStatus
-                      ? '<span class="badge-blue" style="background-color: blue; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Kerja</span>' 
+                      ? '<span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Kerja</span>' 
                       : '<a class="btn btn-primary" href="#">Action</a>';
 
                       // Tentukan apakah tombol "Uploud" akan muncul atau tidak
                       const uploudButton = pulangStatus 
-                      ? '<span class="badge-blue" style="background-color: blue; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Kerja</span>' 
+                      ? '<span style="font-size: 13px;">Tidak Ada Catatan</span>' 
                       : '<a class="btn btn-info" style="color: white" href="#">Uploud</a>';
 
                       // Sisanya kode pembuatan data tabel
@@ -124,3 +124,46 @@ function calculatePercentage(masukTime, pulangTime) {
 
     return persentase.toFixed(2) + "%";
 }
+
+function html_table_to_excel(type)
+		{
+			var data = document.getElementById('example');
+
+			var file = XLSX.utils.table_to_book(data, {sheet: "sheet1"});
+
+			XLSX.write(file, { bookType: type, bookSST: true, type: 'base64' });
+
+			XLSX.writeFile(file, 'Data Rekap Presensi.' + type);
+		}
+
+		const export_button = document.getElementById('exportExcelBtn');
+
+		export_button.addEventListener('click', () => {
+			html_table_to_excel('xlsx');
+		})
+
+		const exportPdfButton = document.getElementById('exportPdfBtn');
+
+		exportPdfButton.addEventListener('click', () => {
+			const doc = new jsPDF();
+			
+			// You might need to adjust these values for styling and layout
+			doc.text('Data Rekap Presensi', 10, 10);
+			doc.autoTable({ html: '#example' });
+			
+			doc.save('Data Rekap Presensi.pdf');
+		});
+
+    // const startDateInput = document.getElementById('startDate');
+    // const endDateInput = document.getElementById('endDate');
+    
+    // const applyFilterBtn = document.getElementById('applyFilterBtn');
+    
+    // applyFilterBtn.addEventListener('click', applyDateFilter);
+    
+    // function applyDateFilter() {
+    //     const startDate = new Date(startDateInput.value);
+    //     const endDate = new Date(endDateInput.value);
+    
+    //     filterDataByDate(startDate, endDate);
+    // }

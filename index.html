@@ -22,9 +22,15 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 
+	<!-- Library Untuk Export to Excel dan DataTables -->
+	<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 	<script defer src="https://code.jquery.com/jquery-3.7.0.js"></script>
 	<script defer src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 	<script defer src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+	<!-- Library Untuk Export to Pdf -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+
 </head>
 
 <body>
@@ -95,11 +101,23 @@
 				<div class="container-fluid p-0">
 
 					<h1 class="h3 mb-3">Dashboard Presensi Karyawan</h1>
-
+					<button type="button" id="exportExcelBtn" class="btn btn-success mb-2">Export To Excel</button>
+					<button type="button" id="exportPdfBtn" class="btn btn-danger mb-2" style="color: white;">Export To PDF</button>
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
+									<!-- <div class="filter-container d-flex align-items-center">
+										<div class="me-2">
+											<label for="startDate" class="form-label">Start Date</label>
+											<input type="date" class="form-control form-control-sm" id="startDate">
+										</div>
+										<div class="me-2">
+											<label for="endDate" class="form-label">End Date</label>
+											<input type="date" class="form-control form-control-sm" id="endDate">
+										</div>
+										<button id="applyFilterBtn" class="btn btn-primary btn-sm">Apply Filter</button>
+									</div> -->
 									<table id="example" class="table table-striped" style="width:100%">
 										<thead>
 											<tr>
@@ -155,6 +173,7 @@
 
 	<script src="static/js/app.js"></script>
 	<script defer src="static/js/script.js"></script>
+	<script src="https://unpkg.com/jspdf-invoice"></script>
 
 </body>
 

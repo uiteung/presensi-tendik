@@ -1,3 +1,5 @@
+import { token } from "../controller/cookies";
+
 fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi")
     .then((result) => {
         return result.json();
@@ -96,10 +98,9 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi")
               }
 
             document.getElementById("tablebody").innerHTML = tableData;
-        } 
-        // else {
-        //     console.log("Data tidak tersedia atau struktur data tidak sesuai.");
-        // }
+        } else {
+            console.log(token);
+        }
     })
     .catch(error => {
         console.log('error', error);

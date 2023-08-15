@@ -14,7 +14,6 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
         return result.json();
     })
     .then((response) => {
-      console.log(token);
         if (response && response.data && response.data.length > 0) {
             let combinedData = {}; // Combined data of masuk and pulang records
 
@@ -109,7 +108,7 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
 
             document.getElementById("tablebody").innerHTML = tableData;
         } else {
-            console.log('Sabar gblg');
+            console.log('Data Tidak Ditemukan');
         }
     })
     .catch(error => {

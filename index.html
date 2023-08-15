@@ -149,6 +149,30 @@
 			</footer>
 		</div>
 	</div>
+	<!-- Untuk Data table -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#example').DataTable({
+				paging: true, // Enable pagination
+				pageLength: 10, // Number of rows per page
+				lengthMenu: [10, 25, 50, 100], // Options for rows per page dropdown
+				language: {
+					// Customize the pagination text
+					paginate: {
+						first: "First",
+						last: "Last",
+						next: "Next",
+						previous: "Prev"
+					}
+				}
+			});
+		});
+	</script>
+		
+
 	<!-- Library Untuk Export to Excel dan DataTables -->
 	<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="description"
+      content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5" />
+    <meta name="author" content="AdminKit" />
+    <meta
+      name="keywords"
+      content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      rel="shortcut icon"
+      href="/static/img/enam_berlian-removebg-preview.png" />
+
+    <title>Perizinan | ULBI</title>
+
+    <!-- Import CSS yang diperlukan -->
+    <link href="/static/css/app.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet" />
+  </head>
+
+<body>
+	<div class="wrapper">
+
+        <!-- Sidebar Start -->
+      <nav id="sidebar" class="sidebar js-sidebar">
+        <div class="sidebar-content js-simplebar">
+          <a class="sidebar-brand" href="index.html">
+            <span class="align-middle"
+              ><img
+                src="/static/img/LOGO ULBI - WIDE BACKGROUNG NEVY (1).png"
+                alt=""
+                style="width: 150px; margin-left: 25px"
+            /></span>
+          </a>
+
+          <ul class="sidebar-nav">
+            <li class="sidebar-header">Pages</li>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="index.html">
+                <i class="align-middle" data-feather="sliders"></i>
+                <span class="align-middle">Dashboard Presensi</span>
+              </a>
+            </li>
+
+            <li class="sidebar-item active">
+              <a class="sidebar-link" href="static/presensi-divisi.html">
+                <i class="align-middle me-2" data-feather="mail"></i>
+                <span class="align-middle">Perizinan</span>
+              </a>
+            </li>
+
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="static/presensi-divisi.html">
+				  <i class="align-middle" data-feather="users"></i>
+				  <span class="align-middle">Presensi Divisi</span>
+				</a>
+			  </li>
+          </ul>
+
+          <div class="sidebar-cta">
+            <div class="sidebar-cta-content">
+              <strong class="d-inline-block mb-2">Presensi Karyawan</strong>
+              <div class="mb-3 text-sm" style="font-size: 13px">
+                Dashboard Presensi Karyawan terintegrasi dengan ITeung. Silahkan
+                absen tepat waktu dengan cara Chat Kontak Iteung.
+              </div>
+              <a
+                class="btn btn-success"
+                style="padding: 5px 55px"
+                href="https://api.whatsapp.com/send?phone=628112000279"
+                role="button">
+                Iteung
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+	  <!-- Sidebar End -->
+
+		<div class="main">
+
+			<!-- Header Start -->
+            <nav class="navbar navbar-expand navbar-light navbar-bg">
+                <a class="sidebar-toggle js-sidebar-toggle" style="margin-left: 30px">
+                  <i class="hamburger align-self-center"></i>
+                </a>
+      
+                <div class="navbar-collapse collapse">
+                  <ul class="navbar-nav navbar-align">
+                    <li class="nav-item dropdown">
+                      <a
+                        class="nav-icon dropdown-toggle d-inline-block d-sm-none"
+                        href="#"
+                        data-bs-toggle="dropdown">
+                        <i class="align-middle" data-feather="settings"></i>
+                      </a>
+      
+                      <a
+                        class="nav-link dropdown-toggle d-none d-sm-inline-block"
+                        href="#"
+                        data-bs-toggle="dropdown">
+                        <img
+                          src="/static/img/avatars/admin.png"
+                          class="avatar img-fluid rounded me-1"/>
+                        <span class="text-dark">Admin</span>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="static/login.html">Log out</a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+            </nav>
+            <!-- Header End -->
+
+            <!-- Main Content Start -->
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3">Form Perizinan Karyawan</h1>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-body">
+                                    <!-- Inputan Nama Karyawan -->
+                                    <h5 class="card-title ">Nama Karyawan</h5>
+                                        <select class="form-select mb-3">
+                                            <option selected>Pilih Nama Karyawan</option>
+                                            <option>One</option>
+                                            <option>Two</option>
+                                            <option>Three</option>
+                                        </select>
+                                    <!-- Inputan Posisi Karyawan -->
+                                    <h5 class="card-title ">Posisi Karyawan</h5>
+                                        <select class="form-select mb-3">
+                                            <option selected>Pilih Posisi Karyawan</option>
+                                            <option>One</option>
+                                            <option>Two</option>
+                                            <option>Three</option>
+                                        </select>
+                                    <!-- Inputan Status Perizinan Karyawan -->
+                                    <h5 class="card-title">Status Perizinan Karyawan</h5>
+                                    <div>
+										<label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inline-radios-example" value="option1">
+                                            <span class="form-check-label">Sakit</span>
+                                        </label>
+										<label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inline-radios-example" value="option2">
+                                            <span class="form-check-label">Izin</span>
+                                        </label>				
+									</div>
+                                    <!-- Inputan Lampiran Perizinan Karyawan -->
+                                    <h5 class="card-title">Catatan Lampiran Perizinan</h5>
+                                    <textarea class="form-control" rows="5" placeholder="Textarea"></textarea>
+
+                                    <!-- Button Submit -->
+                                    <div style="position: relative; text-align: right; margin-top: 20px;">
+                                        <button type="button" class="btn btn-primary">Submit Perizinan</button>
+                                    </div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+            <!-- Main Content End -->
+
+            <!-- Footer Start -->
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-start">
+							<p class="mb-0">
+								<a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>DTI ULBI</strong></a> &copy;
+							</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+            <!-- Footer End -->
+
+		</div>
+	</div>
+
+    <!-- Library Javascript Terkait -->
+	<script src="/static/js/app.js"></script>
+
+</body>
+
+</html>

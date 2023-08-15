@@ -10,23 +10,27 @@
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="img/enam_berlian-removebg-preview.png" />
+	<link rel="shortcut icon" href="/static/img/enam_berlian-removebg-preview.png" />
 
 	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-profile.html" />
 
 	<title>Presensi Divisi | ULBI</title>
 
-	<link href="css/app.css" rel="stylesheet">
+	<!-- Import CSS yang diperlukan -->
+	<link href="/static/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 	<div class="wrapper">
+
+		<!-- Sidebar Start -->
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="index.html">
-          <span class="align-middle"><span class="align-middle"><img src="img/LOGO ULBI - WIDE BACKGROUNG NEVY (1).png" alt="" style="width: 150px; margin-left: 25px;"></span></span>
-        </a>
+          			<span class="align-middle"><span class="align-middle">
+					<img src="/static/img/LOGO ULBI - WIDE BACKGROUNG NEVY (1).png" alt="" style="width: 150px; margin-left: 25px;"></span></span>
+        		</a>
 
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">
@@ -35,44 +39,64 @@
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="index.html">
-              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard Presensi</span>
-            </a>
+              				<i class="align-middle" data-feather="sliders"></i>
+							<span class="align-middle">Dashboard Presensi</span>
+            			</a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="static/presensi-divisi.html">
+						  <i class="align-middle me-2" data-feather="mail"></i>
+						  <span class="align-middle">Perizinan</span>
+						</a>
 					</li>
 
 					<li class="sidebar-item active">
 						<a class="sidebar-link" href="presensi-divisi.html">
-              <i class="align-middle" data-feather="users"></i> <span class="align-middle">Presensi Divisi</span>
-            </a>
+              				<i class="align-middle" data-feather="users"></i>
+							<span class="align-middle">Presensi Divisi</span>
+            			</a>
 					</li>
 				</ul>
 
 				<div class="sidebar-cta">
 					<div class="sidebar-cta-content">
-						<strong class="d-inline-block mb-2">Presensi Karyawan</strong>
-						<div class="mb-3 text-sm">
-							Dashboard Presensi Karyawan terintegrasi dengan ITeung. Silahkan absen tepat waktu.
-						</div>
+					  <strong class="d-inline-block mb-2">Presensi Karyawan</strong>
+					  <div class="mb-3 text-sm" style="font-size: 13px">
+						Dashboard Presensi Karyawan terintegrasi dengan ITeung. Silahkan
+						absen tepat waktu dengan cara Chat Kontak Iteung.
+					  </div>
+					  <a
+						class="btn btn-success"
+						style="padding: 5px 55px"
+						href="https://api.whatsapp.com/send?phone=628112000279"
+						role="button">
+						Iteung
+					  </a>
 					</div>
+				  </div>
 				</div>
-			</div>
-		</nav>
+			</nav>
+			<!-- Sidebar End -->
 
 		<div class="main">
+
+			<!-- Header Start -->
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
-          <i class="hamburger align-self-center"></i>
-        </a>
+          			<i class="hamburger align-self-center"></i>
+        		</a>
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                <i class="align-middle" data-feather="settings"></i>
-              </a>
+                				<i class="align-middle" data-feather="settings"></i>
+              				</a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Admin</span>
-              </a>
+                				<img src="/static/img/avatars/admin.png" class="avatar img-fluid rounded me-1"/> <span class="text-dark">Admin</span>
+              				</a>
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="login.html">Log out</a>
 							</div>
@@ -81,6 +105,7 @@
 				</div>
 			</nav>
 
+			<!-- Main Content Start -->
 			<main class="content">
 				<div class="container-fluid p-0">
 
@@ -119,10 +144,11 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</main>
+			<!-- Main Content End -->
 
+			<!-- Footer Start -->
 			<footer class="footer">
 				<div class="container-fluid">
 					<div class="row text-muted">
@@ -134,10 +160,13 @@
 					</div>
 				</div>
 			</footer>
+			<!-- Footer End -->
+
 		</div>
 	</div>
 
-	<script src="js/app.js"></script>
+	<!-- Library Javascript Terkait -->
+	<script src="/static/js/app.js"></script>
 
 </body>
 

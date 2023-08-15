@@ -18,8 +18,9 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
 	.then((response) => {
 		console.log(token);
 		if (response && response.data && response.data.length > 0) {
+            
 			let combinedData = {}; // Combined data of masuk and pulang records
-
+                       
 			response.data.forEach((entry) => {
 				const biodata = entry.biodata;
 				const checkin = entry.checkin;
@@ -58,7 +59,7 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
 					// Tentukan keterangan badge "Masuk Kerja" jika sudah pulang
 					const keterangan = pulangStatus
 						? '<span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Kerja</span>'
-						: '<a class="btn btn-primary" href="#">Action</a>';
+						: '<a class="btn btn-warning" href="#">Sakit</a><span style="margin: 5px;"></span><a class="btn btn-primary" href="#">Izin</a>';
 
 					// Tentukan apakah tombol "Uploud" akan muncul atau tidak
 					const uploudButton = pulangStatus
@@ -137,6 +138,7 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
                 entityCount > 0 ? totalDuration / entityCount : 0;
             const avgPercentage =
                 entityCount > 0 ? totalPercentage / entityCount : 0;
+                
             // Masukkan nilai rata-rata ke dalam elemen HTML
             const avgDurationElement = document.getElementById("avgDuration");
             avgDurationElement.textContent = formatDuration(avgDuration);

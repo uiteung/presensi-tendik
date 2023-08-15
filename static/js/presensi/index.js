@@ -1,5 +1,5 @@
+// Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
-// import 'https://cdn.datatables.net/1.11.8/js/jquery.dataTables.min.js';  // Impor pustaka DataTables
 
 var header = new Headers();
 header.append("login", token);
@@ -10,6 +10,7 @@ const requestOptions = {
 	headers: header
 };
 
+// Untuk GET data dari API
 fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
 	.then((result) => {
 		return result.json();
@@ -108,6 +109,40 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
 			}
 
 			document.getElementById("tablebody").innerHTML = tableData;
+
+            // Untuk mencari rata-rata durasi kerja dan rata-rata persentase durasi kerja
+            // Hitung total durasi dan total persentase durasi
+            let totalDuration = 0;
+            let totalPercentage = 0;
+            
+            // Hitung jumlah entitas untuk perhitungan rata-rata
+            let entityCount = 0;
+            for (const nama in combinedData) {
+                for (const date in combinedData[nama]) {
+                const { masuk, pulang } = combinedData[nama][date];
+
+                if (masuk && pulang) {
+                    const durasi = pulang - masuk;
+                    const persentase = calculatePercentage(masuk, pulang);
+
+                    totalDuration += durasi;
+                    totalPercentage += parseFloat(persentase);
+                    entityCount++;
+                }
+                }
+            }
+
+            // Hitung rata-rata durasi dan rata-rata persentase
+            const avgDuration =
+                entityCount > 0 ? totalDuration / entityCount : 0;
+            const avgPercentage =
+                entityCount > 0 ? totalPercentage / entityCount : 0;
+            // Masukkan nilai rata-rata ke dalam elemen HTML
+            const avgDurationElement = document.getElementById("avgDuration");
+            avgDurationElement.textContent = formatDuration(avgDuration);
+
+            const avgPercentageElement = document.getElementById("avgPercentage");
+            avgPercentageElement.textContent = avgPercentage.toFixed(2) + "%";
 		} else {
 			console.log('Sabar gblg');
 		}
@@ -116,18 +151,39 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
 		console.log('error', error);
 	});
 
+// Fungsi untuk mengubah durasi menjadi format yang lebih mudah dibaca
+function formatDuration(duration) {
+    const durasiJam = Math.floor(duration / (1000 * 60 * 60));
+    const durasiMenit = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
+    const durasiDetik = Math.floor((duration % (1000 * 60)) / 1000);
+
+    return `${durasiJam} Jam ${durasiMenit} Menit ${durasiDetik} Detik`;
+}
+// Fungsi perhitungan persentase durasi
+function calculatePercentage(masukTime, pulangTime) {
+	const durasi = pulangTime - masukTime;
+
+	const durasiDetik = durasi / 1000;
+	const totalDetikHadir = 8.5 * 60 * 60; // 8.5 jam * 60 menit * 60 detik
+
+	const persentase = (durasiDetik / totalDetikHadir) * 100;
+
+	return persentase.toFixed(2) + "%";
+}
+
+// Untuk membuat format Penanggalan
 function formatDate(datetime) {
 	const options = { year: 'numeric', month: 'long', day: 'numeric' };
 	const formattedDate = new Date(datetime).toLocaleDateString('en-US', options);
 	return formattedDate;
 }
-
 function formatDateToIndonesian(date) {
 	const options = { day: 'numeric', month: 'long', year: 'numeric' };
 	const formattedDate = new Date(date).toLocaleDateString('id-ID', options);
 	return formattedDate;
 }
 
+// Untuk menghitung durasi kerja
 function calculateDuration(masukTime, pulangTime) {
 	const durasi = pulangTime - masukTime;
 
@@ -138,17 +194,8 @@ function calculateDuration(masukTime, pulangTime) {
 	return `${durasiJam} Jam ${durasiMenit} Menit ${durasiDetik} Detik`;
 }
 
-function calculatePercentage(masukTime, pulangTime) {
-	const durasi = pulangTime - masukTime;
 
-	const durasiDetik = durasi / 1000;
-	const totalDetikHadir = 8.5 * 60 * 60;
-
-	const persentase = (durasiDetik / totalDetikHadir) * 100;
-
-	return persentase.toFixed(2) + "%";
-}
-
+// Untuk membuat interaksi button export to excel dan pdf
 function html_table_to_excel(type) {
 	var data = document.getElementById('example');
 	var file = XLSX.utils.table_to_book(data, { sheet: "sheet1" });
@@ -158,13 +205,11 @@ function html_table_to_excel(type) {
 }
 
 const export_button = document.getElementById('exportExcelBtn');
-
 export_button.addEventListener('click', () => {
 	html_table_to_excel('xlsx');
 })
 
 const exportPdfButton = document.getElementById('exportPdfBtn');
-
 exportPdfButton.addEventListener('click', () => {
 	const doc = new jsPDF();
 

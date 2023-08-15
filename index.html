@@ -1,190 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="description"
+      content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5" />
+    <meta name="author" content="AdminKit" />
+    <meta
+      name="keywords"
+      content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web" />
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-	<meta name="author" content="AdminKit">
-	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      rel="shortcut icon"
+      href="static/img/enam_berlian-removebg-preview.png" />
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="static/img/enam_berlian-removebg-preview.png" />
-	
-	<title>Dashboard Presensi Karyawan | ULBI</title>
+    <title>Dashboard Presensi Karyawan | ULBI</title>
 
-	<link href="static/css/app.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.css">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-	
-</head>
-  
-<body>
-	<div class="wrapper">
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html">
-          <span class="align-middle"><img src="static/img/LOGO ULBI - WIDE BACKGROUNG NEVY (1).png" alt="" style="width: 150px; margin-left: 25px;"></span>
-        </a>
+    <!-- Import CSS yang diperlukan -->
+    <link href="static/css/app.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet" />
+  </head>
 
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Pages
-					</li>
+  <body>
+    <div class="wrapper">
+      <nav id="sidebar" class="sidebar js-sidebar">
+        <div class="sidebar-content js-simplebar">
+          <a class="sidebar-brand" href="index.html">
+            <span class="align-middle"
+              ><img
+                src="static/img/LOGO ULBI - WIDE BACKGROUNG NEVY (1).png"
+                alt=""
+                style="width: 150px; margin-left: 25px"
+            /></span>
+          </a>
 
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="index.html">
-              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard Presensi</span>
-            </a>
-					</li>
+          <ul class="sidebar-nav">
+            <li class="sidebar-header">Pages</li>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="static/presensi-divisi.html">
-              <i class="align-middle" data-feather="users"></i> <span class="align-middle">Presensi Divisi</span>
-            </a>
-					</li>
-				</ul>
-
-				<div class="sidebar-cta">
-					<div class="sidebar-cta-content">
-						<strong class="d-inline-block mb-2">Presensi Karyawan</strong>
-						<div class="mb-3 text-sm" style="font-size: 13px;">
-							Dashboard Presensi Karyawan terintegrasi dengan ITeung. Silahkan absen tepat waktu dengan cara Chat Kontak Iteung.
-						</div>
-						<a class="btn btn-success" style="padding: 5px 55px;" href="https://api.whatsapp.com/send?phone=628112000279" role="button">
-							Iteung
-						</a>
-					</div>
-				</div>
-			</div>
-		</nav>
-
-		<div class="main">
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle" style="margin-left: 30px;">
-          <i class="hamburger align-self-center"></i>
-        </a>
-
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav navbar-align">
-						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                <i class="align-middle" data-feather="settings"></i>
+            <li class="sidebar-item active">
+              <a class="sidebar-link" href="index.html">
+                <i class="align-middle" data-feather="sliders"></i>
+                <span class="align-middle">Dashboard Presensi</span>
               </a>
+            </li>
 
-							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                <img src="static/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Admin</span>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="static/presensi-divisi.html">
+                <i class="align-middle" data-feather="users"></i>
+                <span class="align-middle">Presensi Divisi</span>
               </a>
-							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="static/login.html">Log out</a>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</nav>
+            </li>
+          </ul>
 
-			<main class="content">
-				<div class="container-fluid p-0">
+          <div class="sidebar-cta">
+            <div class="sidebar-cta-content">
+              <strong class="d-inline-block mb-2">Presensi Karyawan</strong>
+              <div class="mb-3 text-sm" style="font-size: 13px">
+                Dashboard Presensi Karyawan terintegrasi dengan ITeung. Silahkan
+                absen tepat waktu dengan cara Chat Kontak Iteung.
+              </div>
+              <a
+                class="btn btn-success"
+                style="padding: 5px 55px"
+                href="https://api.whatsapp.com/send?phone=628112000279"
+                role="button">
+                Iteung
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
 
-					<h1 class="h3 mb-3">Dashboard Presensi Karyawan</h1>
-					<button type="button" id="exportExcelBtn" class="btn btn-success mb-2">Export To Excel</button>
-					<button type="button" id="exportPdfBtn" class="btn btn-danger mb-2" style="color: white;">Export To PDF</button>
-					<div class="row justify-content-center">
-						<div class="col-12">
-							<div class="card">
-								<div class="card-header">
+      <div class="main">
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+          <a class="sidebar-toggle js-sidebar-toggle" style="margin-left: 30px">
+            <i class="hamburger align-self-center"></i>
+          </a>
 
-									<table id="example" class="table table-striped" style="width:100%">
-										<thead>
-											<tr style="text-align: center; vertical-align: middle;">
-												<th>Nama</th>
-												<th>Posisi</th>
-												<th>Status</th>
-												<th>Tanggal</th>
-												<th>Durasi Kerja</th>
-												<th>Persentase Durasi Kerja</th>
-												<th>Keterangan</th>
-												<th>Link Dokumen</th>
-											</tr>
-										</thead>
-										<tbody id="tablebody">
-											<script src="static/js/presensi/index.js" type="module"></script>
-										</tbody>
-										<tfoot>
-											<tr>
-												<th>Nama</th>
-												<th>Posisi</th>
-												<th>Status</th>
-												<th>Tanggal</th>
-												<th>Durasi Kerja</th>
-												<th>Persentase Durasi Kerja</th>
-												<th>Keterangan</th>
-												<th>Link Dokumen</th>
-											</tr>
-										</tfoot>
-									</table>
-								</div>
-								<div class="card-body">
-								</div>
-							</div>
-						</div>
-					</div>
+          <div class="navbar-collapse collapse">
+            <ul class="navbar-nav navbar-align">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-icon dropdown-toggle d-inline-block d-sm-none"
+                  href="#"
+                  data-bs-toggle="dropdown">
+                  <i class="align-middle" data-feather="settings"></i>
+                </a>
 
-				</div>
-			</main>
+                <a
+                  class="nav-link dropdown-toggle d-none d-sm-inline-block"
+                  href="#"
+                  data-bs-toggle="dropdown">
+                  <img
+                    src="static/img/avatars/avatar.jpg"
+                    class="avatar img-fluid rounded me-1"
+                    alt="Charles Hall" />
+                  <span class="text-dark">Admin</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <a class="dropdown-item" href="static/login.html">Log out</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
 
-			<footer class="footer">
-				<div class="container-fluid">
-					<div class="row text-muted">
-						<div class="col-6 text-start">
-							<p class="mb-0">
-								<a><strong>DTI ULBI</strong></a> &copy;
-							</p>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
-	<!-- Untuk Data table -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('#example').DataTable({
-				paging: true, // Enable pagination
-				pageLength: 10, // Number of rows per page
-				lengthMenu: [10, 25, 50, 100], // Options for rows per page dropdown
-				language: {
-					// Customize the pagination text
-					paginate: {
-						first: "First",
-						last: "Last",
-						next: "Next",
-						previous: "Prev"
-					}
-				}
-			});
-		});
-	</script>
-		
+        <main class="content">
+          <div class="container-fluid p-0">
+            <h1 class="h3 mb-3">Dashboard Presensi Karyawan</h1>
+            <button
+              type="button"
+              id="exportExcelBtn"
+              class="btn btn-success mb-2">
+              Export To Excel
+            </button>
+            <button
+              type="button"
+              id="exportPdfBtn"
+              class="btn btn-danger mb-2"
+              style="color: white">
+              Export To PDF
+            </button>
+            <div class="row justify-content-center">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="row no-gutters">
+                      <div class="col-auto date-filter" style="width: 20%">
+                        <label for="startDate" class="form-label"
+                          >Start Date</label
+                        >
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="startDate"
+                          name="startDate" />
+                      </div>
+                      <div class="col-auto date-filter" style="width: 20%">
+                        <label for="endDate" class="form-label">End Date</label>
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="endDate"
+                          name="endDate" />
+                      </div>
+                      <div class="col-auto date-filter" style="width: 20%">
+                        <button
+                          type="button"
+                          id="filterButton"
+                          class="btn btn-primary mt-4">
+                          Filter By Date
+                        </button>
+                      </div>
+                    </div>
+                    <hr />
+                    <table
+                      id="example"
+                      class="table table-striped"
+                      style="width: 100%">
+                      <thead>
+                        <tr style="text-align: center; vertical-align: middle">
+                          <th>Nama</th>
+                          <th>Posisi</th>
+                          <th>Status</th>
+                          <th>Tanggal</th>
+                          <th>Durasi Kerja</th>
+                          <th>Persentase Durasi Kerja</th>
+                          <th>Keterangan</th>
+                          <th>Link Dokumen</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tablebody">
+                        <script
+                          src="static/js/presensi/index.js"
+                          type="module"></script>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th>Nama</th>
+                          <th>Posisi</th>
+                          <th>Status</th>
+                          <th>Tanggal</th>
+                          <th>Durasi Kerja</th>
+                          <th>Persentase Durasi Kerja</th>
+                          <th>Keterangan</th>
+                          <th>Link Dokumen</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                    <div class="row">
+                      <div class="col-auto">
+                        <p>
+                          <strong>Rata-rata Durasi Kerja:</strong>
+                          <span id="avgDuration"></span>
+                        </p>
+                      </div>
+                      <div class="col-auto">
+                        <p>
+                          <strong>Rata-rata Persentase Durasi Kerja:</strong>
+                          <span id="avgPercentage"></span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
 
-	<!-- Library Untuk Export to Excel dan DataTables -->
-	<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row text-muted">
+              <div class="col-6 text-start">
+                <p class="mb-0">
+                  <a><strong>DTI ULBI</strong></a> &copy;
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- Library Untuk Export to Excel dan DataTables -->
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 
-	<!-- Library Untuk Export to Pdf -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+    <!-- Library Untuk Export to Pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
 
-	<script src="static/js/app.js"></script>
-	<script defer src="static/js/script.js"></script>
-	<script src="https://unpkg.com/jspdf-invoice"></script>
-	<script src="static/js/croot.js" type="module"> </script>
-
-</body>
-
+    <script src="static/js/table-sorting.js"></script>
+    <script src="static/js/app.js"></script>
+    <script defer src="static/js/script.js"></script>
+    <script src="https://unpkg.com/jspdf-invoice"></script>
+    <script src="static/js/croot.js" type="module"></script>
+  </body>
 </html>

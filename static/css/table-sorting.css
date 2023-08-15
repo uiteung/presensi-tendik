@@ -1,0 +1,25 @@
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.pagination-info {
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.page-link {
+  cursor: pointer;
+}
+
+.page-link:hover {
+  text-decoration: none;
+}
+
+.date-filter {
+  display: flex;
+  align-items: center;
+  margin-right: 10px; /* Spacing between elements */
+}

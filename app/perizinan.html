@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
@@ -29,10 +28,9 @@
       rel="stylesheet" />
   </head>
 
-<body>
-	<div class="wrapper">
-
-        <!-- Sidebar Start -->
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar Start -->
       <nav id="sidebar" class="sidebar js-sidebar">
         <div class="sidebar-content js-simplebar">
           <a class="sidebar-brand" href="../index.html">
@@ -61,12 +59,12 @@
               </a>
             </li>
 
-			<li class="sidebar-item">
-				<a class="sidebar-link" href="../app/presensi-divisi.html">
-				  <i class="align-middle" data-feather="users"></i>
-				  <span class="align-middle">Presensi Divisi</span>
-				</a>
-			  </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="../app/presensi-divisi.html">
+                <i class="align-middle" data-feather="users"></i>
+                <span class="align-middle">Presensi Divisi</span>
+              </a>
+            </li>
           </ul>
 
           <div class="sidebar-cta">
@@ -87,119 +85,140 @@
           </div>
         </div>
       </nav>
-	  <!-- Sidebar End -->
+      <!-- Sidebar End -->
 
-		<div class="main">
+      <div class="main">
+        <!-- Header Start -->
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+          <a class="sidebar-toggle js-sidebar-toggle" style="margin-left: 30px">
+            <i class="hamburger align-self-center"></i>
+          </a>
 
-			<!-- Header Start -->
-            <nav class="navbar navbar-expand navbar-light navbar-bg">
-                <a class="sidebar-toggle js-sidebar-toggle" style="margin-left: 30px">
-                  <i class="hamburger align-self-center"></i>
+          <div class="navbar-collapse collapse">
+            <ul class="navbar-nav navbar-align">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-icon dropdown-toggle d-inline-block d-sm-none"
+                  href="#"
+                  data-bs-toggle="dropdown">
+                  <i class="align-middle" data-feather="settings"></i>
                 </a>
-      
-                <div class="navbar-collapse collapse">
-                  <ul class="navbar-nav navbar-align">
-                    <li class="nav-item dropdown">
-                      <a
-                        class="nav-icon dropdown-toggle d-inline-block d-sm-none"
-                        href="#"
-                        data-bs-toggle="dropdown">
-                        <i class="align-middle" data-feather="settings"></i>
-                      </a>
-      
-                      <a
-                        class="nav-link dropdown-toggle d-none d-sm-inline-block"
-                        href="#"
-                        data-bs-toggle="dropdown">
-                        <img
-                          src="../static/img/avatars/admin.png"
-                          class="avatar img-fluid rounded me-1"/>
-                        <span class="text-dark">Admin</span>
-                      </a>
-                      <div class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item" href="#">Log out</a>
-                      </div>
-                    </li>
-                  </ul>
+
+                <a
+                  class="nav-link dropdown-toggle d-none d-sm-inline-block"
+                  href="#"
+                  data-bs-toggle="dropdown">
+                  <img
+                    src="../static/img/avatars/admin.png"
+                    class="avatar img-fluid rounded me-1" />
+                  <span class="text-dark">Admin</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <a class="dropdown-item" href="#">Log out</a>
                 </div>
-            </nav>
-            <!-- Header End -->
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <!-- Header End -->
 
-            <!-- Main Content Start -->
-			<main class="content">
-				<div class="container-fluid p-0">
+        <!-- Main Content Start -->
+        <main class="content">
+          <div class="container-fluid p-0">
+            <h1 class="h3 mb-3">Form Perizinan Karyawan</h1>
 
-					<h1 class="h3 mb-3">Form Perizinan Karyawan</h1>
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <!-- Inputan Nama Karyawan -->
+                    <h5 class="card-title">Nama Karyawan</h5>
+                    <div class="col-auto date-filter">
+                      <select
+                        class="form-control"
+                        id="employeeNameDropdown"
+                        name="employeeNameDropdown"></select>
+                    </div>
+                    <!-- Inputan Posisi Karyawan -->
+                    <h5 class="card-title mt-2">Posisi Karyawan</h5>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="employeePositionInput"
+                      name="employeePositionInput"
+                      placeholder="- Posisi Karyawan -" />
+                    <!-- Inputan Nomor HP Karyawan -->
+                    <h5 class="card-title mt-2">Nomor Whatsapp Karyawan</h5>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="employeeWhatsappInput"
+                      name="employeeWhatsappInput"
+                      placeholder="- Nomor Whatsapp Karyawan -" />
+                    <!-- Inputan Status Perizinan Karyawan -->
+                    <h5 class="card-title mt-2">Status Perizinan Karyawan</h5>
+                    <div>
+                      <label class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="inline-radios-example"
+                          value="option1" />
+                        <span class="form-check-label">Sakit</span>
+                      </label>
+                      <label class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="inline-radios-example"
+                          value="option2" />
+                        <span class="form-check-label">Izin</span>
+                      </label>
+                    </div>
+                    <!-- Inputan Lampiran Perizinan Karyawan -->
+                    <h5 class="card-title mt-2">Catatan Lampiran Perizinan</h5>
+                    <textarea
+                      class="form-control"
+                      rows="3"
+                      placeholder="Textarea"></textarea>
 
-					<div class="row">
-						<div class="col-12">
-							<div class="card">
-								<div class="card-body">
-                                    <!-- Inputan Nama Karyawan -->
-                                    <h5 class="card-title ">Nama Karyawan</h5>
-                                        <select class="form-select mb-3">
-                                            <option selected>Pilih Nama Karyawan</option>
-                                            <option>One</option>
-                                            <option>Two</option>
-                                            <option>Three</option>
-                                        </select>
-                                    <!-- Inputan Posisi Karyawan -->
-                                    <h5 class="card-title ">Posisi Karyawan</h5>
-                                        <select class="form-select mb-3">
-                                            <option selected>Pilih Posisi Karyawan</option>
-                                            <option>One</option>
-                                            <option>Two</option>
-                                            <option>Three</option>
-                                        </select>
-                                    <!-- Inputan Status Perizinan Karyawan -->
-                                    <h5 class="card-title">Status Perizinan Karyawan</h5>
-                                    <div>
-										<label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inline-radios-example" value="option1">
-                                            <span class="form-check-label">Sakit</span>
-                                        </label>
-										<label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inline-radios-example" value="option2">
-                                            <span class="form-check-label">Izin</span>
-                                        </label>				
-									</div>
-                                    <!-- Inputan Lampiran Perizinan Karyawan -->
-                                    <h5 class="card-title">Catatan Lampiran Perizinan</h5>
-                                    <textarea class="form-control" rows="5" placeholder="Textarea"></textarea>
+                    <!-- Button Submit -->
+                    <div
+                      style="
+                        position: relative;
+                        text-align: right;
+                        margin-top: 20px;
+                      ">
+                      <button type="button" class="btn btn-primary">
+                        Submit Perizinan
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <!-- Main Content End -->
 
-                                    <!-- Button Submit -->
-                                    <div style="position: relative; text-align: right; margin-top: 20px;">
-                                        <button type="button" class="btn btn-primary">Submit Perizinan</button>
-                                    </div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</main>
-            <!-- Main Content End -->
-
-            <!-- Footer Start -->
-			<footer class="footer">
-				<div class="container-fluid">
-					<div class="row text-muted">
-						<div class="col-6 text-start">
-							<p class="mb-0">
-								<a class="text-muted"><strong>DTI ULBI</strong></a> &copy;
-							</p>
-						</div>
-					</div>
-				</div>
-			</footer>
-            <!-- Footer End -->
-
-		</div>
-	</div>
+        <!-- Footer Start -->
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row text-muted">
+              <div class="col-6 text-start">
+                <p class="mb-0">
+                  <a class="text-muted"><strong>DTI ULBI</strong></a> &copy;
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
+        <!-- Footer End -->
+      </div>
+    </div>
 
     <!-- Library Javascript Terkait -->
-	<script src="../static/js/app.js"></script>
-
-</body>
-
+    <script type="module" src="../static/js/presensi/perizinan.js"></script>
+    <script src="../static/js/app.js"></script>
+  </body>
 </html>

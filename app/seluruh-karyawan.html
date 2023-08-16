@@ -16,13 +16,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       rel="shortcut icon"
-      href="static/img/enam_berlian-removebg-preview.png" />
+      href="../static/img/enam_berlian-removebg-preview.png" />
 
     <title>Dashboard Presensi Karyawan | ULBI</title>
 
     <!-- Import CSS yang diperlukan -->
-    <link href="static/css/app.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link href="../static/css/app.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/css/style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
       rel="stylesheet" />
@@ -36,7 +36,7 @@
           <a class="sidebar-brand" href="index.html">
             <span class="align-middle"
               ><img
-                src="static/img/LOGO ULBI - WIDE BACKGROUNG NEVY (1).png"
+                src="../static/img/LOGO ULBI - WIDE BACKGROUNG NEVY (1).png"
                 alt=""
                 style="width: 150px; margin-left: 25px"
             /></span>
@@ -46,14 +46,14 @@
             <li class="sidebar-header">Dashboard & Perizinan</li>
 
             <li class="sidebar-item active">
-              <a class="sidebar-link" href="index.html">
+              <a class="sidebar-link" href="../index.html">
                 <i class="align-middle" data-feather="sliders"></i>
                 <span class="align-middle">Dashboard Presensi</span>
               </a>
             </li>
 
             <li class="sidebar-item">
-              <a class="sidebar-link" href="app/perizinan.html">
+              <a class="sidebar-link" href="../app/perizinan.html">
                 <i class="align-middle me-2" data-feather="mail"></i>
                 <span class="align-middle">Perizinan</span>
               </a>
@@ -62,14 +62,14 @@
             <li class="sidebar-header">Data Presensi Karyawan</li>
 
             <li class="sidebar-item">
-              <a class="sidebar-link" href="app/presensi-divisi.html">
+              <a class="sidebar-link" href="../app/presensi-divisi.html">
                 <i class="align-middle" data-feather="users"></i>
                 <span class="align-middle">Presensi Divisi</span>
               </a>
             </li>
 
             <li class="sidebar-item">
-              <a class="sidebar-link" href="app/seluruh-karyawan.html">
+              <a class="sidebar-link" href="#">
                 <i class="align-middle" data-feather="grid"></i>
                 <span class="align-middle">Data Seluruh Karyawan</span>
               </a>
@@ -118,7 +118,7 @@
                   href="#"
                   data-bs-toggle="dropdown">
                   <img
-                    src="static/img/avatars/admin.png"
+                    src="../static/img/avatars/admin.png"
                     class="avatar img-fluid rounded me-1" />
                   <span class="text-dark">Admin</span>
                 </a>
@@ -152,35 +152,6 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <div class="row no-gutters">
-                      <div class="col-auto date-filter" style="width: 20%">
-                        <label for="startDate" class="form-label"
-                          >Start Date</label
-                        >
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="startDate"
-                          name="startDate" />
-                      </div>
-                      <div class="col-auto date-filter" style="width: 20%">
-                        <label for="endDate" class="form-label">End Date</label>
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="endDate"
-                          name="endDate" />
-                      </div>
-                      <div class="col-auto date-filter" style="width: 20%">
-                        <button
-                          type="button"
-                          id="filterButton"
-                          class="btn btn-primary mt-4">
-                          Filter By Date
-                        </button>
-                      </div>
-                    </div>
-                    <hr />
                     <table
                       id="example"
                       class="table table-striped"
@@ -188,45 +159,25 @@
                       <thead>
                         <tr style="text-align: center; vertical-align: middle">
                           <th>Nama</th>
+                          <th>Nomor Whatsapp</th>
                           <th>Posisi</th>
-                          <th>Status</th>
-                          <th>Tanggal</th>
-                          <th>Durasi Kerja</th>
-                          <th>Persentase Durasi Kerja</th>
-                          <th>Keterangan</th>
-                          <th>Link Dokumen</th>
                         </tr>
                       </thead>
                       <tbody id="tablebody">
                         <script
-                          src="static/js/presensi/index.js"
+                          src="../static/js/presensi/seluruh-karyawan.js"
                           type="module"></script>
                       </tbody>
                       <tfoot>
                         <tr style="text-align: center; vertical-align: middle">
                           <th>Nama</th>
+                          <th>Nomor Whatsapp</th>
                           <th>Posisi</th>
-                          <th>Status</th>
-                          <th>Tanggal</th>
-                          <th>Durasi Kerja</th>
-                          <th>Persentase Durasi Kerja</th>
-                          <th>Keterangan</th>
-                          <th>Link Dokumen</th>
                         </tr>
                       </tfoot>
                     </table>
                     <div class="row">
                       <div class="col-md-6">
-                        <p>
-                          <strong>Rata-rata Durasi Kerja:</strong>
-                          <span id="avgDuration"></span>
-                        </p>
-                        <p>
-                          <strong>Rata-rata Persentase Durasi Kerja:</strong>
-                          <span id="avgPercentage"></span>
-                        </p>
-                      </div>
-                      <div class="col-md-6 text-end">
                         <div class="pagination">
                           <button id="prevPageBtn" class="btn btn-secondary">
                             Previous
@@ -273,9 +224,9 @@
     <script src="https://unpkg.com/jspdf-invoice"></script>
 
     <!-- Library Javascript Terkait -->
-    <script src="static/js/table-sorting.js"></script>
-    <script src="static/js/app.js"></script>
-    <script defer src="static/js/script.js"></script>
-    <script src="static/js/croot.js" type="module"></script>
+    <script src="../static/js/table-sorting.js"></script>
+    <script src="../static/js/app.js"></script>
+    <script defer src="../static/js/script.js"></script>
+    <script src="../static/js/croot.js" type="module"></script>
   </body>
 </html>

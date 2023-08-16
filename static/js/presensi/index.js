@@ -18,9 +18,9 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
 	.then((response) => {
 		console.log(token);
 		if (response && response.data && response.data.length > 0) {
-            
+
 			let combinedData = {}; // Combined data of masuk and pulang records
-                       
+
 			response.data.forEach((entry) => {
 				const biodata = entry.biodata;
 				const checkin = entry.checkin;
@@ -111,40 +111,40 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
 
 			document.getElementById("tablebody").innerHTML = tableData;
 
-            // Untuk mencari rata-rata durasi kerja dan rata-rata persentase durasi kerja
-            // Hitung total durasi dan total persentase durasi
-            let totalDuration = 0;
-            let totalPercentage = 0;
-            
-            // Hitung jumlah entitas untuk perhitungan rata-rata
-            let entityCount = 0;
-            for (const nama in combinedData) {
-                for (const date in combinedData[nama]) {
-                const { masuk, pulang } = combinedData[nama][date];
+			// Untuk mencari rata-rata durasi kerja dan rata-rata persentase durasi kerja
+			// Hitung total durasi dan total persentase durasi
+			let totalDuration = 0;
+			let totalPercentage = 0;
 
-                if (masuk && pulang) {
-                    const durasi = pulang - masuk;
-                    const persentase = calculatePercentage(masuk, pulang);
+			// Hitung jumlah entitas untuk perhitungan rata-rata
+			let entityCount = 0;
+			for (const nama in combinedData) {
+				for (const date in combinedData[nama]) {
+					const { masuk, pulang } = combinedData[nama][date];
 
-                    totalDuration += durasi;
-                    totalPercentage += parseFloat(persentase);
-                    entityCount++;
-                }
-                }
-            }
+					if (masuk && pulang) {
+						const durasi = pulang - masuk;
+						const persentase = calculatePercentage(masuk, pulang);
 
-            // Hitung rata-rata durasi dan rata-rata persentase
-            const avgDuration =
-                entityCount > 0 ? totalDuration / entityCount : 0;
-            const avgPercentage =
-                entityCount > 0 ? totalPercentage / entityCount : 0;
-                
-            // Masukkan nilai rata-rata ke dalam elemen HTML
-            const avgDurationElement = document.getElementById("avgDuration");
-            avgDurationElement.textContent = formatDuration(avgDuration);
+						totalDuration += durasi;
+						totalPercentage += parseFloat(persentase);
+						entityCount++;
+					}
+				}
+			}
 
-            const avgPercentageElement = document.getElementById("avgPercentage");
-            avgPercentageElement.textContent = avgPercentage.toFixed(2) + "%";
+			// Hitung rata-rata durasi dan rata-rata persentase
+			const avgDuration =
+				entityCount > 0 ? totalDuration / entityCount : 0;
+			const avgPercentage =
+				entityCount > 0 ? totalPercentage / entityCount : 0;
+
+			// Masukkan nilai rata-rata ke dalam elemen HTML
+			const avgDurationElement = document.getElementById("avgDuration");
+			avgDurationElement.textContent = formatDuration(avgDuration);
+
+			const avgPercentageElement = document.getElementById("avgPercentage");
+			avgPercentageElement.textContent = avgPercentage.toFixed(2) + "%";
 		} else {
 			console.log('Sabar gblg');
 		}
@@ -155,11 +155,11 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
 
 // Fungsi untuk mengubah durasi menjadi format yang lebih mudah dibaca
 function formatDuration(duration) {
-    const durasiJam = Math.floor(duration / (1000 * 60 * 60));
-    const durasiMenit = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
-    const durasiDetik = Math.floor((duration % (1000 * 60)) / 1000);
+	const durasiJam = Math.floor(duration / (1000 * 60 * 60));
+	const durasiMenit = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
+	const durasiDetik = Math.floor((duration % (1000 * 60)) / 1000);
 
-    return `${durasiJam} Jam ${durasiMenit} Menit ${durasiDetik} Detik`;
+	return `${durasiJam} Jam ${durasiMenit} Menit ${durasiDetik} Detik`;
 }
 // Fungsi perhitungan persentase durasi
 function calculatePercentage(masukTime, pulangTime) {

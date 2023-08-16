@@ -43,7 +43,7 @@
           </a>
 
           <ul class="sidebar-nav">
-            <li class="sidebar-header">Pages</li>
+            <li class="sidebar-header">Dashboard</li>
 
             <li class="sidebar-item">
               <a class="sidebar-link" href="../index.html">
@@ -52,17 +52,28 @@
               </a>
             </li>
 
-            <li class="sidebar-item active">
-              <a class="sidebar-link" href="../app/presensi-divisi.html">
-                <i class="align-middle me-2" data-feather="mail"></i>
-                <span class="align-middle">Perizinan</span>
-              </a>
-            </li>
+            <li class="sidebar-header">Data Presensi Karyawan</li>
 
             <li class="sidebar-item">
               <a class="sidebar-link" href="../app/presensi-divisi.html">
                 <i class="align-middle" data-feather="users"></i>
                 <span class="align-middle">Presensi Divisi</span>
+              </a>
+            </li>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="../app/seluruh-karyawan.html">
+                <i class="align-middle" data-feather="grid"></i>
+                <span class="align-middle">Data Seluruh Karyawan</span>
+              </a>
+            </li>
+
+            <li class="sidebar-header">Rekapan Presensi Karyawan</li>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="../app/presensi-divisi.html">
+                <i class="align-middle" data-feather="bar-chart-2"></i>
+                <span class="align-middle">Rekapan Presensi</span>
               </a>
             </li>
           </ul>
@@ -133,12 +144,13 @@
                   <div class="card-body">
                     <!-- Inputan Nama Karyawan -->
                     <h5 class="card-title">Nama Karyawan</h5>
-                    <div class="col-auto date-filter">
-                      <select
-                        class="form-control"
-                        id="employeeNameDropdown"
-                        name="employeeNameDropdown"></select>
-                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="employeeNameInput"
+                      name="employeeNameInput"
+                      value=""
+                      readonly/>
                     <!-- Inputan Posisi Karyawan -->
                     <h5 class="card-title mt-2">Posisi Karyawan</h5>
                     <input
@@ -146,7 +158,8 @@
                       class="form-control"
                       id="employeePositionInput"
                       name="employeePositionInput"
-                      placeholder="- Posisi Karyawan -" />
+                      value=""
+                      readonly/>
                     <!-- Inputan Nomor HP Karyawan -->
                     <h5 class="card-title mt-2">Nomor Whatsapp Karyawan</h5>
                     <input
@@ -154,7 +167,8 @@
                       class="form-control"
                       id="employeeWhatsappInput"
                       name="employeeWhatsappInput"
-                      placeholder="- Nomor Whatsapp Karyawan -" />
+                      value=""
+                      readonly/>
                     <!-- Inputan Status Perizinan Karyawan -->
                     <h5 class="card-title mt-2">Status Perizinan Karyawan</h5>
                     <div>
@@ -180,7 +194,7 @@
                     <textarea
                       class="form-control"
                       rows="3"
-                      placeholder="Textarea"></textarea>
+                      placeholder="- Link Lampiran Izin/Sakit -"></textarea>
 
                     <!-- Button Submit -->
                     <div
@@ -194,7 +208,7 @@
                       </button>
                     </div>
                   </div>
-                </div>
+                 </div>
               </div>
             </div>
           </div>
@@ -219,6 +233,7 @@
 
     <!-- Library Javascript Terkait -->
     <script type="module" src="../static/js/presensi/perizinan.js"></script>
+    <!-- <script src="../static/js/presensi/perizinan.js"></script> -->
     <script src="../static/js/app.js"></script>
   </body>
 </html>

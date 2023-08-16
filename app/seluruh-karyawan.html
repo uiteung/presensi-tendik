@@ -43,19 +43,12 @@
           </a>
 
           <ul class="sidebar-nav">
-            <li class="sidebar-header">Dashboard & Perizinan</li>
+            <li class="sidebar-header">Dashboard</li>
 
-            <li class="sidebar-item active">
+            <li class="sidebar-item">
               <a class="sidebar-link" href="../index.html">
                 <i class="align-middle" data-feather="sliders"></i>
                 <span class="align-middle">Dashboard Presensi</span>
-              </a>
-            </li>
-
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="../app/perizinan.html">
-                <i class="align-middle me-2" data-feather="mail"></i>
-                <span class="align-middle">Perizinan</span>
               </a>
             </li>
 
@@ -68,10 +61,19 @@
               </a>
             </li>
 
-            <li class="sidebar-item">
+            <li class="sidebar-item active">
               <a class="sidebar-link" href="#">
                 <i class="align-middle" data-feather="grid"></i>
                 <span class="align-middle">Data Seluruh Karyawan</span>
+              </a>
+            </li>
+
+            <li class="sidebar-header">Rekapan Presensi Karyawan</li>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="../app/presensi-divisi.html">
+                <i class="align-middle" data-feather="bar-chart-2"></i>
+                <span class="align-middle">Rekapan Presensi</span>
               </a>
             </li>
           </ul>
@@ -139,6 +141,7 @@
               type="button"
               id="exportExcelBtn"
               class="btn btn-success mb-2">
+              <i class="align-middle" data-feather="layout"></i>
               Export To Excel
             </button>
             <button
@@ -146,6 +149,7 @@
               id="exportPdfBtn"
               class="btn btn-danger mb-2"
               style="color: white">
+              <i class="align-middle" data-feather="file"></i>
               Export To PDF
             </button>
             <div class="row justify-content-center">
@@ -161,6 +165,7 @@
                           <th>Nama</th>
                           <th>Nomor Whatsapp</th>
                           <th>Posisi</th>
+                          <th>Perizinan</th>
                         </tr>
                       </thead>
                       <tbody id="tablebody">
@@ -173,6 +178,7 @@
                           <th>Nama</th>
                           <th>Nomor Whatsapp</th>
                           <th>Posisi</th>
+                          <th>Perizinan</th>
                         </tr>
                       </tfoot>
                     </table>

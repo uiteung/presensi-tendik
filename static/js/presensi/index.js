@@ -24,27 +24,35 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
 			response.data.forEach((entry) => {
 				const biodata = entry.biodata;
 				const checkin = entry.checkin;
-				const datetime = entry.datetime;
-				const formattedDate = new Date(datetime).toISOString().split('T')[0];
-				// const formattedDate = formatDateToIndonesian(datetime); // Change the date format
+				const datetime = entry.Datetime;
+				// const formattedDate = new Date(datetime).toISOString().split('T')[0];
 
-				if (!combinedData[biodata.nama]) {
-					combinedData[biodata.nama] = {};
-				}
+				// Parsing the datetime string to a valid Date object
+                const parsedDate = new Date(datetime);
 
-				if (!combinedData[biodata.nama][formattedDate]) {
-					combinedData[biodata.nama][formattedDate] = {
-						masuk: null,
-						pulang: null,
-					};
-				}
+                if (!isNaN(parsedDate)) { // Check if parsedDate is a valid Date object
+                    const formattedDate = parsedDate.toISOString().split('T')[0];
+                    
+                    if (!combinedData[biodata.nama]) {
+                        combinedData[biodata.nama] = {};
+                    }
 
-				if (checkin === "masuk") {
-					combinedData[biodata.nama][formattedDate].masuk = new Date(datetime);
-				} else if (checkin === "pulang") {
-					combinedData[biodata.nama][formattedDate].pulang = new Date(datetime);
-				}
-			});
+                    if (!combinedData[biodata.nama][formattedDate]) {
+                        combinedData[biodata.nama][formattedDate] = {
+                            masuk: null,
+                            pulang: null,
+                        };
+                    }
+
+                    if (checkin === "masuk") {
+                        combinedData[biodata.nama][formattedDate].masuk = parsedDate;
+                    } else if (checkin === "pulang") {
+                        combinedData[biodata.nama][formattedDate].pulang = parsedDate;
+                    }
+                } else {
+                    console.log("Invalid datetime:", datetime);
+                }
+            });
 
 			let tableData = "";
 			for (const nama in combinedData) {
@@ -59,12 +67,12 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
 					// Tentukan keterangan badge "Masuk Kerja" jika sudah pulang
 					const keterangan = pulangStatus
 						? '<span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Kerja</span>'
-						: '<a class="btn btn-warning" href="#">Sakit</a><span style="margin: 5px;"></span><a class="btn btn-primary" href="#">Izin</a>';
+						: '<span class="badge-blue" style="font-size: 10px; background-color: #ff0e0e; color: white; padding: 5px 10px; border-radius: 5px;">Tidak Masuk Kerja</span>';
 
 					// Tentukan apakah tombol "Uploud" akan muncul atau tidak
 					const uploudButton = pulangStatus
 						? '<span style="font-size: 13px;">Tidak Ada Catatan</span>'
-						: '<a class="btn btn-info" style="color: white" href="#">Uploud</a>';
+						: '<span style="font-size: 13px;">Belum Ada Catatan</span>';
 
 					// Sisanya kode pembuatan data tabel
 					tableData += `
@@ -84,25 +92,25 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
                               <p class="fw-normal mb-1"><b>${masukStatus}</b> ${masukTime}</p>
                               <p class="fw-normal mb-1"><b>${pulangStatus}</b> ${pulangTime}</p>
                           </td>
-                          <td>
+                          <td style="text-align: center; vertical-align: middle">
                               <p class="fw-normal mb-1">${date}</p>
                           </td>
-                          <td>
+                          <td style="text-align: center; vertical-align: middle">
                               ${pulang && masuk
 							? calculateDuration(masuk, pulang)
 							: "0 Jam 0 Menit 0 Detik"
 						}
                           </td>
-                          <td>
+                          <td style="text-align: center; vertical-align: middle">
                               ${pulang && masuk
 							? calculatePercentage(masuk, pulang)
 							: "0%"
 						}
                           </td>
-                          <td>
+                          <td style="text-align: center; vertical-align: middle">
                               ${keterangan}
                           </td>
-                          <td>
+                          <td style="text-align: center; vertical-align: middle">
                              ${uploudButton}
                           </td>
                       </tr>`;

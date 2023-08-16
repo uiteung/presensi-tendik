@@ -1,4 +1,3 @@
-// Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
 
 var header = new Headers();
@@ -10,24 +9,44 @@ const requestOptions = {
 	headers: header
 };
 
-async function fetchData() {
-	const response = await fetch('https://hris_backend.ulbi.ac.id/presensi/datakaryawan', requestOptions);
-	const data = await response.json();
+fetch("https://hris_backend.ulbi.ac.id/presensi/datakaryawan", requestOptions)
+	.then((result) => {
+		return result.json();
+	})
+	.then((data) => {
+		let tableData = "";
+		data.data.map((values) => {
+			tableData += `
+				<tr>
+					<td>
+						<p class="fw-normal mb-1">${values.nama}</p>
+					</td>
+					<td style="text-align: center; vertical-align: middle>
+						<p">${values.phone_number}</p>
+					</td>
+					<td>
+						<p class="fw-normal mb-1">${values.jabatan}</p>
+					</td>
+					<td style="text-align: center; vertical-align: middle">
+						<button type="button" class="btn btn-warning" data-employee-id="${values._id}">Perizinan</button>
+					</td>
+				</tr>`;
+		});
+		document.getElementById("tablebody").innerHTML = tableData;
 
-	const tableBody = document.getElementById('tablebody');
-	data.data.forEach(item => {
-		const row = tableBody.insertRow();
-		const namaCell = row.insertCell(0);
-		const phoneCell = row.insertCell(1);
-		const jabatanCell = row.insertCell(2);
-
-		namaCell.innerHTML = item.nama;
-		phoneCell.innerHTML = item.phone_number;
-		jabatanCell.innerHTML = item.jabatan;
+		// Menambahkan event listener untuk button "Perizinan"
+		const perizinanButtons = document.querySelectorAll('.btn-warning');
+		perizinanButtons.forEach(button => {
+			button.addEventListener('click', (event) => {
+				const _id = event.target.getAttribute('data-employee-id');
+				// Mengarahkan ke halaman perizinan.html dengan mengirimkan parameter _id karyawan
+				window.location.href = `perizinan.html?_id=${_id}`;
+			});
+		});
+	})
+	.catch(error => {
+		console.log('error', error);
 	});
-}
-
-fetchData();
 
 // Untuk membuat interaksi button export to excel dan pdf
 function html_table_to_excel(type) {

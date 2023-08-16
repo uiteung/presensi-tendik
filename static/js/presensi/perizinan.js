@@ -34,3 +34,39 @@ fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/getkaryawan/${_id}`
 		console.log('error', error);
 	});
 
+// Untuk POST data ke data presensi
+// Fungsi untuk mengirim data perizinan ke API
+function submitPerizinan() {
+    const selectedRadio = document.querySelector('input[name="inline-radios-example"]:checked');
+    const status = selectedRadio ? selectedRadio.value : ""; // Ambil status perizinan
+
+    const lampiran = document.querySelector('#lampiranTextarea').value; // Ambil nilai lampiran
+
+    const postData = {
+        _id: _id,
+        status: status,
+        lampiran: lampiran
+    };
+
+    fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/postdata/${_id}`, {
+        method: "POST",
+        headers: header,
+        body: JSON.stringify(postData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Lakukan sesuatu setelah data berhasil di-POST
+        console.log("Data berhasil di-POST:", data);
+
+        // Alihkan pengguna ke halaman dashboard
+        window.location.href = "../index.html"; // Ganti dengan URL halaman dashboard sesuai kebutuhan
+    })
+    .catch(error => {
+        console.error("Error saat melakukan POST data:", error);
+    });
+}
+
+// Event listener untuk tombol "Submit Perizinan"
+const submitButton = document.querySelector('#submitButton');
+submitButton.addEventListener('click', submitPerizinan);
+

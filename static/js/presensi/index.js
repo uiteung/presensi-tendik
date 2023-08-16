@@ -25,6 +25,8 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
 				const biodata = entry.biodata;
 				const checkin = entry.checkin;
 				const datetime = entry.Datetime;
+				const linkdokumen = entry.lampiran;
+				
 				// const formattedDate = new Date(datetime).toISOString().split('T')[0];
 
 				// Parsing the datetime string to a valid Date object
@@ -70,7 +72,7 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
 						: '<span class="badge-blue" style="font-size: 10px; background-color: #ff0e0e; color: white; padding: 5px 10px; border-radius: 5px;">Tidak Masuk Kerja</span>';
 
 					// Tentukan apakah tombol "Uploud" akan muncul atau tidak
-					const uploudButton = pulangStatus
+					const linkdokumen = pulangStatus
 						? '<span style="font-size: 13px;">Tidak Ada Catatan</span>'
 						: '<span style="font-size: 13px;">Belum Ada Catatan</span>';
 
@@ -111,7 +113,7 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
                               ${keterangan}
                           </td>
                           <td style="text-align: center; vertical-align: middle">
-                             ${uploudButton}
+                             ${linkdokumen}
                           </td>
                       </tr>`;
 				}

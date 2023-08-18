@@ -172,22 +172,11 @@
                     <!-- Inputan Status Perizinan Karyawan -->
                     <h5 class="card-title mt-2">Status Perizinan Karyawan</h5>
                     <div>
-                      <label class="form-check form-check-inline">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          name="inline-radios-example"
-                          value="option1" />
-                        <span class="form-check-label">Sakit</span>
-                      </label>
-                      <label class="form-check form-check-inline">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          name="inline-radios-example"
-                          value="option2" />
-                        <span class="form-check-label">Izin</span>
-                      </label>
+                      <select class="form-select mb-3" id="statusSelect">
+                        <option selected>- Pilih Perizinan -</option>
+                        <option value="Sakit">Sakit</option>
+                        <option value="Izin">Izin</option>
+                      </select>
                     </div>
                     <!-- Inputan Lampiran Perizinan Karyawan -->
                     <h5 class="card-title mt-2">Catatan Lampiran Perizinan</h5>

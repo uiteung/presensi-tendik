@@ -25,7 +25,6 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
 				const biodata = entry.biodata;
 				const checkin = entry.checkin;
 				const datetime = entry.Datetime;
-				const linkdokumen = entry.lampiran;
 				
 				// const formattedDate = new Date(datetime).toISOString().split('T')[0];
 

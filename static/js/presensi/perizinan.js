@@ -37,14 +37,14 @@ fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/getkaryawan/${_id}`
 // Untuk POST data ke data presensi
 // Fungsi untuk mengirim data perizinan ke API
 function submitPerizinan() {
-    const selectedRadio = document.querySelector('input[name="inline-radios-example"]:checked');
-    const status = selectedRadio ? selectedRadio.value : ""; // Ambil status perizinan
+    const selectedOption = document.querySelector('#statusSelect'); // Mengambil elemen select dengan class "form-select"
+    const status = selectedOption ? selectedOption.value : ""; // Ambil status perizinan
 
     const lampiran = document.querySelector('#lampiranTextarea').value; // Ambil nilai lampiran
 
     const postData = {
         _id: _id,
-        status: status,
+        ket: status,
         lampiran: lampiran
     };
 

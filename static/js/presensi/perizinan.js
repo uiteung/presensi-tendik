@@ -14,6 +14,16 @@ const requestOptions = {
 const urlParams = new URLSearchParams(window.location.search);
 const _id = urlParams.get('_id');
 
+// Untuk Set Pop UP
+function showSuccessPopup() {
+    const popup = document.getElementById("successPopup");
+    popup.style.display = "flex";
+  
+    setTimeout(() => {
+      popup.style.display = "none";
+    }, 8000); // Setelah 2 detik, sembunyikan pop-up
+  }
+
 fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/getkaryawan/${_id}`, requestOptions)
 	.then((result) => {
 		return result.json();
@@ -66,7 +76,13 @@ function submitPerizinan() {
     });
 }
 
+// // Event listener untuk tombol "Submit Perizinan"
+// const submitButton = document.querySelector('#submitButton');
+// submitButton.addEventListener('click', submitPerizinan);
+
 // Event listener untuk tombol "Submit Perizinan"
 const submitButton = document.querySelector('#submitButton');
-submitButton.addEventListener('click', submitPerizinan);
-
+submitButton.addEventListener('click', () => {
+    submitPerizinan(); // Panggil fungsi submitPerizinan untuk mengirim data
+    showSuccessPopup(); // Panggil fungsi showSuccessPopup untuk menampilkan pop-up
+});

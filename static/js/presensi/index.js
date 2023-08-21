@@ -13,9 +13,6 @@ const requestOptions = {
 	headers: header
 };
 
-// Untuk GET data dari API
-
-
 // Fungsi untuk mengubah durasi menjadi format yang lebih mudah dibaca
 function formatDuration(duration) {
 	const durasiJam = Math.floor(duration / (1000 * 60 * 60));
@@ -58,7 +55,6 @@ function calculateDuration(masukTime, pulangTime) {
 
 	return `${durasiJam} Jam ${durasiMenit} Menit ${durasiDetik} Detik`;
 }
-
 
 // Untuk membuat interaksi button export to excel dan pdf
 function html_table_to_excel(type) {
@@ -249,7 +245,6 @@ CihuyDomReady(() => {
 		.catch(error => {
 			console.log('error', error);
 		});
-
 
 	function displayData(page) {
 		const baris = CihuyQuerySelector("#tablebody tr");

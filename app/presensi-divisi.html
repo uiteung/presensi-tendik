@@ -1,182 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="description"
+      content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5" />
+    <meta name="author" content="AdminKit" />
+    <meta
+      name="keywords"
+      content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web" />
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-	<meta name="author" content="AdminKit">
-	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      rel="shortcut icon"
+      href="../static/img/enam_berlian-removebg-preview.png" />
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="../static/img/enam_berlian-removebg-preview.png" />
+    <link
+      rel="canonical"
+      href="https://demo-basic.adminkit.io/pages-profile.html" />
 
-	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-profile.html" />
+    <title>Presensi Divisi | ULBI</title>
 
-	<title>Presensi Divisi | ULBI</title>
+    <!-- Import CSS yang diperlukan -->
+    <link href="../static/css/app.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet" />
+  </head>
 
-	<!-- Import CSS yang diperlukan -->
-	<link href="../static/css/app.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-</head>
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar Start -->
+      <nav id="sidebar" class="sidebar js-sidebar">
+        <div class="sidebar-content js-simplebar">
+          <a class="sidebar-brand" href="../index.html">
+            <span class="align-middle"
+              ><span class="align-middle">
+                <img
+                  src="../static/img/LOGO ULBI - WIDE BACKGROUNG NEVY (1).png"
+                  alt=""
+                  style="width: 150px; margin-left: 25px" /></span
+            ></span>
+          </a>
 
-<body>
-	<div class="wrapper">
+          <ul class="sidebar-nav">
+            <li class="sidebar-header">Dashboard</li>
 
-		<!-- Sidebar Start -->
-		<nav id="sidebar" class="sidebar js-sidebar">
-			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="../index.html">
-          			<span class="align-middle"><span class="align-middle">
-					<img src="../static/img/LOGO ULBI - WIDE BACKGROUNG NEVY (1).png" alt="" style="width: 150px; margin-left: 25px;"></span></span>
-        		</a>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="../index.html">
+                <i class="align-middle" data-feather="sliders"></i>
+                <span class="align-middle">Dashboard Presensi</span>
+              </a>
+            </li>
 
-				<ul class="sidebar-nav">
-					<li class="sidebar-header">Dashboard</li>
-		
-					<li class="sidebar-item">
-					  <a class="sidebar-link" href="../index.html">
-						<i class="align-middle" data-feather="sliders"></i>
-						<span class="align-middle">Dashboard Presensi</span>
-					  </a>
-					</li>
-		
-					<li class="sidebar-header">Data Presensi Karyawan</li>
-		
-					<li class="sidebar-item active">
-					  <a class="sidebar-link" href="../app/presensi-divisi.html">
-						<i class="align-middle" data-feather="users"></i>
-						<span class="align-middle">Presensi Divisi</span>
-					  </a>
-					</li>
-		
-					<li class="sidebar-item">
-					  <a class="sidebar-link" href="../app/seluruh-karyawan.html">
-						<i class="align-middle" data-feather="grid"></i>
-						<span class="align-middle">Data Seluruh Karyawan</span>
-					  </a>
-					</li>
+            <li class="sidebar-header">Data Presensi Karyawan</li>
 
-					<li class="sidebar-header">Rekapan Presensi Karyawan</li>
+            <li class="sidebar-item active">
+              <a class="sidebar-link" href="../app/presensi-divisi.html">
+                <i class="align-middle" data-feather="users"></i>
+                <span class="align-middle">Presensi Divisi</span>
+                <span
+                  style="
+                    font-size: 7px;
+                    background-color: #ffc107;
+                    color: black;
+                    padding: 3px 3px;
+                    border-radius: 5px;
+                  "
+                  >Maintenance</span
+                >
+              </a>
+            </li>
 
-					<li class="sidebar-item">
-					<a class="sidebar-link" href="../app/presensi-divisi.html">
-						<i class="align-middle" data-feather="bar-chart-2"></i>
-						<span class="align-middle">Rekapan Presensi</span>
-					</a>
-					</li>
-				</ul>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="../app/seluruh-karyawan.html">
+                <i class="align-middle" data-feather="grid"></i>
+                <span class="align-middle">Data Seluruh Karyawan</span>
+              </a>
+            </li>
 
-				<div class="sidebar-cta">
-					<div class="sidebar-cta-content">
-					  <strong class="d-inline-block mb-2">Presensi Karyawan</strong>
-					  <div class="mb-3 text-sm" style="font-size: 13px">
-						Dashboard Presensi Karyawan terintegrasi dengan ITeung. Silahkan
-						absen tepat waktu dengan cara Chat Kontak Iteung.
-					  </div>
-					  <a
-						class="btn btn-success"
-						style="padding: 5px 55px"
-						href="https://api.whatsapp.com/send?phone=628112000279"
-						role="button">
-						Iteung
-					  </a>
-					</div>
-				  </div>
-				</div>
-			</nav>
-			<!-- Sidebar End -->
+            <li class="sidebar-header">Rekapan Presensi Karyawan</li>
 
-		<div class="main">
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="../app/rekapan-presensi.html">
+                <i class="align-middle" data-feather="bar-chart-2"></i>
+                <span class="align-middle">Rekapan Presensi</span>
+                <span
+                  style="
+                    font-size: 7px;
+                    background-color: #ffc107;
+                    color: black;
+                    padding: 3px 3px;
+                    border-radius: 5px;
+                  "
+                  >Maintenance</span
+                >
+              </a>
+            </li>
+          </ul>
 
-			<!-- Header Start -->
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle">
-          			<i class="hamburger align-self-center"></i>
-        		</a>
+          <div class="sidebar-cta">
+            <div class="sidebar-cta-content">
+              <strong class="d-inline-block mb-2">Presensi Karyawan</strong>
+              <div class="mb-3 text-sm" style="font-size: 13px">
+                Dashboard Presensi Karyawan terintegrasi dengan ITeung. Silahkan
+                absen tepat waktu dengan cara Chat Kontak Iteung.
+              </div>
+              <a
+                class="btn btn-success"
+                style="padding: 5px 55px"
+                href="https://api.whatsapp.com/send?phone=628112000279"
+                role="button">
+                Iteung
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <!-- Sidebar End -->
 
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav navbar-align">
-						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                				<i class="align-middle" data-feather="settings"></i>
-              				</a>
+      <div class="main">
+        <!-- Header Start -->
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+          <a class="sidebar-toggle js-sidebar-toggle">
+            <i class="hamburger align-self-center"></i>
+          </a>
 
-							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                				<img src="../static/img/avatars/admin.png" class="avatar img-fluid rounded me-1"/> <span class="text-dark">Admin</span>
-              				</a>
-							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="login.html">Log out</a>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</nav>
+          <div class="navbar-collapse collapse">
+            <ul class="navbar-nav navbar-align">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-icon dropdown-toggle d-inline-block d-sm-none"
+                  href="#"
+                  data-bs-toggle="dropdown">
+                  <i class="align-middle" data-feather="settings"></i>
+                </a>
 
-			<!-- Main Content Start -->
-			<main class="content">
-				<div class="container-fluid p-0">
+                <a
+                  class="nav-link dropdown-toggle d-none d-sm-inline-block"
+                  href="#"
+                  data-bs-toggle="dropdown">
+                  <img
+                    src="../static/img/avatars/admin.png"
+                    class="avatar img-fluid rounded me-1" />
+                  <span class="text-dark">Admin</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <a class="dropdown-item" href="login.html">Log out</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
 
-					<h1 class="h3 mb-3">Dashboard Presensi Karyawan</h1>
+        <!-- Main Content Start -->
+        <main class="content">
+          <div class="container-fluid p-0">
+            <h1 class="h3 mb-3">Dashboard Presensi Karyawan</h1>
 
-					<div class="row">
-						<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-									<table class="table align-middle mb-0 bg-white">
-										<thead class="bg-light">
-										  <tr>
-											<th>Nama Divisi</th>
-											<th>Action</th>
-										  </tr>
-										</thead>
-										<tbody>
-											
-										  <tr>
-											<td>
-											  <div class="d-flex align-items-center">
-												<div class="ms-3">
-												  <p class="fw-bold mb-1">Administrasi Umum & Keuangan</p>
-												</div>
-											  </div>
-											</td>
-											<td>
-												<a class="btn btn-info" href="detail-divisi.html">Detail</a>  
-											</td>
-										  </tr>
-										</tbody>
-									  </table>
-								</div>
-								<div class="card-body">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</main>
-			<!-- Main Content End -->
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <table class="table align-middle mb-0 bg-white">
+                      <thead class="bg-light">
+                        <tr>
+                          <th>Nama Divisi</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div class="d-flex align-items-center">
+                              <div class="ms-3">
+                                <p class="fw-bold mb-1">
+                                  Administrasi Umum & Keuangan
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <a class="btn btn-info" href="detail-divisi.html"
+                              >Detail</a
+                            >
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="card-body"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <!-- Main Content End -->
 
-			<!-- Footer Start -->
-			<footer class="footer">
-				<div class="container-fluid">
-					<div class="row text-muted">
-						<div class="col-6 text-start">
-							<p class="mb-0">
-								<a class="text-muted"><strong>DTI ULBI</strong></a> &copy;
-							</p>
-						</div>
-					</div>
-				</div>
-			</footer>
-			<!-- Footer End -->
+        <!-- Footer Start -->
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row text-muted">
+              <div class="col-6 text-start">
+                <p class="mb-0">
+                  <a class="text-muted"><strong>DTI ULBI</strong></a> &copy;
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
+        <!-- Footer End -->
+      </div>
+    </div>
 
-		</div>
-	</div>
-
-	<!-- Library Javascript Terkait -->
-	<script src="../static/js/app.js"></script>
-
-</body>
-
+    <!-- Library Javascript Terkait -->
+    <script src="../static/js/app.js"></script>
+  </body>
 </html>

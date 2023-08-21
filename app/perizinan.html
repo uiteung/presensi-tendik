@@ -55,9 +55,20 @@
             <li class="sidebar-header">Data Presensi Karyawan</li>
 
             <li class="sidebar-item">
-              <a class="sidebar-link" href="../app/presensi-divisi.html">
+              <!-- <a class="sidebar-link" href="../app/presensi-divisi.html"> -->
+				<a class="sidebar-link" href="">
                 <i class="align-middle" data-feather="users"></i>
                 <span class="align-middle">Presensi Divisi</span>
+                <span
+                  style="
+                    font-size: 7px;
+                    background-color: #ffc107;
+                    color: black;
+                    padding: 3px 3px;
+                    border-radius: 5px;
+                  "
+                  >Maintenance</span
+                >
               </a>
             </li>
 
@@ -71,9 +82,20 @@
             <li class="sidebar-header">Rekapan Presensi Karyawan</li>
 
             <li class="sidebar-item">
-              <a class="sidebar-link" href="../app/presensi-divisi.html">
+              <!-- <a class="sidebar-link" href="../app/rekapan-presensi.html"> -->
+				<a class="sidebar-link" href="">
                 <i class="align-middle" data-feather="bar-chart-2"></i>
                 <span class="align-middle">Rekapan Presensi</span>
+                <span
+                  style="
+                    font-size: 7px;
+                    background-color: #ffc107;
+                    color: black;
+                    padding: 3px 3px;
+                    border-radius: 5px;
+                  "
+                  >Maintenance</span
+                >
               </a>
             </li>
           </ul>
@@ -138,72 +160,82 @@
           <div class="container-fluid p-0">
             <h1 class="h3 mb-3">Form Perizinan Karyawan</h1>
 
+            <!-- Alert Start -->
+            <div id="alertContainer" class="alert-container"></div>
+            <!-- Alert End -->
+
             <div class="row">
               <div class="col-12">
-                <div class="card">
-                  <div class="card-body">
-                    <!-- Inputan Nama Karyawan -->
-                    <h5 class="card-title">Nama Karyawan</h5>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="employeeNameInput"
-                      name="employeeNameInput"
-                      value=""
-                      readonly/>
-                    <!-- Inputan Posisi Karyawan -->
-                    <h5 class="card-title mt-2">Posisi Karyawan</h5>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="employeePositionInput"
-                      name="employeePositionInput"
-                      value=""
-                      readonly/>
-                    <!-- Inputan Nomor HP Karyawan -->
-                    <h5 class="card-title mt-2">Nomor Whatsapp Karyawan</h5>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="employeeWhatsappInput"
-                      name="employeeWhatsappInput"
-                      value=""
-                      readonly/>
-                    <!-- Inputan Status Perizinan Karyawan -->
-                    <h5 class="card-title mt-2">Status Perizinan Karyawan</h5>
-                    <div>
-                      <select class="form-select mb-3" id="statusSelect">
-                        <option selected>- Pilih Perizinan -</option>
-                        <option value="Sakit">Sakit</option>
-                        <option value="Izin">Izin</option>
-                      </select>
-                    </div>
-                    <!-- Inputan Lampiran Perizinan Karyawan -->
-                    <h5 class="card-title mt-2">Catatan Lampiran Perizinan</h5>
-                    <textarea
-                      id="lampiranTextarea"
-                      class="form-control"
-                      rows="3"
-                      placeholder="- Link Lampiran Izin/Sakit -"></textarea>
+                <form id="perizinanForm">
+                  <div class="card">
+                    <div class="card-body">
+                      <!-- Inputan Nama Karyawan -->
+                      <h5 class="card-title">Nama Karyawan</h5>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="employeeNameInput"
+                        name="employeeNameInput"
+                        value=""
+                        readonly />
+                      <!-- Inputan Posisi Karyawan -->
+                      <h5 class="card-title mt-2">Posisi Karyawan</h5>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="employeePositionInput"
+                        name="employeePositionInput"
+                        value=""
+                        readonly />
+                      <!-- Inputan Nomor HP Karyawan -->
+                      <h5 class="card-title mt-2">Nomor Whatsapp Karyawan</h5>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="employeeWhatsappInput"
+                        name="employeeWhatsappInput"
+                        value=""
+                        readonly />
+                      <!-- Inputan Status Perizinan Karyawan -->
+                      <h5 class="card-title mt-2">Status Perizinan Karyawan</h5>
+                      <div>
+                        <select
+                          class="form-select mb-3"
+                          id="statusSelect"
+                          required>
+                          <option selected>- Pilih Perizinan -</option>
+                          <option value="Sakit">Sakit</option>
+                          <option value="Izin">Izin</option>
+                        </select>
+                      </div>
+                      <!-- Inputan Lampiran Perizinan Karyawan -->
+                      <h5 class="card-title mt-2">
+                        Catatan Lampiran Perizinan
+                      </h5>
+                      <textarea
+                        id="lampiranTextarea"
+                        class="form-control"
+                        rows="3"
+                        placeholder="- Link Lampiran Izin/Sakit -"
+                        required></textarea>
 
-                    <!-- Button Submit -->
-                    <div
-                      style="
-                        position: relative;
-                        text-align: right;
-                        margin-top: 20px;
-                      ">
-                      <button type="button" class="btn btn-primary" id="submitButton">
-                        Submit Perizinan
-                      </button>
+                      <!-- Button Submit -->
+                      <div
+                        style="
+                          position: relative;
+                          text-align: right;
+                          margin-top: 20px;
+                        ">
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          id="submitButton">
+                          Submit Perizinan
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  <div id="successPopup" class="popup">
-                    <div class="popup-content">
-                      <p>Data Berhasil Ditambahkan</p>
-                    </div>
-                  </div>
-                 </div>
+                </form>
               </div>
             </div>
           </div>

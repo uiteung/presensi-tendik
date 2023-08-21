@@ -14,16 +14,6 @@ const requestOptions = {
 const urlParams = new URLSearchParams(window.location.search);
 const _id = urlParams.get('_id');
 
-// Untuk Set Pop UP
-function showSuccessPopup() {
-    const popup = document.getElementById("successPopup");
-    popup.style.display = "flex";
-  
-    setTimeout(() => {
-      popup.style.display = "none";
-    }, 8000); // Setelah 2 detik, sembunyikan pop-up
-  }
-
 fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/getkaryawan/${_id}`, requestOptions)
 	.then((result) => {
 		return result.json();
@@ -47,42 +37,56 @@ fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/getkaryawan/${_id}`
 // Untuk POST data ke data presensi
 // Fungsi untuk mengirim data perizinan ke API
 function submitPerizinan() {
-    const selectedOption = document.querySelector('#statusSelect'); // Mengambil elemen select dengan class "form-select"
-    const status = selectedOption ? selectedOption.value : ""; // Ambil status perizinan
+	const selectedOption = document.querySelector('#statusSelect'); // Mengambil elemen select dengan class "form-select"
+	const status = selectedOption ? selectedOption.value : ""; // Ambil status perizinan
 
-    const lampiran = document.querySelector('#lampiranTextarea').value; // Ambil nilai lampiran
+	const lampiran = document.querySelector('#lampiranTextarea').value; // Ambil nilai lampiran
 
-    const postData = {
-        _id: _id,
-        ket: status,
-        lampiran: lampiran
-    };
+	const postData = {
+		_id: _id,
+		ket: status,
+		lampiran: lampiran
+	};
 
-    fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/postdata/${_id}`, {
-        method: "POST",
-        headers: header,
-        body: JSON.stringify(postData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Lakukan sesuatu setelah data berhasil di-POST
-        console.log("Data berhasil di-POST:", data);
-
-        // Alihkan pengguna ke halaman dashboard
-        window.location.href = "../index.html"; // Ganti dengan URL halaman dashboard sesuai kebutuhan
-    })
-    .catch(error => {
-        console.error("Error saat melakukan POST data:", error);
-    });
+	fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/postdata/${_id}`, {
+		method: "POST",
+		headers: header,
+		body: JSON.stringify(postData)
+	})
+		.then(response => response.json())
+		.then(data => {
+			if (data.success) {
+				// Menampilkan Data Alert Success
+				const alertContainer = document.querySelector('#alertContainer');
+				const alertDiv = document.createElement('div');
+				alertDiv.classList.add('alert', 'alert-success', 'mt-3');
+				alertDiv.textContent = 'Data Berhasil Ditambahkan';
+				alertContainer.appendChild(alertDiv);
+			} else {
+				// Menampilkan Data Alert Error
+				const alertContainer = document.querySelector('#alertContainer');
+				const alertDiv = document.createElement(`div`);
+				alertDiv.classList.add('alert', 'alert-danger', 'mt-3');
+				alertDiv.textContent = 'Data Gagal Ditambahkan';
+				alertContainer.appendChild(alertDiv);
+			}
+		})
+		.catch(error => {
+			console.error("Error saat melakukan POST data:", error);
+		});
 }
-
-// // Event listener untuk tombol "Submit Perizinan"
-// const submitButton = document.querySelector('#submitButton');
-// submitButton.addEventListener('click', submitPerizinan);
 
 // Event listener untuk tombol "Submit Perizinan"
 const submitButton = document.querySelector('#submitButton');
 submitButton.addEventListener('click', () => {
-    submitPerizinan(); // Panggil fungsi submitPerizinan untuk mengirim data
-    showSuccessPopup(); // Panggil fungsi showSuccessPopup untuk menampilkan pop-up
+	// Untuk Ambil Element Form
+	const form = document.getElementById('perizinanForm');
+
+	// Untuk Cek apakah formnya valid atau tidak
+	if (form.checkValidity()) {
+		// Panggil fungsi submitPerizinan
+		submitPerizinan();
+	} else {
+		form.reportValidity();
+	}
 });

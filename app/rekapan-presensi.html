@@ -13,16 +13,20 @@
     <meta
       name="keywords"
       content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web" />
+
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       rel="shortcut icon"
       href="../static/img/enam_berlian-removebg-preview.png" />
 
-    <title>Dashboard Presensi Karyawan | ULBI</title>
+    <link
+      rel="canonical"
+      href="https://demo-basic.adminkit.io/pages-profile.html" />
+
+    <title>Presensi Divisi | ULBI</title>
 
     <!-- Import CSS yang diperlukan -->
     <link href="../static/css/app.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../static/css/style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
       rel="stylesheet" />
@@ -33,13 +37,14 @@
       <!-- Sidebar Start -->
       <nav id="sidebar" class="sidebar js-sidebar">
         <div class="sidebar-content js-simplebar">
-          <a class="sidebar-brand" href="index.html">
+          <a class="sidebar-brand" href="../index.html">
             <span class="align-middle"
-              ><img
-                src="../static/img/LOGO ULBI - WIDE BACKGROUNG NEVY (1).png"
-                alt=""
-                style="width: 150px; margin-left: 25px"
-            /></span>
+              ><span class="align-middle">
+                <img
+                  src="../static/img/LOGO ULBI - WIDE BACKGROUNG NEVY (1).png"
+                  alt=""
+                  style="width: 150px; margin-left: 25px" /></span
+            ></span>
           </a>
 
           <ul class="sidebar-nav">
@@ -54,9 +59,8 @@
 
             <li class="sidebar-header">Data Presensi Karyawan</li>
 
-            <li class="sidebar-item">
-              <!-- <a class="sidebar-link" href="../app/presensi-divisi.html"> -->
-              <a class="sidebar-link" href="">
+            <li class="sidebar-item active">
+              <a class="sidebar-link" href="../app/presensi-divisi.html">
                 <i class="align-middle" data-feather="users"></i>
                 <span class="align-middle">Presensi Divisi</span>
                 <span
@@ -72,8 +76,8 @@
               </a>
             </li>
 
-            <li class="sidebar-item active">
-              <a class="sidebar-link" href="#">
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="../app/seluruh-karyawan.html">
                 <i class="align-middle" data-feather="grid"></i>
                 <span class="align-middle">Data Seluruh Karyawan</span>
               </a>
@@ -82,8 +86,7 @@
             <li class="sidebar-header">Rekapan Presensi Karyawan</li>
 
             <li class="sidebar-item">
-              <!-- <a class="sidebar-link" href="../app/rekapan-presensi.html"> -->
-              <a class="sidebar-link" href="">
+              <a class="sidebar-link" href="../app/rekapan-presensi.html">
                 <i class="align-middle" data-feather="bar-chart-2"></i>
                 <span class="align-middle">Rekapan Presensi</span>
                 <span
@@ -123,7 +126,7 @@
       <div class="main">
         <!-- Header Start -->
         <nav class="navbar navbar-expand navbar-light navbar-bg">
-          <a class="sidebar-toggle js-sidebar-toggle" style="margin-left: 30px">
+          <a class="sidebar-toggle js-sidebar-toggle">
             <i class="hamburger align-self-center"></i>
           </a>
 
@@ -147,77 +150,25 @@
                   <span class="text-dark">Admin</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                  <a class="dropdown-item" href="static/login.html">Log out</a>
+                  <a class="dropdown-item" href="login.html">Log out</a>
                 </div>
               </li>
             </ul>
           </div>
         </nav>
-        <!-- Header End -->
 
         <!-- Main Content Start -->
         <main class="content">
           <div class="container-fluid p-0">
-            <h1 class="h3 mb-3">Dashboard Presensi Karyawan</h1>
-            <button
-              type="button"
-              id="exportExcelBtn"
-              class="btn btn-success mb-2">
-              <i class="align-middle" data-feather="layout"></i>
-              Export To Excel
-            </button>
-            <button
-              type="button"
-              id="exportPdfBtn"
-              class="btn btn-danger mb-2"
-              style="color: white">
-              <i class="align-middle" data-feather="file"></i>
-              Export To PDF
-            </button>
-            <div class="row justify-content-center">
+            <h1 class="h3 mb-3">Blank Page</h1>
+
+            <div class="row">
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <table
-                      id="example"
-                      class="table table-striped"
-                      style="width: 100%">
-                      <thead>
-                        <tr style="text-align: center; vertical-align: middle">
-                          <th>Nama</th>
-                          <th>Nomor Whatsapp</th>
-                          <th>Posisi</th>
-                          <th>Perizinan</th>
-                        </tr>
-                      </thead>
-                      <tbody id="tablebody">
-                        <script
-                          src="../static/js/presensi/seluruh-karyawan.js"
-                          type="module"></script>
-                      </tbody>
-                      <tfoot>
-                        <tr style="text-align: center; vertical-align: middle">
-                          <th>Nama</th>
-                          <th>Nomor Whatsapp</th>
-                          <th>Posisi</th>
-                          <th>Perizinan</th>
-                        </tr>
-                      </tfoot>
-                    </table>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="pagination">
-                          <button id="prevPageBtn" class="btn btn-secondary">
-                            Previous
-                          </button>
-                          <span id="currentPage" class="mx-2">Page 1</span>
-                          <button id="nextPageBtn" class="btn btn-secondary">
-                            Next
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                    <h5 class="card-title mb-0">Empty card</h5>
                   </div>
+                  <div class="card-body"></div>
                 </div>
               </div>
             </div>
@@ -241,20 +192,7 @@
       </div>
     </div>
 
-    <!-- Library Untuk Export to Excel dan DataTables -->
-    <script
-      type="text/javascript"
-      src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
-
-    <!-- Library Untuk Export to Pdf -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
-    <script src="https://unpkg.com/jspdf-invoice"></script>
-
     <!-- Library Javascript Terkait -->
-    <script src="../static/js/table-sorting.js"></script>
     <script src="../static/js/app.js"></script>
-    <script defer src="../static/js/script.js"></script>
-    <script src="../static/js/croot.js" type="module"></script>
   </body>
 </html>

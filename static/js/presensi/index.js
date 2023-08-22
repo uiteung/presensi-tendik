@@ -273,7 +273,7 @@ CihuyDomReady(() => {
 
 	buttonselanjutnya.addEventListener("click", () => {
 		const totalPages = Math.ceil(
-			tablebody.querySelectorAll("#tablebody tr").length / itemperpage
+			tablebody.querySelectorAll("#tablebody-masuk tr").length / itemperpage
 		);
 		if (halamannow < totalPages) {
 			halamannow++;

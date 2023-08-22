@@ -21,8 +21,8 @@
     <title>Dashboard Presensi Karyawan | ULBI</title>
 
     <!-- Import CSS yang diperlukan -->
-    <link href="static/css/app.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link href="../static/css/app.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
       rel="stylesheet" />
@@ -48,7 +48,32 @@
             <li class="sidebar-item active">
               <a class="sidebar-link" href="index.html">
                 <i class="align-middle" data-feather="sliders"></i>
-                <span class="align-middle">Dashboard Presensi</span>
+                <span class="align-middle">Presensi Masuk</span>
+              </a>
+            </li>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/app/presensi-keluar.html">
+                <i class="align-middle" data-feather="sliders"></i>
+                <span class="align-middle">Presensi Keluar</span>
+              </a>
+            </li>
+
+            <li class="sidebar-item">
+              <!-- <a class="sidebar-link" href="../app/rekapan-presensi.html"> -->
+              <a class="sidebar-link" href="404.html">
+                <i class="align-middle" data-feather="mail"></i>
+                <span class="align-middle">Sakit/Izin</span>
+                <span
+                  style="
+                    font-size: 7px;
+                    background-color: #ffc107;
+                    color: black;
+                    padding: 3px 3px;
+                    border-radius: 5px;
+                  "
+                  >Maintenance</span
+                >
               </a>
             </li>
 
@@ -85,7 +110,7 @@
               <!-- <a class="sidebar-link" href="../app/rekapan-presensi.html"> -->
               <a class="sidebar-link" href="404.html">
                 <i class="align-middle" data-feather="bar-chart-2"></i>
-                <span class="align-middle">Rekapan Presensi</span>
+                <span class="align-middle">Rekap Presensi</span>
                 <span
                   style="
                     font-size: 7px;
@@ -147,7 +172,7 @@
                   <span class="text-dark">Admin</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                  <a class="dropdown-item" href="static/login.html">Log out</a>
+                  <a class="dropdown-item" href="https://euis.ulbi.ac.id">Log out</a>
                 </div>
               </li>
             </ul>
@@ -237,19 +262,14 @@
                           <th>Posisi</th>
                           <th>Status</th>
                           <th>Tanggal</th>
-                          <th>Durasi Kerja</th>
-                          <th>Persentase Durasi Kerja</th>
                           <th>Keterangan</th>
                           <th>Link Dokumen</th>
                         </tr>
                       </thead>
                       <tbody id="tablebody">
                         <script
-                          src="static/js/presensi/index.js"
+                          src="static/js/presensi/index-masuk.js"
                           type="module"></script>
-                          <!-- <script
-                          src="static/js/presensi/index-coba.js"
-                          type="module"></script> -->
                       </tbody>
                       <tfoot>
                         <tr style="text-align: center; vertical-align: middle">
@@ -257,8 +277,6 @@
                           <th>Posisi</th>
                           <th>Status</th>
                           <th>Tanggal</th>
-                          <th>Durasi Kerja</th>
-                          <th>Persentase Durasi Kerja</th>
                           <th>Keterangan</th>
                           <th>Link Dokumen</th>
                         </tr>
@@ -322,8 +340,8 @@
     <script src="https://unpkg.com/jspdf-invoice"></script>
 
     <!-- Library Javascript Terkait -->
-    <script src="static/js/table-sorting.js"></script>
-    <script src="static/js/app.js"></script>
-    <script src="static/js/croot.js" type="module"></script>
+    <script src="./static/js/table-sorting.js"></script>
+    <script src="./static/js/app.js"></script>
+    <script src="./static/js/croot.js" type="module"></script>
   </body>
 </html>

@@ -46,14 +46,14 @@
             <li class="sidebar-header">Dashboard</li>
 
             <li class="sidebar-item">
-              <a class="sidebar-link" href="../index.html">
+              <a class="sidebar-link" href="/index.html">
                 <i class="align-middle" data-feather="sliders"></i>
                 <span class="align-middle">Presensi Masuk</span>
               </a>
             </li>
 
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="../index.html">
+            <li class="sidebar-item active">
+              <a class="sidebar-link" href="./presensi-keluar.html">
                 <i class="align-middle" data-feather="sliders"></i>
                 <span class="align-middle">Presensi Keluar</span>
               </a>
@@ -80,8 +80,8 @@
             <li class="sidebar-header">Data Presensi Karyawan</li>
 
             <li class="sidebar-item">
-              <!-- <a class="sidebar-link" href="../app/presensi-divisi.html"> -->
-              <a class="sidebar-link" href="../404.html">
+              <!-- <a class="sidebar-link" href="app/presensi-divisi.html"> -->
+              <a class="sidebar-link" href="/404.html">
                 <i class="align-middle" data-feather="users"></i>
                 <span class="align-middle">Presensi Divisi</span>
                 <span
@@ -97,8 +97,8 @@
               </a>
             </li>
 
-            <li class="sidebar-item active">
-              <a class="sidebar-link" href="seluruh-karyawan.html">
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/app/seluruh-karyawan.html">
                 <i class="align-middle" data-feather="grid"></i>
                 <span class="align-middle">Data Seluruh Karyawan</span>
               </a>
@@ -108,9 +108,9 @@
 
             <li class="sidebar-item">
               <!-- <a class="sidebar-link" href="../app/rekapan-presensi.html"> -->
-              <a class="sidebar-link" href="../404.html">
+              <a class="sidebar-link" href="/404.html">
                 <i class="align-middle" data-feather="bar-chart-2"></i>
-                <span class="align-middle">Rekapan Presensi</span>
+                <span class="align-middle">Rekap Presensi</span>
                 <span
                   style="
                     font-size: 7px;
@@ -187,14 +187,14 @@
             <button
               type="button"
               id="exportExcelBtn"
-              class="btn btn-success mb-2">
+              class="btn btn-success mb-3">
               <i class="align-middle" data-feather="layout"></i>
               Export To Excel
             </button>
             <button
               type="button"
               id="exportPdfBtn"
-              class="btn btn-danger mb-2"
+              class="btn btn-danger mb-3"
               style="color: white">
               <i class="align-middle" data-feather="file"></i>
               Export To PDF
@@ -203,6 +203,55 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
+                    <div class="row no-gutters">
+                      <div class="col-auto date-filter" style="width: 20%">
+                        <label for="startDate" class="form-label"
+                          >Tanggal Mulai</label
+                        >
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="startDate"
+                          name="startDate" />
+                      </div>
+                      <div class="col-auto date-filter" style="width: 20%">
+                        <label for="endDate" class="form-label"
+                          >Tanggal Akhir</label
+                        >
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="endDate"
+                          name="endDate" />
+                      </div>
+                      <div class="col-auto date-filter" style="width: 20%">                       
+                        <button
+                          type="button"
+                          id="filterButton"
+                          class="btn btn-info mt-4"
+                          style="height: 40px">
+                          <i class="align-middle me-1" data-feather="search"></i>
+                          Filter Berdasarkan Tanggal
+                        </button>
+                      </div>
+                      <div
+                        class="col-md-3"
+                        style="
+                          position: absolute;
+                          top: 0;
+                          right: 0;
+                          width: 15%;
+                          margin-top: 40px;
+                        ">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="searchInput"
+                          placeholder="Cari" />
+                      </div>
+                    </div>
+
+                    <hr />
                     <table
                       id="example"
                       class="table table-striped"
@@ -210,27 +259,45 @@
                       <thead>
                         <tr style="text-align: center; vertical-align: middle">
                           <th>Nama</th>
-                          <th>Nomor Whatsapp</th>
                           <th>Posisi</th>
-                          <th>Perizinan</th>
+                          <th>Status</th>
+                          <th>Tanggal</th>
+                          <th>Durasi Kerja</th>
+                          <th>Persentase Durasi Kerja</th>
+                          <th>Keterangan</th>
+                          <th>Link Dokumen</th>
                         </tr>
                       </thead>
                       <tbody id="tablebody">
-                        <script
-                          src="../static/js/presensi/seluruh-karyawan.js"
+                          <script
+                          src="../static/js/presensi/index-pulang.js"
                           type="module"></script>
                       </tbody>
                       <tfoot>
                         <tr style="text-align: center; vertical-align: middle">
                           <th>Nama</th>
-                          <th>Nomor Whatsapp</th>
                           <th>Posisi</th>
-                          <th>Perizinan</th>
+                          <th>Status</th>
+                          <th>Tanggal</th>
+                          <th>Durasi Kerja</th>
+                          <th>Persentase Durasi Kerja</th>
+                          <th>Keterangan</th>
+                          <th>Link Dokumen</th>
                         </tr>
                       </tfoot>
                     </table>
                     <div class="row">
                       <div class="col-md-6">
+                        <p>
+                          <strong>Rata-rata Durasi Kerja:</strong>
+                          <span id="avgDuration"></span>
+                        </p>
+                        <p>
+                          <strong>Rata-rata Persentase Durasi Kerja:</strong>
+                          <span id="avgPercentage"></span>
+                        </p>
+                      </div>
+                      <div class="col-md-6 text-end">
                         <div class="pagination">
                           <button id="prevPageBtn" class="btn btn-secondary">
                             Previous
@@ -246,6 +313,8 @@
                 </div>
               </div>
             </div>
+
+            
           </div>
         </main>
         <!-- Main Content End -->
@@ -279,7 +348,6 @@
     <!-- Library Javascript Terkait -->
     <script src="../static/js/table-sorting.js"></script>
     <script src="../static/js/app.js"></script>
-    <script defer src="../static/js/script.js"></script>
     <script src="../static/js/croot.js" type="module"></script>
   </body>
 </html>

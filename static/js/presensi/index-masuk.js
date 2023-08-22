@@ -89,13 +89,22 @@ CihuyDomReady(() => {
       return result.json();
     })
     .then((data) => {
+      // Sorting descending data
+      data.data.sort((a, b) => new Date(b.Datetime) - new Date(a.Datetime));
+
       let tableData = "";
       data.data.map((entry) => {
         const nama = entry.biodata.nama;
         const checkin = entry.checkin;
-        const date = new Date(entry.Datetime).toLocaleDateString();
+        const lampiran = entry.lampiran;
+        const ket = entry.ket;
+        const date = new Date(entry.Datetime).toLocaleDateString(); 
         const jamMasuk = new Date(entry.Datetime).toLocaleTimeString();
-        
+
+        // Add a conditional statement to handle empty 'ket' values
+        const ketContent = ket ? ket : '<span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Kerja</span>';
+        const lampiranContent = lampiran ? lampiran : '<p>Tidak ada Catatan</p>';
+
         tableData += `
         <tr>
           <td>
@@ -120,13 +129,13 @@ CihuyDomReady(() => {
                 <p class="fw-normal mb-1">0 Jam 0 Menit 0 Detik</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
-                <p class="fw-normal mb-1">0%</p>
+                <p>0%</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
-                <span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Kerja</span>
+                <p class="fw-normal mb-1">${ketContent}</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
-              <p></p>
+                <p class="fw-normal mb-1">${lampiranContent}</p>
             </td>
         </tr>
         `
@@ -134,7 +143,7 @@ CihuyDomReady(() => {
       document.getElementById("tablebody").innerHTML = tableData;
 
       displayData(halamannow);
-	  updatePagination();
+			updatePagination();
     })
     .catch(error => {
       console.log('error', error);
@@ -154,7 +163,7 @@ CihuyDomReady(() => {
 		}
 	}
 	function updatePagination() {
-		halamansaatini.textContent = `Page ${halamannow}`;
+		halamansaatini.textContent = `Halaman ${halamannow}`;
 	}
 
 	buttonsebelumnya.addEventListener("click", () => {

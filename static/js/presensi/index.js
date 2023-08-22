@@ -83,7 +83,7 @@ exportPdfButton.addEventListener('click', () => {
 
 // Untuk Membuat Pagination
 CihuyDomReady(() => {
-	const tablebody = CihuyId("tablebody-masuk");
+	const tablebody = CihuyId("tablebody");
 	const buttonsebelumnya = CihuyId("prevPageBtn");
 	const buttonselanjutnya = CihuyId("nextPageBtn");
 	const halamansaatini = CihuyId("currentPage");
@@ -247,7 +247,7 @@ CihuyDomReady(() => {
 		});
 
 	function displayData(page) {
-		const baris = CihuyQuerySelector("#tablebody-masuk tr");
+		const baris = CihuyQuerySelector("#tablebody tr");
 		const mulaiindex = (page - 1) * itemperpage;
 		const akhirindex = mulaiindex + itemperpage;
 

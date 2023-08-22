@@ -96,8 +96,12 @@ CihuyDomReady(() => {
       data.data.map((entry) => {
         const nama = entry.Biodata.nama;
         const checkin = entry.Checkin;
+        const persentase = entry.Persentase;
         const date = new Date(entry.Datetime).toLocaleDateString(); 
         const jamPulang = new Date(entry.Datetime).toLocaleTimeString();
+
+        // Pengkondisian
+        const persetaseContent = persentase ? persentase : '<p>0%</p>';
         
         tableData += `
         <tr>
@@ -123,7 +127,7 @@ CihuyDomReady(() => {
                 <p class="fw-normal mb-1">${entry.Durasi}</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
-              <p></p>
+                <p class="fw-normal mb-1">${persetaseContent}</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
             <span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Kerja</span>

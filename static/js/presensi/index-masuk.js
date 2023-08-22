@@ -126,12 +126,6 @@ CihuyDomReady(() => {
                 <p class="fw-normal mb-1">${date}</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
-                <p class="fw-normal mb-1">0 Jam 0 Menit 0 Detik</p>
-            </td>
-            <td style="text-align: center; vertical-align: middle">
-                <p>0%</p>
-            </td>
-            <td style="text-align: center; vertical-align: middle">
                 <p class="fw-normal mb-1">${ketContent}</p>
             </td>
             <td style="text-align: center; vertical-align: middle">

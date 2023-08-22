@@ -83,7 +83,7 @@ exportPdfButton.addEventListener('click', () => {
 
 // Untuk Membuat Pagination
 CihuyDomReady(() => {
-	const tablebody = CihuyId("tablebody");
+	const tablebody = CihuyId("tablebody-masuk");
 	const buttonsebelumnya = CihuyId("prevPageBtn");
 	const buttonselanjutnya = CihuyId("nextPageBtn");
 	const halamansaatini = CihuyId("currentPage");
@@ -247,7 +247,7 @@ CihuyDomReady(() => {
 		});
 
 	function displayData(page) {
-		const baris = CihuyQuerySelector("#tablebody tr");
+		const baris = CihuyQuerySelector("#tablebody-masuk tr");
 		const mulaiindex = (page - 1) * itemperpage;
 		const akhirindex = mulaiindex + itemperpage;
 
@@ -273,7 +273,7 @@ CihuyDomReady(() => {
 
 	buttonselanjutnya.addEventListener("click", () => {
 		const totalPages = Math.ceil(
-			tablebody.querySelectorAll("#tablebody tr").length / itemperpage
+			tablebody.querySelectorAll("#tablebody-masuk tr").length / itemperpage
 		);
 		if (halamannow < totalPages) {
 			halamannow++;

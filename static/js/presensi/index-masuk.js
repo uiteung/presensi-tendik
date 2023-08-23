@@ -64,7 +64,7 @@ CihuyDomReady(() => {
         const date = new Date(entry.Datetime).toLocaleDateString(); 
         const jamMasuk = new Date(entry.Datetime).toLocaleTimeString();
 
-        // Add a conditional statement to handle empty 'ket' values
+        // Pengkondisian Badge Keterangan
         let ketBadge = '';
         if (ket === 'Lebih Cepat') {
           ketBadge = '<span class="badge-green" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Lebih Cepat</span>';

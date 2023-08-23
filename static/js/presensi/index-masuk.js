@@ -29,7 +29,7 @@ export_button.addEventListener('click', () => {
 
 const exportPdfButton = document.getElementById('exportPdfBtn');
 exportPdfButton.addEventListener('click', () => {
-  const doc = new jsPDF();
+  const doc = new jsPDF({ orientation: 'landscape' });
 
   // You might need to adjust these values for styling and layout
   doc.text('Data Rekap Presensi', 10, 10);
@@ -65,7 +65,21 @@ CihuyDomReady(() => {
         const jamMasuk = new Date(entry.Datetime).toLocaleTimeString();
 
         // Add a conditional statement to handle empty 'ket' values
-        const ketContent = ket ? ket : '<span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Kerja</span>';
+        let ketBadge = '';
+        if (ket === 'Lebih Cepat') {
+          ketBadge = '<span class="badge-green" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Lebih Cepat</span>';
+        } else if (ket === 'Tepat Waktu') {
+          ketBadge = '<span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Tepat Waktu</span>';
+        } else if (ket === 'Terlambat') {
+          ketBadge = '<span class=badge-danger" style="font-size: 10px; background-color: #bb2124; color: white; padding: 5px 10px; border-radius: 5px;">Terlambat</span>';
+        } else if (ket === 'Sakit') {
+          ketBadge = '<span class="badge-warning" style="font-size: 10px; background-color: #ffcc00; color: white; padding: 5px 10px; border-radius: 5px;">Sakit</span>';
+        } else if (ket === 'izin') {
+          ketBadge = '<span class=badge-warning" style="font-size: 10px; background-color: #ff8700; color: white; padding: 5px 10px; border-radius: 5px;">Izin</span>'
+        } else {
+          ketBadge = "";
+        }
+
         const lampiranContent = lampiran ? lampiran : '<p>Tidak ada Catatan</p>';
 
         tableData += `
@@ -89,7 +103,7 @@ CihuyDomReady(() => {
                 <p class="fw-normal mb-1">${date}</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
-                <p class="fw-normal mb-1">${ketContent}</p>
+                <p class="fw-normal mb-1">${ketBadge}</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
                 <p class="fw-normal mb-1">${lampiranContent}</p>

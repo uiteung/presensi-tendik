@@ -1,4 +1,6 @@
 import { token } from "../controller/cookies.js";
+import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
+import { CihuyDomReady, CihuyQuerySelector } from "https://c-craftjs.github.io/table/table.js";
 
 var header = new Headers();
 header.append("login", token);
@@ -8,6 +10,15 @@ const requestOptions = {
 	method: "GET",
 	headers: header
 };
+
+// Untuk Membuat Pagination
+CihuyDomReady(() => {
+	const tablebody = CihuyId("tablebody");
+	const buttonsebelumnya = CihuyId("prevPageBtn");
+	const buttonselanjutnya = CihuyId("nextPageBtn");
+	const halamansaatini = CihuyId("currentPage");
+	const itemperpage = 12;
+	let halamannow = 1;
 
 fetch("https://hris_backend.ulbi.ac.id/presensi/datakaryawan", requestOptions)
 	.then((result) => {
@@ -33,6 +44,9 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datakaryawan", requestOptions)
 				</tr>`;
 		});
 		document.getElementById("tablebody").innerHTML = tableData;
+
+		displayData(halamannow);
+		updatePagination();
 
 		// Menambahkan event listener untuk button "Perizinan"
 		const perizinanButtons = document.querySelectorAll('.btn-warning');
@@ -71,4 +85,41 @@ exportPdfButton.addEventListener('click', () => {
 	doc.autoTable({ html: '#example' });
 
 	doc.save('Data Rekap Presensi.pdf');
+});
+
+function displayData(page) {
+	const baris = CihuyQuerySelector("#tablebody tr");
+	const mulaiindex = (page - 1) * itemperpage;
+	const akhirindex = mulaiindex + itemperpage;
+
+	for (let i = 0; i < baris.length; i++) {
+		if (i >= mulaiindex && i < akhirindex) {
+			baris[i].style.display = "table-row";
+		} else {
+			baris[i].style.display = "none";
+		}
+	}
+}
+function updatePagination() {
+	halamansaatini.textContent = `Halaman ${halamannow}`;
+}
+
+buttonsebelumnya.addEventListener("click", () => {
+	if (halamannow > 1) {
+		halamannow--;
+		displayData(halamannow);
+		updatePagination();
+	}
+});
+
+buttonselanjutnya.addEventListener("click", () => {
+	const totalPages = Math.ceil(
+		tablebody.querySelectorAll("#tablebody tr").length / itemperpage
+	);
+	if (halamannow < totalPages) {
+		halamannow++;
+		displayData(halamannow);
+		updatePagination();
+	}
+  });
 });

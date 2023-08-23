@@ -59,9 +59,22 @@ CihuyDomReady(() => {
       data.data.map((entry) => {
         const nama = entry.Biodata.nama;
         const checkin = entry.Checkin;
+        const ket = entry.Keterangan;
         const persentase = entry.Persentase;
         const date = new Date(entry.Datetime).toLocaleDateString(); 
         const jamPulang = new Date(entry.Datetime).toLocaleTimeString();
+
+          // Pengkondisian Badge Keterangan
+          let ketBadge = '';
+          if (ket === 'Lebih Cepat') {
+            ketBadge = '<span class="badge-green" style="font-size: 10px; background-color: #ff8700; color: white; padding: 5px 10px; border-radius: 5px;">Lebih Cepat</span>';
+          } else if (ket === 'Tepat Waktu') {
+            ketBadge = '<span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Tepat Waktu</span>';
+          } else if (ket === 'Lebih Lama') {
+            ketBadge = '<span class=badge-danger" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Lebih Lama</span>';
+          } else {
+            ketBadge = "";
+          }
 
         // Pengkondisian
         const persetaseContent = persentase ? persentase : '<p>0%</p>';
@@ -93,7 +106,7 @@ CihuyDomReady(() => {
                 <p class="fw-normal mb-1">${persetaseContent}</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
-            <span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Kerja</span>
+              <p class="fw-normal mb-1">${ketBadge}</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
             <p class="fw-normal mb-1">Tidak Ada Catatan</p>

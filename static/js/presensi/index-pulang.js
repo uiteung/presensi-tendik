@@ -44,45 +44,8 @@ CihuyDomReady(() => {
   const buttonsebelumnya = CihuyId("prevPageBtn");
   const buttonselanjutnya = CihuyId("nextPageBtn");
   const halamansaatini = CihuyId("currentPage");
-  const itemperpage = 10;
+  const itemperpage = 7;
   let halamannow = 1;
-
-  function displayData(page) {
-    const baris = CihuyQuerySelector("#tablebody tr");
-    const mulaiindex = (page - 1) * itemperpage;
-    const akhirindex = mulaiindex + itemperpage;
-
-    for (let i = 0; i < baris.length; i++) {
-      if (i >= mulaiindex && i < akhirindex) {
-        baris[i].style.display = "table-row";
-      } else {
-        baris[i].style.display = "none";
-      }
-    }
-  }
-
-  function updatePagination() {
-    halamansaatini.textContent = `Halaman ${halamannow}`;
-  }
-
-  buttonsebelumnya.addEventListener("click", () => {
-    if (halamannow > 1) {
-      halamannow--;
-      displayData(halamannow);
-      updatePagination();
-    }
-  });
-
-  buttonselanjutnya.addEventListener("click", () => {
-    const totalPages = Math.ceil(
-      tablebody.querySelectorAll("#tablebody tr").length / itemperpage
-    );
-    if (halamannow < totalPages) {
-      halamannow++;
-      displayData(halamannow);
-      updatePagination();
-    }
-  });
 
   fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi/pulang", requestOptions)
     .then((result) => {
@@ -136,12 +99,15 @@ CihuyDomReady(() => {
             <p class="fw-normal mb-1">Tidak Ada Catatan</p>
             </td>
         </tr>
-        `
+        `;
       })
       document.getElementById("tablebody").innerHTML = tableData;
 
+      // Call displayData function with halamannow parameter
       displayData(halamannow);
-			updatePagination();
+      
+      // Call updatePagination function
+      updatePagination();
     })
     .catch(error => {
       console.log('error', error);

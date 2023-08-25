@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Untuk GET data harian pulang
 document.addEventListener("DOMContentLoaded", function() {
-    const initialData = [0, 0, 0, 0, 0]; // Initialize with zeros for each category
+    const initialData = [0, 0, 0]; // Initialize with zeros for each category
     
     const doughnutChart = new Chart(document.getElementById("chartjs-pie"), {
         type: "pie",
@@ -112,24 +112,18 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             console.log(data); // Print data to console to understand its structure
             if (data && data.success && data.data) {
-                const newData = [0, 0, 0, 0, 0]; // Initialize with zeros for each category
+                const newData = [0, 0, 0]; // Initialize with zeros for each category
 
                 data.data.forEach(entry => {
                     switch (entry.ket) {
                         case "Tepat Waktu":
                             newData[0]++;
                             break;
-                        case "Lebih Cepat":
+                        case "Lebih Lama":
                             newData[1]++;
                             break;
-                        case "Terlambat":
+                        case "Lebih Cepat":
                             newData[2]++;
-                            break;
-                        case "Sakit":
-                            newData[3]++;
-                            break;
-                        case "Izin":
-                            newData[4]++;
                             break;
                         default:
                             break;

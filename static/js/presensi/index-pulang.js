@@ -53,16 +53,16 @@ CihuyDomReady(() => {
     })
     .then((data) => {
       // Sorting descending data
-      data.data.sort((a, b) => new Date(b.Datetime) - new Date(a.Datetime));
+      data.data.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
 
       let tableData = "";
       data.data.map((entry) => {
-        const nama = entry.Biodata.nama;
-        const checkin = entry.Checkin;
-        const ket = entry.Keterangan;
-        const persentase = entry.Persentase;
-        const date = new Date(entry.Datetime).toLocaleDateString(); 
-        const jamPulang = new Date(entry.Datetime).toLocaleTimeString();
+        const nama = entry.biodata.nama;
+        const checkin = entry.checkin;
+        const ket = entry.ket;
+        const persentase = entry.persentase;
+        const date = new Date(entry.datetime).toLocaleDateString();
+        const jamPulang = new Date(entry.datetime).toLocaleTimeString();
 
           // Pengkondisian Badge Keterangan
           let ketBadge = '';
@@ -85,12 +85,12 @@ CihuyDomReady(() => {
               <div class="d-flex align-items-center">
                     <div class="ms-3">
                         <p class="fw-bold mb-1">${nama}</p>
-                        <p class="text-muted mb-0">${entry.Phone_number}</p>
+                        <p class="text-muted mb-0">${entry.phone_number}</p>
                     </div>
                 </div>
             </td>
             <td>
-                <p class="fw-normal mb-1">${entry.Biodata.jabatan}</p>
+                <p class="fw-normal mb-1">${entry.biodata.jabatan}</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
                 <p class="fw-normal mb-1"><b>${checkin}</b></p>
@@ -100,7 +100,7 @@ CihuyDomReady(() => {
                 <p class="fw-normal mb-1">${date}</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
-                <p class="fw-normal mb-1">${entry.Durasi}</p>
+                <p class="fw-normal mb-1">${entry.durasi}</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
                 <p class="fw-normal mb-1">${persetaseContent}</p>

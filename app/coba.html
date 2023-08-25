@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       rel="shortcut icon"
-      href="../static/img/enam_berlian-removebg-preview.png" />
+      href="static/img/enam_berlian-removebg-preview.png" />
 
     <title>Dashboard Presensi Karyawan | ULBI</title>
 
@@ -45,7 +45,7 @@
           <ul class="sidebar-nav">
             <li class="sidebar-header">Dashboard</li>
 
-            <li class="sidebar-item">
+            <li class="sidebar-item active">
               <a class="sidebar-link" href="../index.html">
                 <i class="align-middle" data-feather="sliders"></i>
                 <span class="align-middle">Presensi Masuk</span>
@@ -53,7 +53,7 @@
             </li>
 
             <li class="sidebar-item">
-              <a class="sidebar-link" href="presensi-keluar.html">
+              <a class="sidebar-link" href="../app/presensi-keluar.html">
                 <i class="align-middle" data-feather="sliders"></i>
                 <span class="align-middle">Presensi Keluar</span>
               </a>
@@ -98,7 +98,7 @@
             </li>
 
             <li class="sidebar-item">
-              <a class="sidebar-link" href="seluruh-karyawan.html">
+              <a class="sidebar-link" href="../app/seluruh-karyawan.html">
                 <i class="align-middle" data-feather="grid"></i>
                 <span class="align-middle">Data Seluruh Karyawan</span>
               </a>
@@ -106,9 +106,9 @@
 
             <li class="sidebar-header">Rekapan Presensi Karyawan</li>
 
-            <li class="sidebar-item active">
+            <li class="sidebar-item">
               <!-- <a class="sidebar-link" href="../app/rekapan-presensi.html"> -->
-              <a class="sidebar-link" href="rekap-harian.html">
+              <a class="sidebar-link" href="../app/rekap-harian.html">
                 <i class="align-middle" data-feather="bar-chart-2"></i>
                 <span class="align-middle">Rekap Harian</span>
                 <span
@@ -182,102 +182,101 @@
 
         <!-- Main Content Start -->
         <main class="content">
-          <div class="container-fluid p-0">
-            <h5 class="right-aligned" style="float: right;"><a href="../index.html">Home</a> / Presensi Keluar</h5>
-            <h1 class="h3 mb-3">Dashboard Presensi Karyawan</h1>
-            <button
-              type="button"
-              id="exportExcelBtn"
-              class="btn btn-success mb-3">
-              <i class="align-middle" data-feather="layout"></i>
-              Export To Excel
-            </button>
-            <button
-              type="button"
-              id="exportPdfBtn"
-              class="btn btn-danger mb-3"
-              style="color: white">
-              <i class="align-middle" data-feather="file"></i>
-              Export To PDF
-            </button>
-            <div class="row justify-content-center">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-header">
-                    <div class="row no-gutters" style="height: 40px;">
-                      <div
-                        class="col-md-3"
-                        id="filterButton"
-                        style="
-                          position: absolute;
-                          top: 0;
-                          right: 0;
-                          width: 15%;
-                          margin-top: 20px;
-                        ">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="searchInput"
-                          placeholder="Cari" />
+            <div class="container-fluid p-0">
+              <h5 class="right-aligned" style="float: right;"><a href="../index.html">Home</a> / <a href="rekap-harian.html">Rekap Harian</a> / Detail Rekapan Presensi Masuk Harian</h5>
+              <h1 class="h3 mb-3">Dashboard Presensi Karyawan</h1>
+              <div class="row justify-content-center">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <table
+                        id="example"
+                        class="table table-striped"
+                        style="width: 100%">
+                        <thead>
+                          <tr style="text-align: center; vertical-align: middle">
+                            <th>Nama</th>
+                            <th>Posisi</th>
+                            <th>Status</th>
+                            <th>Tanggal</th>
+                            <th>Keterangan</th>
+                            <th>Link Dokumen</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tablebody">
+                          <script
+                            src="../static/js/presensi/coba.js"
+                            type="module"></script>
+                        </tbody>
+                        <tfoot>
+                          <tr style="text-align: center; vertical-align: middle">
+                            <th>Nama</th>
+                            <th>Posisi</th>
+                            <th>Status</th>
+                            <th>Tanggal</th>
+                            <th>Keterangan</th>
+                            <th>Link Dokumen</th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="pagination">
+                            <button id="prevPageBtn" class="btn btn-secondary">
+                              Previous
+                            </button>
+                            <span id="currentPage" class="mx-2">Page 1</span>
+                            <button id="nextPageBtn" class="btn btn-secondary">
+                              Next
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
 
-                    <hr />
-                    <table
-                      id="example"
-                      class="table table-striped"
-                      style="width: 100%">
-                      <thead>
-                        <tr style="text-align: center; vertical-align: middle">
-                          <th>Nama</th>
-                          <th>Posisi</th>
-                          <th>Status</th>
-                          <th>Tanggal</th>
-                          <th>Durasi Kerja</th>
-                          <th>Persentase Durasi Kerja</th>
-                          <th>Keterangan</th>
-                          <th>Link Dokumen</th>
-                        </tr>
-                      </thead>
-                      <tbody id="tablebody">
+              <h1 class="h3 mb-3">Dashboard Karyawan Belum Presensi</h1>
+              <div class="row justify-content-center">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <table
+                        id="example-all"
+                        class="table table-striped"
+                        style="width: 100%">
+                        <thead>
+                          <tr style="text-align: center; vertical-align: middle">
+                            <th>Nama</th>
+                            <th>Nomor Handphone</th>
+                            <th>Posisi</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tablebody-all">
                           <script
-                          src="../static/js/presensi/rekap-harian-pulang.js"
-                          type="module"></script>
-                      </tbody>
-                      <tfoot>
-                        <tr style="text-align: center; vertical-align: middle">
-                          <th>Nama</th>
-                          <th>Posisi</th>
-                          <th>Status</th>
-                          <th>Tanggal</th>
-                          <th>Durasi Kerja</th>
-                          <th>Persentase Durasi Kerja</th>
-                          <th>Keterangan</th>
-                          <th>Link Dokumen</th>
-                        </tr>
-                      </tfoot>
-                    </table>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <p>
-                          <strong>Rata-rata Durasi Kerja:</strong>
-                          <span id="avgDuration"></span>
-                        </p>
-                        <p>
-                          <strong>Rata-rata Persentase Durasi Kerja:</strong>
-                          <span id="avgPercentage"></span>
-                        </p>
-                      </div>
-                      <div class="col-md-6 text-end">
-                        <div class="pagination">
-                          <button id="prevPageBtn" class="btn btn-secondary">
-                            Previous
-                          </button>
-                          <span id="currentPage" class="mx-2">Page 1</span>
-                          <button id="nextPageBtn" class="btn btn-secondary">
-                            Next
-                          </button>
+                            src="../static/js/presensi/coba-2.js"
+                            type="module"></script>
+                        </tbody>
+                        <tfoot>
+                          <tr style="text-align: center; vertical-align: middle">
+                            <th>Nama</th>
+                            <th>Nomor Handphone</th>
+                            <th>Posisi</th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="pagination">
+                            <button id="prevPageBtn-all" class="btn btn-secondary">
+                              Previous
+                            </button>
+                            <span id="currentPage-all" class="mx-2">Page 1</span>
+                            <button id="nextPageBtn-all" class="btn btn-secondary">
+                              Next
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -285,11 +284,8 @@
                 </div>
               </div>
             </div>
-
-            
-          </div>
-        </main>
-        <!-- Main Content End -->
+          </main>
+          <!-- Main Content End -->
 
         <!-- Footer Start -->
         <footer class="footer">
@@ -322,9 +318,9 @@
     <script src="https://unpkg.com/jspdf-invoice"></script>
 
     <!-- Library Javascript Terkait -->
-    <script src="../static/js/style.js" defer></script>
     <!-- <script src="static/js/presensi/cihuyred.js" type="module"></script> -->
-    <script src="../static/js/table-sorting.js"></script>
+    <script src="../static/js/style.js" defer></script>
+    <!-- <script src="../static/js/table-sorting.js"></script> -->
     <script src="../static/js/app.js"></script>
     <script src="../static/js/croot.js" type="module"></script>
   </body>

@@ -18,7 +18,7 @@
       rel="shortcut icon"
       href="../static/img/enam_berlian-removebg-preview.png" />
 
-    <title>Dashboard Presensi Karyawan | ULBI</title>
+    <title>Rekap Harian Pulang | ULBI</title>
 
     <!-- Import CSS yang diperlukan -->
     <link href="../static/css/app.css" rel="stylesheet" />
@@ -111,16 +111,6 @@
               <a class="sidebar-link" href="rekap-harian.html">
                 <i class="align-middle" data-feather="bar-chart-2"></i>
                 <span class="align-middle">Rekap Harian</span>
-                <span
-                  style="
-                    font-size: 7px;
-                    background-color: #ffc107;
-                    color: black;
-                    padding: 3px 3px;
-                    border-radius: 5px;
-                  "
-                  >Maintenance</span
-                >
               </a>
             </li>
           </ul>
@@ -172,7 +162,9 @@
                   <span class="text-dark">Admin</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                  <a class="dropdown-item" href="https://euis.ulbi.ac.id">Log out</a>
+                  <a class="dropdown-item" href="https://euis.ulbi.ac.id"
+                    >Log out</a
+                  >
                 </div>
               </li>
             </ul>
@@ -182,19 +174,22 @@
 
         <!-- Main Content Start -->
         <main class="content">
+          <!-- Tabel Presensi Pulang Karyawan Start -->
           <div class="container-fluid p-0">
-            <h5 class="right-aligned" style="float: right;"><a href="../index.html">Home</a> / Presensi Keluar</h5>
-            <h1 class="h3 mb-3">Dashboard Presensi Karyawan</h1>
+            <h5 class="right-aligned" style="float: right">
+              <a href="../index.html">Home</a> / Presensi Keluar
+            </h5>
+            <h1 class="h3 mb-3"><b>Dashboard Presensi Karyawan</b></h1>
             <button
               type="button"
-              id="exportExcelBtn"
+              id="exportExcelBtnPulang"
               class="btn btn-success mb-3">
               <i class="align-middle" data-feather="layout"></i>
               Export To Excel
             </button>
             <button
               type="button"
-              id="exportPdfBtn"
+              id="exportPdfBtnPulang"
               class="btn btn-danger mb-3"
               style="color: white">
               <i class="align-middle" data-feather="file"></i>
@@ -204,10 +199,13 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <div class="row no-gutters" style="height: 40px;">
+                    <div class="row no-gutters" style="height: 40px">
+                      <h1 class="h3 mb-3">
+                        Tabel Karyawan Belum Presensi Pulang
+                      </h1>
                       <div
                         class="col-md-3"
-                        id="filterButton"
+                        id="filterButtonPulang"
                         style="
                           position: absolute;
                           top: 0;
@@ -218,14 +216,14 @@
                         <input
                           type="text"
                           class="form-control"
-                          id="searchInput"
+                          id="searchInputPulang"
                           placeholder="Cari" />
                       </div>
                     </div>
 
                     <hr />
                     <table
-                      id="example"
+                      id="examplePulang"
                       class="table table-striped"
                       style="width: 100%">
                       <thead>
@@ -240,8 +238,8 @@
                           <th>Link Dokumen</th>
                         </tr>
                       </thead>
-                      <tbody id="tablebody">
-                          <script
+                      <tbody id="tablebodyPulang">
+                        <script
                           src="../static/js/presensi/rekap-harian-pulang.js"
                           type="module"></script>
                       </tbody>
@@ -271,11 +269,17 @@
                       </div>
                       <div class="col-md-6 text-end">
                         <div class="pagination">
-                          <button id="prevPageBtn" class="btn btn-secondary">
+                          <button
+                            id="prevPageBtnPulang"
+                            class="btn btn-secondary">
                             Previous
                           </button>
-                          <span id="currentPage" class="mx-2">Page 1</span>
-                          <button id="nextPageBtn" class="btn btn-secondary">
+                          <span id="currentPagePulang" class="mx-2"
+                            >Page 1</span
+                          >
+                          <button
+                            id="nextPageBtnPulang"
+                            class="btn btn-secondary">
                             Next
                           </button>
                         </div>
@@ -285,9 +289,114 @@
                 </div>
               </div>
             </div>
-
-            
           </div>
+          <!-- Tabel Presensi Pulang Karyawan End -->
+
+          <!-- Tabel Karyawan Belum Presensi Pulang Start -->
+          <div class="container-fluid p-0">
+            <button
+              type="button"
+              id="exportExcelBtnBelumPulang"
+              class="btn btn-success mb-3">
+              <i class="align-middle" data-feather="layout"></i>
+              Export To Excel
+            </button>
+            <button
+              type="button"
+              id="exportPdfBtnBelumPulang"
+              class="btn btn-danger mb-3"
+              style="color: white">
+              <i class="align-middle" data-feather="file"></i>
+              Export To PDF
+            </button>
+            <div class="row justify-content-center">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="row no-gutters" style="height: 40px">
+                      <h1 class="h3 mb-3">
+                        Tabel Karyawan Belum Presensi Pulang
+                      </h1>
+                      <div
+                        class="col-md-3"
+                        id="filterButton"
+                        style="
+                          position: absolute;
+                          top: 0;
+                          right: 0;
+                          width: 15%;
+                          margin-top: 20px;
+                        ">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="searchInputBelumPulang"
+                          placeholder="Cari" />
+                      </div>
+                    </div>
+
+                    <hr />
+                    <table
+                      id="exampleBelumPulang"
+                      class="table table-striped"
+                      style="width: 100%">
+                      <thead>
+                        <tr style="text-align: center; vertical-align: middle">
+                          <th>Nama</th>
+                          <th>Posisi</th>
+                          <th>Status</th>
+                          <th>Keterangan</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tablebodyBelumPulang">
+                        <script
+                          src="../static/js/presensi/karyawan-belum-pulang.js"
+                          type="module"></script>
+                      </tbody>
+                      <tfoot>
+                        <tr style="text-align: center; vertical-align: middle">
+                          <th>Nama</th>
+                          <th>Posisi</th>
+                          <th>Status</th>
+                          <th>Keterangan</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <p>
+                          <strong>Rata-rata Durasi Kerja:</strong>
+                          <span id="avgDuration"></span>
+                        </p>
+                        <p>
+                          <strong>Rata-rata Persentase Durasi Kerja:</strong>
+                          <span id="avgPercentage"></span>
+                        </p>
+                      </div>
+                      <div class="col-md-6 text-end">
+                        <div class="pagination">
+                          <button
+                            id="prevPageBtnBelumPulang"
+                            class="btn btn-secondary">
+                            Previous
+                          </button>
+                          <span id="currentPageBelumPulang" class="mx-2"
+                            >Page 1</span
+                          >
+                          <button
+                            id="nextPageBtnBelumPulang"
+                            class="btn btn-secondary">
+                            Next
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Tabel Karyawan Belum Presensi Pulang End -->
         </main>
         <!-- Main Content End -->
 

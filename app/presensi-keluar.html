@@ -18,7 +18,7 @@
       rel="shortcut icon"
       href="../static/img/enam_berlian-removebg-preview.png" />
 
-    <title>Dashboard Presensi Karyawan | ULBI</title>
+    <title>Presensi Keluar | ULBI</title>
 
     <!-- Import CSS yang diperlukan -->
     <link href="../static/css/app.css" rel="stylesheet" />
@@ -61,19 +61,9 @@
 
             <li class="sidebar-item">
               <!-- <a class="sidebar-link" href="../app/rekapan-presensi.html"> -->
-              <a class="sidebar-link" href="../404.html">
+              <a class="sidebar-link" href="sakit-izin.html">
                 <i class="align-middle" data-feather="mail"></i>
                 <span class="align-middle">Sakit/Izin</span>
-                <span
-                  style="
-                    font-size: 7px;
-                    background-color: #ffc107;
-                    color: black;
-                    padding: 3px 3px;
-                    border-radius: 5px;
-                  "
-                  >Maintenance</span
-                >
               </a>
             </li>
 
@@ -111,16 +101,6 @@
               <a class="sidebar-link" href="../app/rekap-harian.html">
                 <i class="align-middle" data-feather="bar-chart-2"></i>
                 <span class="align-middle">Rekap Presensi</span>
-                <span
-                  style="
-                    font-size: 7px;
-                    background-color: #ffc107;
-                    color: black;
-                    padding: 3px 3px;
-                    border-radius: 5px;
-                  "
-                  >Maintenance</span
-                >
               </a>
             </li>
           </ul>
@@ -172,7 +152,9 @@
                   <span class="text-dark">Admin</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                  <a class="dropdown-item" href="https://euis.ulbi.ac.id">Log out</a>
+                  <a class="dropdown-item" href="https://euis.ulbi.ac.id"
+                    >Log out</a
+                  >
                 </div>
               </li>
             </ul>
@@ -183,7 +165,9 @@
         <!-- Main Content Start -->
         <main class="content">
           <div class="container-fluid p-0">
-            <h5 class="right-aligned" style="float: right;"><a href="../index.html">Home</a> / Presensi Keluar</h5>
+            <h5 class="right-aligned" style="float: right">
+              <a href="../index.html">Home</a> / Presensi Keluar
+            </h5>
             <h1 class="h3 mb-3">Dashboard Presensi Karyawan</h1>
             <button
               type="button"
@@ -225,13 +209,15 @@
                           id="endDate"
                           name="endDate" />
                       </div>
-                      <div class="col-auto date-filter" style="width: 20%">                       
+                      <div class="col-auto date-filter" style="width: 20%">
                         <button
                           type="button"
                           id="filterButton"
                           class="btn btn-info mt-4"
                           style="height: 40px">
-                          <i class="align-middle me-1" data-feather="search"></i>
+                          <i
+                            class="align-middle me-1"
+                            data-feather="search"></i>
                           Filter Berdasarkan Tanggal
                         </button>
                       </div>
@@ -270,7 +256,7 @@
                         </tr>
                       </thead>
                       <tbody id="tablebody">
-                          <script
+                        <script
                           src="../static/js/presensi/index-pulang.js"
                           type="module"></script>
                       </tbody>
@@ -314,8 +300,6 @@
                 </div>
               </div>
             </div>
-
-            
           </div>
         </main>
         <!-- Main Content End -->

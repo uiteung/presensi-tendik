@@ -15,39 +15,39 @@ const requestOptions = {
 
 // Untuk membuat interaksi button export to excel dan pdf
 function html_table_to_excel(type) {
-	var data = document.getElementById('exampleMasuk');
+	var data = document.getElementById('example');
 	var file = XLSX.utils.table_to_book(data, { sheet: "sheet1" });
 
 	XLSX.write(file, { bookType: type, bookSST: true, type: 'base64' });
 	XLSX.writeFile(file, 'Data Rekap Presensi.' + type);
 }
 
-const export_button = document.getElementById('exportExcelBtnMasuk');
+const export_button = document.getElementById('exportExcelBtn');
 export_button.addEventListener('click', () => {
 	html_table_to_excel('xlsx');
 })
 
-const exportPdfButton = document.getElementById('exportPdfBtnMasuk');
+const exportPdfButton = document.getElementById('exportPdfBtn');
 exportPdfButton.addEventListener('click', () => {
 	const doc = new jsPDF({ orientation: 'landscape' });
 
 	// You might need to adjust these values for styling and layout
 	doc.text('Data Rekap Presensi', 10, 10);
-	doc.autoTable({ html: '#exampleMasuk' });
+	doc.autoTable({ html: '#example' });
 
 	doc.save('Data Rekap Presensi.pdf');
 });
 
 // Untuk Membuat Pagination
 CihuyDomReady(() => {
-	const tablebody = CihuyId("tablebodyMasuk");
-	const buttonsebelumnya = CihuyId("prevPageBtnMasuk");
-	const buttonselanjutnya = CihuyId("nextPageBtnMasuk");
-	const halamansaatini = CihuyId("currentPageMasuk");
-	const itemperpage = 5;
+	const tablebody = CihuyId("tablebody");
+	const buttonsebelumnya = CihuyId("prevPageBtnSakit");
+	const buttonselanjutnya = CihuyId("nextPageBtnSakit");
+	const halamansaatini = CihuyId("currentPageSakit");
+	const itemperpage = 8;
 	let halamannow = 1;
 
-	fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi/masukharian", requestOptions)
+	fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
 		.then((result) => {
 			return result.json();
 		})
@@ -55,8 +55,11 @@ CihuyDomReady(() => {
 			// Sorting descending data
 			data.data.sort((a, b) => new Date(b.Datetime) - new Date(a.Datetime));
 
+			// Untuk Filter data yang sakit dan izin saja
+			const filteredData = data.data.filter(entry => entry.ket === 'Sakit' || entry.ket === 'izin');
+
 			let tableData = "";
-			data.data.map((entry) => {
+			filteredData.map((entry) => {
 				const nama = entry.biodata.nama;
 				const checkin = entry.checkin;
 				const lampiran = entry.lampiran;
@@ -83,35 +86,35 @@ CihuyDomReady(() => {
 				const lampiranContent = lampiran ? lampiran : '<p>Tidak ada Catatan</p>';
 
 				tableData += `
-        <tr>
-          <td>
-              <div class="d-flex align-items-center">
-                    <div class="ms-3">
-                        <p class="fw-bold mb-1">${nama}</p>
-                        <p class="text-muted mb-0">${entry.phone_number}</p>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <p class="fw-normal mb-1">${entry.biodata.jabatan}</p>
-            </td>
-            <td style="text-align: center; vertical-align: middle">
-                <p class="fw-normal mb-1"><b>${checkin}</b></p>
-                <p>${jamMasuk}</p>
-            </td>
-            <td style="text-align: center; vertical-align: middle">
-                <p class="fw-normal mb-1">${date}</p>
-            </td>
-            <td style="text-align: center; vertical-align: middle">
-                <p class="fw-normal mb-1">${ketBadge}</p>
-            </td>
-            <td style="text-align: center; vertical-align: middle">
-                <p class="fw-normal mb-1">${lampiranContent}</p>
-            </td>
-        </tr>
-        `
+				<tr>
+				<td>
+					<div class="d-flex align-items-center">
+							<div class="ms-3">
+								<p class="fw-bold mb-1">${nama}</p>
+								<p class="text-muted mb-0">${entry.phone_number}</p>
+							</div>
+						</div>
+					</td>
+					<td>
+						<p class="fw-normal mb-1">${entry.biodata.jabatan}</p>
+					</td>
+					<td style="text-align: center; vertical-align: middle">
+						<p class="fw-normal mb-1"><b>${checkin}</b></p>
+						<p>${jamMasuk}</p>
+					</td>
+					<td style="text-align: center; vertical-align: middle">
+						<p class="fw-normal mb-1">${date}</p>
+					</td>
+					<td style="text-align: center; vertical-align: middle">
+						<p class="fw-normal mb-1">${ketBadge}</p>
+					</td>
+					<td style="text-align: center; vertical-align: middle">
+						<p class="fw-normal mb-1">${lampiranContent}</p>
+					</td>
+				</tr>
+				`
 			})
-			document.getElementById("tablebodyMasuk").innerHTML = tableData;
+			document.getElementById("tablebody").innerHTML = tableData;
 
 			displayData(halamannow);
 			updatePagination();
@@ -121,7 +124,7 @@ CihuyDomReady(() => {
 		});
 
 	function displayData(page) {
-		const baris = CihuyQuerySelector("#tablebodyMasuk tr");
+		const baris = CihuyQuerySelector("#tablebody tr");
 		const mulaiindex = (page - 1) * itemperpage;
 		const akhirindex = mulaiindex + itemperpage;
 
@@ -147,7 +150,7 @@ CihuyDomReady(() => {
 
 	buttonselanjutnya.addEventListener("click", () => {
 		const totalPages = Math.ceil(
-			tablebody.querySelectorAll("#tablebodyMasuk tr").length / itemperpage
+			tablebody.querySelectorAll("#tablebody tr").length / itemperpage
 		);
 		if (halamannow < totalPages) {
 			halamannow++;
@@ -156,28 +159,4 @@ CihuyDomReady(() => {
 		}
 	});
 
-});
-
-// Membuat fitur search
-document.addEventListener("DOMContentLoaded", function () {
-	const searchInput = document.getElementById("searchInputMasuk");
-	const tableBody = document.getElementById("tablebodyMasuk").getElementsByTagName("tr");
-
-	searchInput.addEventListener("input", function () {
-		const searchText = searchInput.value.toLowerCase();
-
-		for (const row of tableBody) {
-			const cells = row.getElementsByTagName("td");
-			let rowMatchesSearch = false;
-
-			for (const cell of cells) {
-				if (cell.textContent.toLowerCase().includes(searchText)) {
-					rowMatchesSearch = true;
-					break;
-				}
-			}
-
-			row.style.display = rowMatchesSearch ? "" : "none";
-		}
-	});
 });

@@ -11,6 +11,49 @@ const requestOptions = {
 	headers: header
 };
 
+// Untuk membuat interaksi button export to excel dan pdf
+function html_table_to_excel(type) {
+	var data = document.getElementById('exampleBelumPulang');
+	var file = XLSX.utils.table_to_book(data, { sheet: "sheet1" });
+
+	XLSX.write(file, { bookType: type, bookSST: true, type: 'base64' });
+	XLSX.writeFile(file, 'Rekap Belum Presensi Pulang Harian.' + type);
+}
+
+const export_button = document.getElementById('exportExcelBtnBelumPulang');
+export_button.addEventListener('click', () => {
+	html_table_to_excel('xlsx');
+})
+
+const exportPdfButton = document.getElementById('exportPdfBtnBelumPulang');
+exportPdfButton.addEventListener('click', () => {
+	const doc = new jsPDF({ orientation: 'landscape' });
+	doc.text('Rekap Belum Presensi Pulang Harian', 10, 10);
+	const rows = document.getElementById('exampleBelumPulang').querySelectorAll('tr');
+	const tableData = [];
+	const headers = ['Nama', 'Posisi', 'Status', 'Tanggal', 'Keterangan', 'Link Dokumen'];
+	tableData.push(headers);
+	rows.forEach(row => {
+		const rowData = [];
+		row.querySelectorAll('td').forEach(cell => {
+			rowData.push(cell.innerText);
+		});
+		tableData.push(rowData);
+	});
+	const colWidths = [60, 40, 40, 40, 40, 40]; // Set the column widths (you can adjust these values)
+	const rowHeight = 10; 	// Set the row height (you can adjust this value)
+	doc.autoTable({
+		head: [headers],
+		body: tableData.slice(1), // Exclude headers from the body
+		columnStyles: { 0: { columnWidth: colWidths[0] }, 1: { columnWidth: colWidths[1] }, 2: { columnWidth: colWidths[2] }, 3: { columnWidth: colWidths[3] }, 4: { columnWidth: colWidths[4] }, 5: { columnWidth: colWidths[5] } },
+		margin: { top: 20 }, // Adjust top margin for better layout
+		rowPageBreak: 'avoid', // Avoid breaking rows between pages
+		headStyles: { fillColor: [41, 128, 185] }, // Set header fill color
+		styles: { fontSize: 10, cellPadding: 3, valign: 'middle', halign: 'center', minCellHeight: rowHeight },
+	});
+	doc.save('Rekap Belum Presensi Pulang Harian.pdf');
+});
+
 // Untuk Membuat Pagination
 CihuyDomReady(() => {
 	const tablebody = CihuyId("tablebodyBelumPulang");

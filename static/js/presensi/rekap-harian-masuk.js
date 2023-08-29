@@ -85,7 +85,7 @@ CihuyDomReady(() => {
 				if (ket === 'Lebih Cepat') {
 					ketBadge = '<span class="badge-green" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Lebih Cepat</span>';
 				} else if (ket === 'Tepat Waktu') {
-					ketBadge = '<span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Tepat Waktu</span>';
+					ketBadge = '<span class="badge-blue" style="font-size: 10px; background-color: #283891; color: white; padding: 5px 10px; border-radius: 5px;">Tepat Waktu</span>';
 				} else if (ket === 'Terlambat') {
 					ketBadge = '<span class=badge-danger" style="font-size: 10px; background-color: #bb2124; color: white; padding: 5px 10px; border-radius: 5px;">Terlambat</span>';
 				} else if (ket === 'Sakit') {

@@ -26,7 +26,6 @@ fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/getkaryawan/${_id}`
 			document.getElementById("employeeNameInput").value = employeeData.nama;
 			document.getElementById("employeePositionInput").value = employeeData.jabatan;
 			document.getElementById("employeeWhatsappInput").value = employeeData.phone_number;
-			
 		} else {
 			console.log('Data karyawan tidak ditemukan.');
 		}
@@ -63,11 +62,6 @@ function submitPerizinan() {
 				alertDiv.classList.add('alert', 'alert-success', 'mt-3');
 				alertDiv.textContent = 'Data Berhasil Ditambahkan';
 				alertContainer.appendChild(alertDiv);
-			
-				// Alihkan ke halaman sakit-izin.html setelah alert muncul
-				setTimeout(() => {
-					window.location.href = 'sakit-izin.html';
-				}, 1000); // Mengalihkan setelah 2 detik (2000 milidetik)
 			} else {
 				// Menampilkan Data Alert Error
 				const alertContainer = document.querySelector('#alertContainer');

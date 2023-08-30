@@ -61,9 +61,10 @@ CihuyDomReady(() => {
 			let tableData = "";
 			filteredData.map((entry) => {
 				const nama = entry.biodata.nama;
-				const checkin = entry.checkin;
+				// const checkin = entry.checkin;
 				const lampiran = entry.lampiran;
 				const ket = entry.ket;
+				const phone_number = entry.biodata.phone_number;
 				const date = new Date(entry.Datetime).toLocaleDateString();
 
 				// Pengkondisian Badge Keterangan
@@ -84,7 +85,7 @@ CihuyDomReady(() => {
 					<div class="d-flex align-items-center">
 							<div class="ms-3">
 								<p class="fw-bold mb-1">${nama}</p>
-								<p class="text-muted mb-0">${entry.phone_number}</p>
+								<p class="text-muted mb-0">${phone_number}</p>
 							</div>
 						</div>
 					</td>

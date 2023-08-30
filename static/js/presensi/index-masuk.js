@@ -97,7 +97,7 @@ CihuyDomReady(() => {
           if (ketMasuk === 'Lebih Cepat') {
             ketBadgeMasuk = '<span class="badge-green" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Lebih Cepat</span>';
           } else if (ketMasuk === 'Tepat Waktu') {
-            ketBadgeMasuk = '<span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Tepat Waktu</span>';
+            ketBadgeMasuk = '<span class="badge-blue" style="font-size: 10px; background-color: #0d6efd; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Tepat Waktu</span>';
           } else if (ketMasuk === 'Terlambat') {
             ketBadgeMasuk = '<span class=badge-danger" style="font-size: 10px; background-color: #bb2124; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Terlambat</span>';
           } else if (ketMasuk === 'Sakit') {
@@ -113,7 +113,7 @@ CihuyDomReady(() => {
           if (ketPulang === 'Lebih Cepat') {
             ketBadgePulang = '<span class="badge-green" style="font-size: 10px; background-color: #ff8700; color: white; padding: 5px 10px; border-radius: 5px;">Pulang Lebih Cepat</span>';
           } else if (ketPulang === 'Tepat Waktu') {
-            ketBadgePulang = '<span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Pulang Tepat Waktu</span>';
+            ketBadgePulang = '<span class="badge-blue" style="font-size: 10px; background-color: #0d6efd; color: white; padding: 5px 10px; border-radius: 5px;">Pulang Tepat Waktu</span>';
           } else if (ketPulang === 'Lebih Lama') {
             ketBadgePulang = '<span class=badge-danger" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Pulang Lebih Lama</span>';
           } else {

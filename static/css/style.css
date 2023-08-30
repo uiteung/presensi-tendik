@@ -49,6 +49,18 @@ table.dataTable thead .sorting_desc_disabled:before {
     border-color: #c3e6cb;
 }
 
+.alert-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #db3a35;
+}
+
+.alert-warning {
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #e79b31;
+}
+
 .loader {
   position: fixed;
   top: 0;

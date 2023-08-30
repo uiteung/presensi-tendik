@@ -10,6 +10,8 @@ const requestOptions = {
 	headers: header
 };
 
+let employeeData; // Declare employeeData at a higher scope
+
 // Ambil _id dari URL
 const urlParams = new URLSearchParams(window.location.search);
 const _id = urlParams.get('_id');
@@ -20,7 +22,7 @@ fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/getkaryawan/${_id}`
 	})
 	.then((data) => {
 		if (data && data.data) {
-			const employeeData = data.data; // Data karyawan langsung diambil dari data.data
+			employeeData = data.data; // Data karyawan langsung diambil dari data.data
 
 			// Tampilkan data karyawan ke dalam form
 			document.getElementById("employeeNameInput").value = employeeData.nama;
@@ -36,10 +38,7 @@ fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/getkaryawan/${_id}`
 	});
 
 // Event listener untuk tombol "Submit Perizinan"
-const submitButton = document.querySelector('#submitButton');
 submitButton.addEventListener('click', () => {
-	const form = document.getElementById('editkaryawan');
-
 	const employeeName = document.getElementById('employeeNameInput').value;
 	const employeePosition = document.getElementById('employeePositionInput').value;
 	const employeeWhatsapp = document.getElementById('employeeWhatsappInput').value;
@@ -49,8 +48,37 @@ submitButton.addEventListener('click', () => {
 		jabatan: employeePosition,
 		phone_number: employeeWhatsapp
 	};
-		updateEmployeeData(updatedData); // Panggil fungsi dengan parameter data
+
+	// Compare updated data with existing data
+	if (isDataChanged(employeeData, updatedData)) {
+		updateEmployeeData(updatedData);
+	} else {
+		showNoChangeAlert();
+	}
 });
+
+// Fungsi untuk membandingkan apakah ada perubahan pada data
+function isDataChanged(existingData, newData) {
+	return (
+		existingData.nama !== newData.nama ||
+		existingData.jabatan !== newData.jabatan ||
+		existingData.phone_number !== newData.phone_number
+	);
+}
+
+// Fungsi untuk menampilkan alert jika tidak ada perubahan pada data
+function showNoChangeAlert() {
+	const alertContainer = document.querySelector('#alertContainer');
+	const alertDiv = document.createElement('div');
+	alertDiv.classList.add('alert', 'alert-warning', 'mt-3');
+	alertDiv.textContent = 'Maaf, Tidak ada Perubahan Pada Data';
+	alertContainer.appendChild(alertDiv);
+
+	// Hapus alert setelah beberapa detik
+	setTimeout(() => {
+		alertContainer.removeChild(alertDiv);
+	}, 5000); // Menghapus alert setelah 3 detik (3000 milidetik)
+}
 
 // Untuk Update data ke data presensi
 // Fungsi untuk mengirim data perizinan ke API

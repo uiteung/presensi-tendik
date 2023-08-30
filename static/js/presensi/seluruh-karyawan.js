@@ -39,6 +39,7 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datakaryawan", requestOptions)
 						<p class="fw-normal mb-1">${values.jabatan}</p>
 					</td>
 					<td style="text-align: center; vertical-align: middle">
+						<button type="button" class="btn btn-info" data-employee-id="${values._id}">Edit</button>	
 						<button type="button" class="btn btn-warning" data-employee-id="${values._id}">Perizinan</button>
 					</td>
 				</tr>`;
@@ -57,6 +58,17 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datakaryawan", requestOptions)
 				window.location.href = `perizinan.html?_id=${_id}`;
 			});
 		});
+
+		// Menambahkan event listener untuk button "Perizinan"
+		const editkaryawanButtons = document.querySelectorAll('.btn-info');
+		editkaryawanButtons.forEach(button => {
+			button.addEventListener('click', (event) => {
+				const _id = event.target.getAttribute('data-employee-id');
+				// Mengarahkan ke halaman perizinan.html dengan mengirimkan parameter _id karyawan
+				window.location.href = `edit-karyawan.html?_id=${_id}`;
+			});
+		});
+		
 	})
 	.catch(error => {
 		console.log('error', error);

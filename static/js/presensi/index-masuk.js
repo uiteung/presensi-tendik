@@ -92,6 +92,7 @@ CihuyDomReady(() => {
         const jamMasuk = new Date(masukEntry.Datetime).toLocaleTimeString();
         const jamPulang = new Date(pulangEntry.datetime).toLocaleTimeString();
         const Durasi = pulangEntry.durasi;
+        const persentaseStatus = parseFloat(pulangEntry.persentase);
         const Persentase = pulangEntry.persentase;
         const lampiranContent = lampiran ? lampiran : '<p>Tidak ada Catatan</p>';
 
@@ -124,9 +125,9 @@ CihuyDomReady(() => {
           }
 
           let statusKerja = '';
-          if (Durasi >= '100%') {
+          if (persentaseStatus >= 100) {
             statusKerja = '<span class=badge-danger" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Tuntas</span>'
-          } else if (Durasi < '100%') {
+          } else if (persentaseStatus < 100) {
             statusKerja = '<span class=badge-danger" style="font-size: 10px; background-color: #bb2124; color: white; padding: 5px 10px; border-radius: 5px;">Belum Tuntas</span>';
           } else {
             statusKerja = '';

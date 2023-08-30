@@ -56,7 +56,7 @@ CihuyDomReady(() => {
 			data.data.sort((a, b) => new Date(b.Datetime) - new Date(a.Datetime));
 
 			// Untuk Filter data yang sakit dan izin saja
-			const filteredData = data.data.filter(entry => entry.ket === 'Sakit' || entry.ket === 'izin');
+			const filteredData = data.data.filter(entry => entry.ket === 'Sakit' || entry.ket === 'Izin');
 
 			let tableData = "";
 			filteredData.map((entry) => {
@@ -65,20 +65,13 @@ CihuyDomReady(() => {
 				const lampiran = entry.lampiran;
 				const ket = entry.ket;
 				const date = new Date(entry.Datetime).toLocaleDateString();
-				const jamMasuk = new Date(entry.Datetime).toLocaleTimeString();
 
 				// Pengkondisian Badge Keterangan
 				let ketBadge = '';
-				if (ket === 'Lebih Cepat') {
-					ketBadge = '<span class="badge-green" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Lebih Cepat</span>';
-				} else if (ket === 'Tepat Waktu') {
-					ketBadge = '<span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Tepat Waktu</span>';
-				} else if (ket === 'Terlambat') {
-					ketBadge = '<span class=badge-danger" style="font-size: 10px; background-color: #bb2124; color: white; padding: 5px 10px; border-radius: 5px;">Terlambat</span>';
+				if (ket === 'Izin') {
+					ketBadge = '<span class=badge-warning" style="font-size: 10px; background-color: #ff8700; color: white; padding: 5px 10px; border-radius: 5px;">Izin</span>';
 				} else if (ket === 'Sakit') {
 					ketBadge = '<span class="badge-warning" style="font-size: 10px; background-color: #ffcc00; color: white; padding: 5px 10px; border-radius: 5px;">Sakit</span>';
-				} else if (ket === 'izin') {
-					ketBadge = '<span class=badge-warning" style="font-size: 10px; background-color: #ff8700; color: white; padding: 5px 10px; border-radius: 5px;">Izin</span>'
 				} else {
 					ketBadge = "";
 				}
@@ -99,17 +92,13 @@ CihuyDomReady(() => {
 						<p class="fw-normal mb-1">${entry.biodata.jabatan}</p>
 					</td>
 					<td style="text-align: center; vertical-align: middle">
-						<p class="fw-normal mb-1"><b>${checkin}</b></p>
-						<p>${jamMasuk}</p>
-					</td>
-					<td style="text-align: center; vertical-align: middle">
 						<p class="fw-normal mb-1">${date}</p>
 					</td>
 					<td style="text-align: center; vertical-align: middle">
 						<p class="fw-normal mb-1">${ketBadge}</p>
 					</td>
 					<td style="text-align: center; vertical-align: middle">
-						<p class="fw-normal mb-1">${lampiranContent}</p>
+						<a href="${lampiranContent}" class="fw-normal mb-1">Buka Link Dokumen</a>
 					</td>
 				</tr>
 				`

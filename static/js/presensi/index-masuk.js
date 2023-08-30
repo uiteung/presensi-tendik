@@ -47,40 +47,90 @@ CihuyDomReady(() => {
   const itemperpage = 8;
   let halamannow = 1;
 
+  // Ambil data masuk
   fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
-    .then((result) => {
-      return result.json();
-    })
-    .then((data) => {
-      // Sorting descending data
-      data.data.sort((a, b) => new Date(b.Datetime) - new Date(a.Datetime));
+  .then((result) => result.json())
+  .then((masukData) => {
+    // Ambil data pulang
+    fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi/pulang", requestOptions)
+      .then((result) => result.json())
+      .then((pulangData) => {
+        // Gabungkan data berdasarkan nama dan tanggal yang sesuai
+        const combinedData = [];
+        masukData.data.forEach((masukEntry) => {
+          const matchingPulangEntry = pulangData.data.find((pulangEntry) =>
+            pulangEntry.biodata.nama === masukEntry.biodata.nama &&
+            new Date(pulangEntry.datetime).toLocaleDateString() === new Date(masukEntry.Datetime).toLocaleDateString()
+          );
+          if (matchingPulangEntry) {
+            combinedData.push({
+              masuk: masukEntry,
+              pulang: matchingPulangEntry,
+            });
+          }
+        });
 
+      // Sort the combinedData array by date
+      combinedData.sort((a, b) => new Date(b.masuk.Datetime).getTime() - new Date(a.masuk.Datetime).getTime());
+
+      // Initialize tableData
       let tableData = "";
-      data.data.map((entry) => {
-        const nama = entry.biodata.nama;
-        const checkin = entry.checkin;
-        const lampiran = entry.lampiran;
-        const ket = entry.ket;
-        const date = new Date(entry.Datetime).toLocaleDateString(); 
-        const jamMasuk = new Date(entry.Datetime).toLocaleTimeString();
 
-        // Pengkondisian Badge Keterangan
-        let ketBadge = '';
-        if (ket === 'Lebih Cepat') {
-          ketBadge = '<span class="badge-green" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Lebih Cepat</span>';
-        } else if (ket === 'Tepat Waktu') {
-          ketBadge = '<span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Tepat Waktu</span>';
-        } else if (ket === 'Terlambat') {
-          ketBadge = '<span class=badge-danger" style="font-size: 10px; background-color: #bb2124; color: white; padding: 5px 10px; border-radius: 5px;">Terlambat</span>';
-        } else if (ket === 'Sakit') {
-          ketBadge = '<span class="badge-warning" style="font-size: 10px; background-color: #ffcc00; color: white; padding: 5px 10px; border-radius: 5px;">Sakit</span>';
-        } else if (ket === 'izin') {
-          ketBadge = '<span class=badge-warning" style="font-size: 10px; background-color: #ff8700; color: white; padding: 5px 10px; border-radius: 5px;">Izin</span>'
-        } else {
-          ketBadge = "";
-        }
+      // Iterate through combinedData and build table rows
+      combinedData.forEach((combinedEntry) => {
+        const masukEntry = combinedEntry.masuk;
+        const pulangEntry = combinedEntry.pulang;
 
+        // Extract relevant data
+        const nama = masukEntry.biodata.nama;
+        const lampiran = masukEntry.lampiran;
+        // const statusMasuk = masukEntry.checkin;
+        // const statusPulang = pulangEntry.checkin;
+        const ketMasuk = masukEntry.ket;
+        const ketPulang = pulangEntry.ket;
+        const date = new Date(masukEntry.Datetime).toLocaleDateString();
+        const jamMasuk = new Date(masukEntry.Datetime).toLocaleTimeString();
+        const jamPulang = new Date(pulangEntry.datetime).toLocaleTimeString();
+        const Durasi = pulangEntry.durasi;
+        const Persentase = pulangEntry.persentase;
         const lampiranContent = lampiran ? lampiran : '<p>Tidak ada Catatan</p>';
+
+          // Pengkondisian Badge Keterangan
+          let ketBadgeMasuk = '';
+          if (ketMasuk === 'Lebih Cepat') {
+            ketBadgeMasuk = '<span class="badge-green" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Lebih Cepat</span>';
+          } else if (ketMasuk === 'Tepat Waktu') {
+            ketBadgeMasuk = '<span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Tepat Waktu</span>';
+          } else if (ketMasuk === 'Terlambat') {
+            ketBadgeMasuk = '<span class=badge-danger" style="font-size: 10px; background-color: #bb2124; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Terlambat</span>';
+          } else if (ketMasuk === 'Sakit') {
+            ketBadgeMasuk = '<span class="badge-warning" style="font-size: 10px; background-color: #ffcc00; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Sakit</span>';
+          } else if (ketMasuk === 'izin') {
+            ketBadgeMasuk = '<span class=badge-warning" style="font-size: 10px; background-color: #ff8700; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Izin</span>'
+          } else {
+            ketBadgeMasuk = "";
+          }
+
+          // Pengkondisian Badge Keterangan
+          let ketBadgePulang = '';
+          if (ketPulang === 'Lebih Cepat') {
+            ketBadgePulang = '<span class="badge-green" style="font-size: 10px; background-color: #ff8700; color: white; padding: 5px 10px; border-radius: 5px;">Pulang Lebih Cepat</span>';
+          } else if (ketPulang === 'Tepat Waktu') {
+            ketBadgePulang = '<span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Pulang Tepat Waktu</span>';
+          } else if (ketPulang === 'Lebih Lama') {
+            ketBadgePulang = '<span class=badge-danger" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Pulang Lebih Lama</span>';
+          } else {
+            ketBadgePulang = "";
+          }
+
+          let statusKerja = '';
+          if (Durasi >= '100%') {
+            statusKerja = '<span class=badge-danger" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Tuntas</span>'
+          } else if (Durasi < '100%') {
+            statusKerja = '<span class=badge-danger" style="font-size: 10px; background-color: #bb2124; color: white; padding: 5px 10px; border-radius: 5px;">Belum Tuntas</span>';
+          } else {
+            statusKerja = '';
+          }
 
         tableData += `
         <tr>
@@ -88,22 +138,28 @@ CihuyDomReady(() => {
               <div class="d-flex align-items-center">
                     <div class="ms-3">
                         <p class="fw-bold mb-1">${nama}</p>
-                        <p class="text-muted mb-0">${entry.phone_number}</p>
+                        <p class="text-muted mb-0">${masukEntry.phone_number}</p>
                     </div>
                 </div>
             </td>
             <td>
-                <p class="fw-normal mb-1">${entry.biodata.jabatan}</p>
+                <p class="fw-normal mb-1">${masukEntry.biodata.jabatan}</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
-                <p class="fw-normal mb-1"><b>${checkin}</b></p>
-                <p>${jamMasuk}</p>
+                <p class="fw-normal mb-1"><b>${ketBadgeMasuk}</b> ${jamMasuk}</p>
+                <p class="fw-normal mb-1"><b>${ketBadgePulang}</b> ${jamPulang}</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
                 <p class="fw-normal mb-1">${date}</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
-                <p class="fw-normal mb-1">${ketBadge}</p>
+                <p class="fw-normal mb-1">${Durasi}</p>
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+                <p class="fw-normal mb-1">${Persentase}</p>
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+                <p class="fw-normal mb-1">${statusKerja}</p>
             </td>
             <td style="text-align: center; vertical-align: middle">
                 <p class="fw-normal mb-1">${lampiranContent}</p>
@@ -155,5 +211,5 @@ CihuyDomReady(() => {
 			updatePagination();
 		}
 	});
-
+  })
 });

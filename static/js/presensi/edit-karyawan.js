@@ -35,64 +35,55 @@ fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/getkaryawan/${_id}`
 		console.log('error', error);
 	});
 
-// // Untuk POST data ke data presensi
-// // Fungsi untuk mengirim data perizinan ke API
-// function submitPerizinan() {
-// 	const selectedOption = document.querySelector('#statusSelect'); // Mengambil elemen select dengan class "form-select"
-// 	const status = selectedOption ? selectedOption.value : ""; // Ambil status perizinan
-
-// 	const lampiran = document.querySelector('#lampiranTextarea').value; // Ambil nilai lampiran
-
-// 	const postData = {
-// 		_id: _id,
-// 		ket: status,
-// 		lampiran: lampiran
-// 	};
-
-// 	fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/postdata/${_id}`, {
-// 		method: "POST",
-// 		headers: header,
-// 		body: JSON.stringify(postData)
-// 	})
-// 		.then(response => response.json())
-// 		.then(data => {
-// 			if (data.success) {
-// 				// Menampilkan Data Alert Success
-// 				const alertContainer = document.querySelector('#alertContainer');
-// 				const alertDiv = document.createElement('div');
-// 				alertDiv.classList.add('alert', 'alert-success', 'mt-3');
-// 				alertDiv.textContent = 'Data Berhasil Ditambahkan';
-// 				alertContainer.appendChild(alertDiv);
-			
-// 				// Alihkan ke halaman sakit-izin.html setelah alert muncul
-// 				setTimeout(() => {
-// 					window.location.href = 'sakit-izin.html';
-// 				}, 1000); // Mengalihkan setelah 2 detik (2000 milidetik)
-// 			} else {
-// 				// Menampilkan Data Alert Error
-// 				const alertContainer = document.querySelector('#alertContainer');
-// 				const alertDiv = document.createElement(`div`);
-// 				alertDiv.classList.add('alert', 'alert-danger', 'mt-3');
-// 				alertDiv.textContent = 'Data Gagal Ditambahkan';
-// 				alertContainer.appendChild(alertDiv);
-// 			}
-// 		})
-// 		.catch(error => {
-// 			console.error("Error saat melakukan POST data:", error);
-// 		});
-// }
-
 // Event listener untuk tombol "Submit Perizinan"
 const submitButton = document.querySelector('#submitButton');
 submitButton.addEventListener('click', () => {
-	// Untuk Ambil Element Form
 	const form = document.getElementById('editkaryawan');
 
-	// Untuk Cek apakah formnya valid atau tidak
-	if (form.checkValidity()) {
-		// Panggil fungsi submitPerizinan
-		submitPerizinan();
-	} else {
-		form.reportValidity();
-	}
+	const employeeName = document.getElementById('employeeNameInput').value;
+	const employeePosition = document.getElementById('employeePositionInput').value;
+	const employeeWhatsapp = document.getElementById('employeeWhatsappInput').value;
+
+	const updatedData = {
+		nama: employeeName,
+		jabatan: employeePosition,
+		phone_number: employeeWhatsapp
+	};
+		updateEmployeeData(updatedData); // Panggil fungsi dengan parameter data
 });
+
+// Untuk Update data ke data presensi
+// Fungsi untuk mengirim data perizinan ke API
+function updateEmployeeData(data) {
+	fetch(`https://hris_backend.ulbi.ac.id/presensi/datakaryawan/updatedata/${_id}`, {
+		method: "PATCH",
+		headers: header,
+		body: JSON.stringify(data)
+	})
+		.then(response => response.json())
+		.then(data => {
+			if (data.success) {
+				// Menampilkan Data Alert Success
+				const alertContainer = document.querySelector('#alertContainer');
+				const alertDiv = document.createElement('div');
+				alertDiv.classList.add('alert', 'alert-success', 'mt-3');
+				alertDiv.textContent = 'Data Berhasil Ditambahkan';
+				alertContainer.appendChild(alertDiv);
+			
+				// Alihkan ke halaman sakit-izin.html setelah alert muncul
+				setTimeout(() => {
+					window.location.href = 'seluruh-karyawan.html';
+				}, 1000); // Mengalihkan setelah 2 detik (2000 milidetik)
+			} else {
+				// Menampilkan Data Alert Error
+				const alertContainer = document.querySelector('#alertContainer');
+				const alertDiv = document.createElement(`div`);
+				alertDiv.classList.add('alert', 'alert-danger', 'mt-3');
+				alertDiv.textContent = 'Data Gagal Ditambahkan';
+				alertContainer.appendChild(alertDiv);
+			}
+		})
+		.catch(error => {
+			console.error("Error saat melakukan POST data:", error);
+		});
+}

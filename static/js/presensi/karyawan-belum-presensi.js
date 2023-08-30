@@ -13,23 +13,23 @@ const requestOptions = {
 
 // Untuk membuat interaksi button export to excel dan pdf
 function html_table_to_excel(type) {
-	var data = document.getElementById('exampleBelumPulang');
+	var data = document.getElementById('exampleBelum');
 	var file = XLSX.utils.table_to_book(data, { sheet: "sheet1" });
 
 	XLSX.write(file, { bookType: type, bookSST: true, type: 'base64' });
-	XLSX.writeFile(file, 'Rekap Belum Presensi Pulang Harian.' + type);
+	XLSX.writeFile(file, 'Rekap Belum Presensi Harian.' + type);
 }
 
-const export_button = document.getElementById('exportExcelBtnBelumPulang');
+const export_button = document.getElementById('exportExcelBtnBelum');
 export_button.addEventListener('click', () => {
 	html_table_to_excel('xlsx');
 })
 
-const exportPdfButton = document.getElementById('exportPdfBtnBelumPulang');
+const exportPdfButton = document.getElementById('exportPdfBtnBelum');
 exportPdfButton.addEventListener('click', () => {
 	const doc = new jsPDF({ orientation: 'landscape' });
-	doc.text('Rekap Belum Presensi Pulang Harian', 10, 10);
-	const rows = document.getElementById('exampleBelumPulang').querySelectorAll('tr');
+	doc.text('Rekap Belum Presensi Harian', 10, 10);
+	const rows = document.getElementById('exampleBelum').querySelectorAll('tr');
 	const tableData = [];
 	const headers = ['Nama', 'Posisi', 'Status', 'Tanggal', 'Keterangan', 'Link Dokumen'];
 	tableData.push(headers);
@@ -56,10 +56,10 @@ exportPdfButton.addEventListener('click', () => {
 
 // Untuk Membuat Pagination
 CihuyDomReady(() => {
-	const tablebody = CihuyId("tablebodyBelumPulang");
-	const buttonsebelumnya = CihuyId("prevPageBtnBelumPulang");
-	const buttonselanjutnya = CihuyId("nextPageBtnBelumPulang");
-	const halamansaatini = CihuyId("currentPageBelumPulang");
+	const tablebody = CihuyId("tablebodyBelum");
+	const buttonsebelumnya = CihuyId("prevPageBtnBelum");
+	const buttonselanjutnya = CihuyId("nextPageBtnBelum");
+	const halamansaatini = CihuyId("currentPageBelum");
 	const itemperpage = 5;
 	let halamannow = 1;
 
@@ -91,12 +91,12 @@ CihuyDomReady(() => {
                                 <p class="fw-normal mb-1">${values.jabatan}</p>
                             </td>
 							<td style="text-align: center; vertical-align: middle;">
-                                <span class=badge-danger" style="font-size: 10px; background-color: #bb2124; color: white; padding: 5px 10px; border-radius: 5px; ">Tidak Absen Pulang</span>
+                                <span class=badge-danger" style="font-size: 10px; background-color: #bb2124; color: white; padding: 5px 10px; border-radius: 5px; ">Tidak Presensi</span>
                             </td>
                         </tr>`;
 					});
 
-					document.getElementById("tablebodyBelumPulang").innerHTML = tableData;
+					document.getElementById("tablebodyBelum").innerHTML = tableData;
 
 					displayData(halamannow);
 					updatePagination();
@@ -110,7 +110,7 @@ CihuyDomReady(() => {
 		});
 
 	function displayData(page) {
-		const baris = CihuyQuerySelector("#tablebodyBelumPulang tr");
+		const baris = CihuyQuerySelector("#tablebodyBelum tr");
 		const mulaiindex = (page - 1) * itemperpage;
 		const akhirindex = mulaiindex + itemperpage;
 
@@ -137,7 +137,7 @@ CihuyDomReady(() => {
 
 	buttonselanjutnya.addEventListener("click", () => {
 		const totalPages = Math.ceil(
-			tablebody.querySelectorAll("#tablebodyBelumPulang tr").length / itemperpage
+			tablebody.querySelectorAll("#tablebodyBelum tr").length / itemperpage
 		);
 		if (halamannow < totalPages) {
 			halamannow++;
@@ -149,8 +149,8 @@ CihuyDomReady(() => {
 
 // Membuat fitur search
 document.addEventListener("DOMContentLoaded", function () {
-	const searchInput = document.getElementById("searchInputBelumPulang");
-	const tableBody = document.getElementById("tablebodyBelumPulang").getElementsByTagName("tr");
+	const searchInput = document.getElementById("searchInputBelum");
+	const tableBody = document.getElementById("tablebodyBelum").getElementsByTagName("tr");
 
 	searchInput.addEventListener("input", function () {
 		const searchText = searchInput.value.toLowerCase();

@@ -53,48 +53,44 @@ CihuyDomReady(() => {
   .then((masukData) => {
     // Ambil data pulang
     fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi/pulang", requestOptions)
-      .then((result) => result.json())
-      .then((pulangData) => {
-        // Gabungkan data berdasarkan nama dan tanggal yang sesuai
-        const combinedData = [];
-        masukData.data.forEach((masukEntry) => {
-          const matchingPulangEntry = pulangData.data.find((pulangEntry) =>
-            pulangEntry.biodata.nama === masukEntry.biodata.nama &&
-            new Date(pulangEntry.datetime).toLocaleDateString() === new Date(masukEntry.Datetime).toLocaleDateString()
-          );
-          if (matchingPulangEntry) {
-            combinedData.push({
-              masuk: masukEntry,
-              pulang: matchingPulangEntry,
-            });
-          }
-        });
+    .then((result) => result.json())
+    .then((pulangData) => {
+      // Gabungkan data berdasarkan nama dan tanggal yang sesuai
+      const combinedData = masukData.data.map((masukEntry) => {
+        const matchingPulangEntry = pulangData.data.find((pulangEntry) =>
+          pulangEntry.biodata.nama === masukEntry.biodata.nama &&
+          new Date(pulangEntry.datetime).toLocaleDateString() === new Date(masukEntry.Datetime).toLocaleDateString()
+        );
 
-      // Sort the combinedData array by date
+        return {
+          masuk: masukEntry,
+          pulang: matchingPulangEntry,
+        };
+      });
+
+      // Sortir array combinedData berdasarkan tanggal masuk
       combinedData.sort((a, b) => new Date(b.masuk.Datetime).getTime() - new Date(a.masuk.Datetime).getTime());
 
-      // Initialize tableData
+      // Inisialisasi data tabel
       let tableData = "";
 
-      // Iterate through combinedData and build table rows
+      // Iterasi melalui combinedData dan membangun baris tabel
       combinedData.forEach((combinedEntry) => {
         const masukEntry = combinedEntry.masuk;
         const pulangEntry = combinedEntry.pulang;
 
-        // Extract relevant data
+        // Ekstrak data yang relevan
         const nama = masukEntry.biodata.nama;
         const lampiran = masukEntry.lampiran;
-        // const statusMasuk = masukEntry.checkin;
-        // const statusPulang = pulangEntry.checkin;
-        const ketMasuk = masukEntry.ket;
-        const ketPulang = pulangEntry.ket;
+        const ketMasuk = masukEntry?.ket;
+        const ketPulang = pulangEntry?.ket;
         const date = new Date(masukEntry.Datetime).toLocaleDateString();
         const jamMasuk = new Date(masukEntry.Datetime).toLocaleTimeString();
-        const jamPulang = new Date(pulangEntry.datetime).toLocaleTimeString();
-        const Durasi = pulangEntry.durasi;
-        const persentaseStatus = parseFloat(pulangEntry.persentase);
-        const Persentase = pulangEntry.persentase;
-        const lampiranContent = lampiran ? lampiran : '<p>Tidak ada Catatan</p>';
+        const jamPulang = pulangEntry ? new Date(pulangEntry.datetime).toLocaleTimeString() : '';
+        const Durasi = pulangEntry ? pulangEntry.durasi : '-';
+        const persentaseStatus = pulangEntry ? parseFloat(pulangEntry.persentase) : 0;
+        const Persentase = pulangEntry ? pulangEntry.persentase : '-';
+        const lampiranContent = lampiran ? lampiran : '<p>Tidak Ada Catatan</p>';
 
           // Pengkondisian Badge Keterangan
           let ketBadgeMasuk = '';
@@ -109,7 +105,7 @@ CihuyDomReady(() => {
           } else if (ketMasuk === 'izin') {
             ketBadgeMasuk = '<span class=badge-warning" style="font-size: 10px; background-color: #ff8700; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Izin</span>'
           } else {
-            ketBadgeMasuk = "";
+            ketBadgeMasuk = "<span>Belum Absen Masuk</span>";
           }
 
           // Pengkondisian Badge Keterangan
@@ -121,7 +117,7 @@ CihuyDomReady(() => {
           } else if (ketPulang === 'Lebih Lama') {
             ketBadgePulang = '<span class=badge-danger" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Pulang Lebih Lama</span>';
           } else {
-            ketBadgePulang = "";
+            ketBadgePulang = "<span>Belum Absen Pulang</span>";
           }
 
           let statusKerja = '';

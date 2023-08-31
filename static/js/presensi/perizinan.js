@@ -54,9 +54,6 @@ function submitPerizinan() {
 			tgl: formattedDate // Tambahkan tanggal ke data POST
 		};
 
-	// // Variabel untuk lacak apakah alert sudah muncul atau belum
-	// let alertShown = false;
-	
 	fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/postdata/${_id}`, {
 		method: "POST",
 		headers: header,
@@ -93,8 +90,24 @@ function submitPerizinan() {
 // Event listener untuk tombol "Submit Perizinan"
 const submitButton = document.querySelector('#submitButton');
 submitButton.addEventListener('click', () => {
+	// Get values from input fields
+	const selectedOption = document.querySelector('#statusSelect').value;
+	const lampiran = document.querySelector('#lampiranTextarea').value;
+	const startDate = new Date(document.getElementById("startDate").value);
+	const endDate = new Date(document.getElementById("endDate").value);
+
 	// Untuk Ambil Element Form
 	const form = document.getElementById('perizinanForm');
+  
+	// Check if any of the fields is empty
+	if (!selectedOption || !lampiran || !startDate || !endDate) {
+	  Swal.fire({
+		icon: 'warning',
+		title: 'Oops...',
+		text: 'Semua field harus diisi!',
+	  });
+	  return; // Stop further processing
+	}
 
 	// Untuk Cek apakah formnya valid atau tidak
 	if (form.checkValidity()) {

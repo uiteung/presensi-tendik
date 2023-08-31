@@ -88,9 +88,8 @@ function showConfirmationAlert(data) {
 function showNoChangeAlert() {
 	Swal.fire({
 		icon: 'warning',
-		title: 'Maaf, Tidak Ada Perubahan Data',
-		showConfirmButton: false,
-		timer: 1500
+		title: 'Oops...',
+		text : 'Tidak Ada Perubahan Data'
 	});
 }
 
@@ -107,9 +106,7 @@ function updateEmployeeData(data) {
 				// Menampilkan Data Alert Success
 				Swal.fire({
 					icon: 'success',
-					title: 'Data Karyawan Berhasil Diperbarui',
-					showConfirmButton: false,
-					timer: 1500
+					title: 'Data Karyawan Berhasil Diperbarui'
 				}).then(() => {
 					window.location.href = 'seluruh-karyawan.html';
 				});

@@ -48,7 +48,7 @@ submitButton.addEventListener('click', () => {
   // Check if any of the fields is empty
   if (!employeeName || !employeePosition || !employeeWhatsapp) {
     Swal.fire({
-      icon: 'error',
+      icon: 'warning',
       title: 'Oops...',
       text: 'Semua field harus diisi!',
     });

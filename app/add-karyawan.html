@@ -168,9 +168,9 @@
             <h5 class="right-aligned" style="float: right">
                 <a href="../index.html">Home</a> /
                 <a href="seluruh-karyawan.html">Data Seluruh Karyawan</a> /
-                Edit Karyawan
+                Tambah Data Karyawan
             </h5>
-            <h1 class="h3 mb-3"><b>Form Edit Data Karyawan</b></h1>
+            <h1 class="h3 mb-3"><b>Form Tambah Karyawan</b></h1>
 
             <!-- Alert Start -->
             <div id="alertContainer" class="alert-container"></div>
@@ -188,7 +188,7 @@
                         class="form-control"
                         id="employeeNameInput"
                         name="employeeNameInput"
-                        value="" />
+                        required/>
                         <!-- Inputan Posisi Karyawan -->
                         <h5 class="card-title mt-2">Posisi Karyawan</h5>
                         <input
@@ -196,7 +196,7 @@
                         class="form-control"
                         id="employeePositionInput"
                         name="employeePositionInput"
-                        value="" />
+                        required/>
                         <!-- Inputan Nomor HP Karyawan -->
                         <h5 class="card-title mt-2">Nomor Whatsapp Karyawan</h5>
                         <input
@@ -204,7 +204,7 @@
                         class="form-control"
                         id="employeeWhatsappInput"
                         name="employeeWhatsappInput"
-                        value="" />
+                        required/>
 
                         <!-- Button Submit -->
                         <div
@@ -215,9 +215,9 @@
                         ">
                         <button
                             type="button"
-                            class="btn btn-info"
+                            class="btn btn-primary"
                             id="submitButton">
-                            Simpan Perubahan
+                            Tambah Karyawan
                         </button>
                         </div>
                     </div>
@@ -260,7 +260,7 @@
     <script src="https://unpkg.com/jspdf-invoice"></script>
 
     <!-- Library Javascript Terkait -->
-    <script type="module" src="../static/js/presensi/edit-karyawan.js"></script>
+    <script type="module" src="../static/js/presensi/add-karyawan.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="../static/js/style.js" defer></script>
     <script src="../static/js/presensi/cihuyred.js" type="module"></script>

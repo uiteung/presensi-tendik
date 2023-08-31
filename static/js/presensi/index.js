@@ -9,242 +9,169 @@ header.append("login", token);
 header.append("Content-Type", "application/json");
 
 const requestOptions = {
-	method: "GET",
-	headers: header
+  method: "GET",
+  headers: header
 };
-
-// Fungsi untuk mengubah durasi menjadi format yang lebih mudah dibaca
-function formatDuration(duration) {
-	const durasiJam = Math.floor(duration / (1000 * 60 * 60));
-	const durasiMenit = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
-	const durasiDetik = Math.floor((duration % (1000 * 60)) / 1000);
-
-	return `${durasiJam} Jam ${durasiMenit} Menit ${durasiDetik} Detik`;
-}
-// Fungsi perhitungan persentase durasi
-function calculatePercentage(masukTime, pulangTime) {
-	const durasi = pulangTime - masukTime;
-
-	const durasiDetik = durasi / 1000;
-	const totalDetikHadir = 8.5 * 60 * 60; // 8.5 jam * 60 menit * 60 detik
-
-	const persentase = (durasiDetik / totalDetikHadir) * 100;
-
-	return persentase.toFixed(2) + "%";
-}
-
-// Untuk membuat format Penanggalan
-function formatDate(datetime) {
-	const options = { year: 'numeric', month: 'long', day: 'numeric' };
-	const formattedDate = new Date(datetime).toLocaleDateString('en-US', options);
-	return formattedDate;
-}
-function formatDateToIndonesian(date) {
-	const options = { day: 'numeric', month: 'long', year: 'numeric' };
-	const formattedDate = new Date(date).toLocaleDateString('id-ID', options);
-	return formattedDate;
-}
-
-// Untuk menghitung durasi kerja
-function calculateDuration(masukTime, pulangTime) {
-	const durasi = pulangTime - masukTime;
-
-	const durasiJam = Math.floor(durasi / (1000 * 60 * 60));
-	const durasiMenit = Math.floor((durasi % (1000 * 60 * 60)) / (1000 * 60));
-	const durasiDetik = Math.floor((durasi % (1000 * 60)) / 1000);
-
-	return `${durasiJam} Jam ${durasiMenit} Menit ${durasiDetik} Detik`;
-}
 
 // Untuk membuat interaksi button export to excel dan pdf
 function html_table_to_excel(type) {
-	var data = document.getElementById('example');
-	var file = XLSX.utils.table_to_book(data, { sheet: "sheet1" });
+  var data = document.getElementById('example');
+  var file = XLSX.utils.table_to_book(data, { sheet: "sheet1" });
 
-	XLSX.write(file, { bookType: type, bookSST: true, type: 'base64' });
-	XLSX.writeFile(file, 'Data Rekap Presensi.' + type);
+  XLSX.write(file, { bookType: type, bookSST: true, type: 'base64' });
+  XLSX.writeFile(file, 'Data Rekap Presensi.' + type);
 }
 
 const export_button = document.getElementById('exportExcelBtn');
 export_button.addEventListener('click', () => {
-	html_table_to_excel('xlsx');
+  html_table_to_excel('xlsx');
 })
 
 const exportPdfButton = document.getElementById('exportPdfBtn');
 exportPdfButton.addEventListener('click', () => {
-	const doc = new jsPDF();
+  const doc = new jsPDF({ orientation: 'landscape' });
 
-	// You might need to adjust these values for styling and layout
-	doc.text('Data Rekap Presensi', 10, 10);
-	doc.autoTable({ html: '#example' });
+  // You might need to adjust these values for styling and layout
+  doc.text('Data Rekap Presensi', 10, 10);
+  doc.autoTable({ html: '#example' });
 
-	doc.save('Data Rekap Presensi.pdf');
+  doc.save('Data Rekap Presensi.pdf');
 });
 
 // Untuk Membuat Pagination
 CihuyDomReady(() => {
-	const tablebody = CihuyId("tablebody");
-	const buttonsebelumnya = CihuyId("prevPageBtn");
-	const buttonselanjutnya = CihuyId("nextPageBtn");
-	const halamansaatini = CihuyId("currentPage");
-	const itemperpage = 10;
-	let halamannow = 1;
+  const tablebody = CihuyId("tablebody");
+  const buttonsebelumnya = CihuyId("prevPageBtn");
+  const buttonselanjutnya = CihuyId("nextPageBtn");
+  const halamansaatini = CihuyId("currentPage");
+  const itemperpage = 8;
+  let halamannow = 1;
 
-	fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
-		.then((result) => {
-			return result.json();
-		})
-		.then((response) => {
-			console.log(token);
-			if (response && response.data && response.data.length > 0) {
+  // Ambil data masuk
+  fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
+  .then((result) => result.json())
+  .then((masukData) => {
+    // Ambil data pulang
+    fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi/pulang", requestOptions)
+    .then((result) => result.json())
+    .then((pulangData) => {
+      // Gabungkan data berdasarkan nama dan tanggal yang sesuai
+      const combinedData = masukData.data.map((masukEntry) => {
+        const matchingPulangEntry = pulangData.data.find((pulangEntry) =>
+          pulangEntry.biodata.nama === masukEntry.biodata.nama &&
+          new Date(pulangEntry.datetime).toLocaleDateString() === new Date(masukEntry.Datetime).toLocaleDateString()
+        );
 
-				let combinedData = {}; // Combined data of masuk and pulang records
+        return {
+          masuk: masukEntry,
+          pulang: matchingPulangEntry,
+        };
+      });
 
-				response.data.forEach((entry) => {
-					const biodata = entry.biodata;
-					const checkin = entry.checkin;
-					const datetime = entry.Datetime;
+      // Sortir array combinedData berdasarkan tanggal masuk
+      combinedData.sort((a, b) => new Date(b.masuk.Datetime).getTime() - new Date(a.masuk.Datetime).getTime());
 
-					// const formattedDate = new Date(datetime).toISOString().split('T')[0];
+      // Inisialisasi data tabel
+      let tableData = "";
 
-					// Parsing the datetime string to a valid Date object
-					const parsedDate = new Date(datetime);
+      // Iterasi melalui combinedData dan membangun baris tabel
+      combinedData.forEach((combinedEntry) => {
+        const masukEntry = combinedEntry.masuk;
+        const pulangEntry = combinedEntry.pulang;
 
-					if (!isNaN(parsedDate)) { // Check if parsedDate is a valid Date object
-						const formattedDate = parsedDate.toISOString().split('T')[0];
+        // Ekstrak data yang relevan
+        const nama = masukEntry.biodata.nama;
+        const lampiran = masukEntry.lampiran;
+        const ketMasuk = masukEntry?.ket;
+        const ketPulang = pulangEntry?.ket;
+        const date = new Date(masukEntry.Datetime).toLocaleDateString();
+        const jamMasuk = new Date(masukEntry.Datetime).toLocaleTimeString();
+        const jamPulang = pulangEntry ? new Date(pulangEntry.datetime).toLocaleTimeString() : '';
+        const Durasi = pulangEntry ? pulangEntry.durasi : '0 Jam 0 Menit 0 Detik';
+        const persentaseStatus = pulangEntry ? parseFloat(pulangEntry.persentase) : 0;
+        const Persentase = pulangEntry ? pulangEntry.persentase : '0%';
+        const lampiranContent = lampiran ? lampiran : '<p>Tidak Ada Catatan</p>';
 
-						if (!combinedData[biodata.nama]) {
-							combinedData[biodata.nama] = {};
-						}
+          // Pengkondisian Badge Keterangan
+          let ketBadgeMasuk = '';
+          if (ketMasuk === 'Lebih Cepat') {
+            ketBadgeMasuk = '<span class="badge-green" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Lebih Cepat</span>';
+          } else if (ketMasuk === 'Tepat Waktu') {
+            ketBadgeMasuk = '<span class="badge-blue" style="font-size: 10px; background-color: #0d6efd; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Tepat Waktu</span>';
+          } else if (ketMasuk === 'Terlambat') {
+            ketBadgeMasuk = '<span class=badge-danger" style="font-size: 10px; background-color: #bb2124; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Terlambat</span>';
+          } else if (ketMasuk === 'Sakit') {
+            ketBadgeMasuk = '<span class="badge-warning" style="font-size: 10px; background-color: #ffcc00; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Sakit</span>';
+          } else if (ketMasuk === 'izin') {
+            ketBadgeMasuk = '<span class=badge-warning" style="font-size: 10px; background-color: #ff8700; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Izin</span>'
+          } else {
+            ketBadgeMasuk = "<span>Belum Presensi Masuk</span>";
+          }
 
-						if (!combinedData[biodata.nama][formattedDate]) {
-							combinedData[biodata.nama][formattedDate] = {
-								masuk: null,
-								pulang: null,
-							};
-						}
+          // Pengkondisian Badge Keterangan
+          let ketBadgePulang = '';
+          if (ketPulang === 'Lebih Cepat') {
+            ketBadgePulang = '<span class="badge-green" style="font-size: 10px; background-color: #ff8700; color: white; padding: 5px 10px; border-radius: 5px;">Pulang Lebih Cepat</span>';
+          } else if (ketPulang === 'Tepat Waktu') {
+            ketBadgePulang = '<span class="badge-blue" style="font-size: 10px; background-color: #0d6efd; color: white; padding: 5px 10px; border-radius: 5px;">Pulang Tepat Waktu</span>';
+          } else if (ketPulang === 'Lebih Lama') {
+            ketBadgePulang = '<span class=badge-danger" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Pulang Lebih Lama</span>';
+          } else {
+            ketBadgePulang = "<span>Belum Presensi Pulang</span>";
+          }
 
-						if (checkin === "masuk") {
-							combinedData[biodata.nama][formattedDate].masuk = parsedDate;
-						} else if (checkin === "pulang") {
-							combinedData[biodata.nama][formattedDate].pulang = parsedDate;
-						}
-					} else {
-						console.log("Invalid datetime:", datetime);
-					}
+          let statusKerja = '';
+          if (persentaseStatus >= 100) {
+            statusKerja = '<span class=badge-danger" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Tuntas</span>'
+          } else if (persentaseStatus < 100) {
+            statusKerja = '<span class=badge-danger" style="font-size: 10px; background-color: #bb2124; color: white; padding: 5px 10px; border-radius: 5px;">Belum Tuntas</span>';
+          } else {
+            statusKerja = '';
+          }
 
-				});
+        tableData += `
+        <tr>
+          <td>
+              <div class="d-flex align-items-center">
+                    <div class="ms-3">
+                        <p class="fw-bold mb-1">${nama}</p>
+                        <p class="text-muted mb-0">${masukEntry.phone_number}</p>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <p class="fw-normal mb-1">${masukEntry.biodata.jabatan}</p>
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+                <p class="fw-normal mb-1"><b>${ketBadgeMasuk}</b> ${jamMasuk}</p>
+                <p class="fw-normal mb-1"><b>${ketBadgePulang}</b> ${jamPulang}</p>
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+                <p class="fw-normal mb-1">${date}</p>
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+                <p class="fw-normal mb-1">${Durasi}</p>
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+                <p class="fw-normal mb-1">${Persentase}</p>
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+                <p class="fw-normal mb-1">${statusKerja}</p>
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+                <p class="fw-normal mb-1">${lampiranContent}</p>
+            </td>
+        </tr>
+        `
+      })
+      document.getElementById("tablebody").innerHTML = tableData;
 
-				let tableData = "";
-				for (const nama in combinedData) {
-					for (const date in combinedData[nama]) {
-						const { masuk, pulang } = combinedData[nama][date];
-						const masukTime = masuk ? masuk.toLocaleTimeString("id-ID", { timeZone: "Asia/Jakarta", timeStyle: "medium" }) : "Tidak Absen Masuk";
-						const pulangTime = pulang ? pulang.toLocaleTimeString("id-ID", { timeZone: "Asia/Jakarta", timeStyle: "medium" }) : "Tidak Absen Pulang";
-						const masukStatus = masuk ? "Masuk" : "";
-						const pulangStatus = pulang ? "Pulang" : "";
-						const biodata = response.data.find(entry => entry.biodata.nama === nama).biodata;
-
-						// Tentukan keterangan badge "Masuk Kerja" jika sudah pulang
-						const keterangan = pulangStatus
-							? '<span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Kerja</span>'
-							: '<span class="badge-blue" style="font-size: 10px; background-color: #ff0e0e; color: white; padding: 5px 10px; border-radius: 5px;">Tidak Masuk Kerja</span>';
-
-						// Tentukan apakah tombol "Uploud" akan muncul atau tidak
-						const linkdokumen = pulangStatus
-							? '<span style="font-size: 13px;">Tidak Ada Catatan</span>'
-							: '<span style="font-size: 13px;">Belum Ada Catatan</span>';
-
-						// Sisanya kode pembuatan data tabel
-						tableData += `
-                      <tr>
-                          <td>
-                              <div class="d-flex align-items-center">
-                                  <div class="ms-3">
-                                      <p class="fw-bold mb-1">${nama}</p>
-                                      <p class="text-muted mb-0">${biodata.phone_number}</p>
-                                  </div>
-                              </div>
-                          </td>
-                          <td>
-                              <p class="fw-normal mb-1">${biodata.jabatan}</p>
-                          </td>
-                          <td>
-                              <p class="fw-normal mb-1"><b>${masukStatus}</b> ${masukTime}</p>
-                              <p class="fw-normal mb-1"><b>${pulangStatus}</b> ${pulangTime}</p>
-                          </td>
-                          <td style="text-align: center; vertical-align: middle">
-                              <p class="fw-normal mb-1">${date}</p>
-                          </td>
-                          <td style="text-align: center; vertical-align: middle">
-                              ${pulang && masuk
-								? calculateDuration(masuk, pulang)
-								: "0 Jam 0 Menit 0 Detik"
-							}
-                          </td>
-                          <td style="text-align: center; vertical-align: middle">
-                              ${pulang && masuk
-								? calculatePercentage(masuk, pulang)
-								: "0%"
-							}
-                          </td>
-                          <td style="text-align: center; vertical-align: middle">
-                              ${keterangan}
-                          </td>
-                          <td style="text-align: center; vertical-align: middle">
-                             ${linkdokumen}
-                          </td>
-                      </tr>`;
-					}
-				}
-
-				document.getElementById("tablebody").innerHTML = tableData;
-
-				// Untuk mencari rata-rata durasi kerja dan rata-rata persentase durasi kerja
-				// Hitung total durasi dan total persentase durasi
-				let totalDuration = 0;
-				let totalPercentage = 0;
-
-				// Hitung jumlah entitas untuk perhitungan rata-rata
-				let entityCount = 0;
-				for (const nama in combinedData) {
-					for (const date in combinedData[nama]) {
-						const { masuk, pulang } = combinedData[nama][date];
-
-						if (masuk && pulang) {
-							const durasi = pulang - masuk;
-							const persentase = calculatePercentage(masuk, pulang);
-
-							totalDuration += durasi;
-							totalPercentage += parseFloat(persentase);
-							entityCount++;
-						}
-					}
-				}
-
-				// Hitung rata-rata durasi dan rata-rata persentase
-				const avgDuration =
-					entityCount > 0 ? totalDuration / entityCount : 0;
-				const avgPercentage =
-					entityCount > 0 ? totalPercentage / entityCount : 0;
-
-				// Masukkan nilai rata-rata ke dalam elemen HTML
-				const avgDurationElement = document.getElementById("avgDuration");
-				avgDurationElement.textContent = formatDuration(avgDuration);
-
-				const avgPercentageElement = document.getElementById("avgPercentage");
-				avgPercentageElement.textContent = avgPercentage.toFixed(2) + "%";
-
-			} else {
-				console.log('Sabar gblg');
-
-			} displayData(halamannow);
+      displayData(halamannow);
 			updatePagination();
-
-		})
-		.catch(error => {
-			console.log('error', error);
-		});
+    })
+    .catch(error => {
+      console.log('error', error);
+    });
 
 	function displayData(page) {
 		const baris = CihuyQuerySelector("#tablebody tr");
@@ -273,7 +200,7 @@ CihuyDomReady(() => {
 
 	buttonselanjutnya.addEventListener("click", () => {
 		const totalPages = Math.ceil(
-			tablebody.querySelectorAll("#tablebody-masuk tr").length / itemperpage
+			tablebody.querySelectorAll("#tablebody tr").length / itemperpage
 		);
 		if (halamannow < totalPages) {
 			halamannow++;
@@ -281,5 +208,5 @@ CihuyDomReady(() => {
 			updatePagination();
 		}
 	});
-
+  })
 });

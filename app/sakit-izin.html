@@ -172,25 +172,27 @@
               <a href="../index.html">Home</a> / Sakit & Izin
             </h5>
             <h1 class="h3 mb-3"><b>Dashboard Karyawan Sakit & Izin</b></h1>
-            <button
-              type="button"
-              id="exportExcelBtn"
-              class="btn btn-success mb-3">
-              <i class="align-middle" data-feather="layout"></i>
-              Export To Excel
-            </button>
-            <button
-              type="button"
-              id="exportPdfBtn"
-              class="btn btn-danger mb-3"
-              style="color: white">
-              <i class="align-middle" data-feather="file"></i>
-              Export To PDF
-            </button>
-            <a class="btn btn-warning mb-3" href="seluruh-karyawan.html">
-              <i class="align-middle" data-feather="mail"></i>
-              Tambah Izin Karyawan
-            </a>  
+            <div class="row mb-2">
+              <div class="col-md-6">
+                  <div class="d-flex justify-content-start">
+                    <button
+                      type="button"
+                      id="exportExcelBtn"
+                      class="btn btn-success me-2">
+                      <i class="align-middle" data-feather="layout"></i>
+                      Export To Excel
+                    </button>
+                    <button
+                      type="button"
+                      id="exportPdfBtn"
+                      class="btn btn-danger me-2"
+                      style="color: white">
+                      <i class="align-middle" data-feather="file"></i>
+                      Export To PDF
+                    </button>
+                  </div>
+              </div>
+            </div>
             <div class="row justify-content-center">
               <div class="col-12">
                 <div class="card">
@@ -257,6 +259,7 @@
                           <th>Tanggal</th>
                           <th>Keterangan</th>
                           <th>Link Dokumen</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody id="tablebody">
@@ -271,6 +274,7 @@
                           <th>Tanggal</th>
                           <th>Keterangan</th>
                           <th>Link Dokumen</th>
+                          <th>Action</th>
                         </tr>
                       </tfoot>
                     </table>
@@ -322,6 +326,7 @@
     <!-- Library Javascript Terkait -->
     <script src="../static/js/style.js" defer></script>
     <script src="../static/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="../static/js/table-sorting.js" type="module"></script>
     <script src="../static/js/presensi/cihuyred.js" type="module"></script>
   </body>

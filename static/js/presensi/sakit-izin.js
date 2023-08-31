@@ -65,7 +65,8 @@ CihuyDomReady(() => {
 				const lampiran = entry.lampiran;
 				const ket = entry.ket;
 				const phone_number = entry.biodata.phone_number;
-				const date = new Date(entry.Datetime).toLocaleDateString();
+				const dateObj = new Date(entry.tgl);
+				const formattedDate = `${dateObj.getMonth() + 1}/${dateObj.getDate()}/${dateObj.getFullYear()}`;
 
 				// Pengkondisian Badge Keterangan
 				let ketBadge = '';
@@ -93,13 +94,17 @@ CihuyDomReady(() => {
 						<p class="fw-normal mb-1">${entry.biodata.jabatan}</p>
 					</td>
 					<td style="text-align: center; vertical-align: middle">
-						<p class="fw-normal mb-1">${date}</p>
+						<p class="fw-normal mb-1">${formattedDate}</p>
 					</td>
 					<td style="text-align: center; vertical-align: middle">
 						<p class="fw-normal mb-1">${ketBadge}</p>
 					</td>
 					<td style="text-align: center; vertical-align: middle">
 						<a href="${lampiranContent}" class="fw-normal mb-1">Buka Link Dokumen</a>
+					</td>
+					<td style="text-align: center; vertical-align: middle">
+						<button class="btn btn-info">Edit</button>
+						<button class="btn btn-danger" data-entry-id="${entry._id}">Hapus</button>
 					</td>
 				</tr>
 				`
@@ -148,5 +153,66 @@ CihuyDomReady(() => {
 			updatePagination();
 		}
 	});
-
 });
+
+// Function Delete Data Izin dan Sakit
+// Add event listener for "Hapus" button
+document.getElementById("tablebody").addEventListener("click", (event) => {
+	const target = event.target;
+	if (target.classList.contains("btn-danger")) {
+	  const _id = target.getAttribute("data-entry-id");
+	  if (_id) {
+		// Display SweetAlert confirmation dialog
+		Swal.fire({
+		  title: 'Hapus Data Perizinan?',
+		  text: "Data tidak akan dapat mengembalikan ini!",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: 'Yes'
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			// User confirmed, call the function to handle deletion
+			deleteData(_id);
+		  }
+		});
+	  }
+	}
+  });
+  
+  // Function to delete data
+  function deleteData(_id) {
+	const deleteUrl = `https://hris_backend.ulbi.ac.id/presensi/datapresensi/deletedata/${_id}`;
+	
+	fetch(deleteUrl, {
+	  method: "DELETE",
+	  headers: header
+	})
+	  .then((response) => response.json())
+	  .then((data) => {
+		// Handle successful deletion
+		console.log("Data deleted:", data);
+		// You might want to update the table or handle other UI updates here
+		
+		// Display success SweetAlert
+		Swal.fire({
+			title: 'Deleted!',
+			text: 'Data Perizinan Berhasil Dihapus.',
+			icon: 'success'
+		  }).then(() => {
+			// Reload the page after successful deletion
+			location.reload();
+		  });
+		})
+	  	.catch((error) => {
+			console.error("Error deleting data:", error);
+			
+			// Display error SweetAlert
+			Swal.fire(
+			'Error!',
+			'Data Perizinan Gagal Dihapus',
+			'error'
+			);
+		});
+  }

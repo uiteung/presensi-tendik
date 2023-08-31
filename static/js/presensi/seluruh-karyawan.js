@@ -41,6 +41,7 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datakaryawan", requestOptions)
 					<td style="text-align: center; vertical-align: middle">
 						<button type="button" class="btn btn-info" data-employee-id="${values._id}">Edit</button>	
 						<button type="button" class="btn btn-warning" data-employee-id="${values._id}">Perizinan</button>
+						<button type="button" class="btn btn-danger" data-employee-id="${values._id}">Hapus</button>
 					</td>
 				</tr>`;
 		});
@@ -73,6 +74,68 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datakaryawan", requestOptions)
 	.catch(error => {
 		console.log('error', error);
 	});
+
+// Function Delete Data Izin dan Sakit
+// Add event listener for "Hapus" button
+document.getElementById("tablebody").addEventListener("click", (event) => {
+	const target = event.target;
+	if (target.classList.contains("btn-danger")) {
+	  const _id = target.getAttribute("data-employee-id");
+	  if (_id) {
+		// Display SweetAlert confirmation dialog
+		Swal.fire({
+		  title: 'Hapus Data Karyawan?',
+		  text: "Data tidak akan dapat mengembalikan ini!",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: 'Yes'
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			// User confirmed, call the function to handle deletion
+			deleteData(_id);
+		  }
+		});
+	  }
+	}
+  });
+  
+  // Function to delete data
+  function deleteData(_id) {
+	const deleteUrl = `https://hris_backend.ulbi.ac.id/presensi/datakaryawan/deletedata/${_id}`;
+	
+	fetch(deleteUrl, {
+	  method: "DELETE",
+	  headers: header
+	})
+	  .then((response) => response.json())
+	  .then((data) => {
+		// Handle successful deletion
+		console.log("Data deleted:", data);
+		// You might want to update the table or handle other UI updates here
+		
+		// Display success SweetAlert
+		Swal.fire({
+			title: 'Deleted!',
+			text: 'Data Karyawan Berhasil Dihapus.',
+			icon: 'success'
+		  }).then(() => {
+			// Reload the page after successful deletion
+			location.reload();
+		  });
+		})
+	  	.catch((error) => {
+			console.error("Error deleting data:", error);
+			
+			// Display error SweetAlert
+			Swal.fire(
+			'Error!',
+			'Data Karyawan Gagal Dihapus',
+			'error'
+			);
+		});
+  }
 
 // Untuk membuat interaksi button export to excel dan pdf
 function html_table_to_excel(type) {

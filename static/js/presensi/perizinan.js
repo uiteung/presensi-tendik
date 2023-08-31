@@ -39,15 +39,24 @@ fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/getkaryawan/${_id}`
 function submitPerizinan() {
 	const selectedOption = document.querySelector('#statusSelect'); // Mengambil elemen select dengan class "form-select"
 	const status = selectedOption ? selectedOption.value : ""; // Ambil status perizinan
-
 	const lampiran = document.querySelector('#lampiranTextarea').value; // Ambil nilai lampiran
+	const startDate = new Date(document.getElementById("startDate").value); // Ambil Tanggal Mulai
+	const endDate = new Date(document.getElementById("endDate").value); // Ambil Tanggal Akhir
 
-	const postData = {
-		_id: _id,
-		ket: status,
-		lampiran: lampiran
-	};
+	const currentDate = new Date(startDate);
+	while (currentDate <= endDate) {
+		const formattedDate = currentDate.toISOString().split('T')[0]; // Ubah tanggal ke format 'YYYY-MM-DD'
+		
+		const postData = {
+			_id: _id,
+			ket: status,
+			lampiran: lampiran,
+			tgl: formattedDate // Tambahkan tanggal ke data POST
+		};
 
+	// // Variabel untuk lacak apakah alert sudah muncul atau belum
+	// let alertShown = false;
+	
 	fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/postdata/${_id}`, {
 		method: "POST",
 		headers: header,
@@ -57,24 +66,29 @@ function submitPerizinan() {
 		.then(data => {
 			if (data.success) {
 				// Menampilkan Data Alert Success
-				const alertContainer = document.querySelector('#alertContainer');
-				const alertDiv = document.createElement('div');
-				alertDiv.classList.add('alert', 'alert-success', 'mt-3');
-				alertDiv.textContent = 'Data Berhasil Ditambahkan';
-				alertContainer.appendChild(alertDiv);
+				Swal.fire({
+					icon: 'success',
+					title: 'Data Perizinan Berhasil Ditambahkan',
+					showConfirmButton: false,
+					timer: 1500
+				  }).then(() =>{
+					window.location.href = 'sakit-izin.html';
+				  });
 			} else {
 				// Menampilkan Data Alert Error
-				const alertContainer = document.querySelector('#alertContainer');
-				const alertDiv = document.createElement(`div`);
-				alertDiv.classList.add('alert', 'alert-danger', 'mt-3');
-				alertDiv.textContent = 'Data Gagal Ditambahkan';
-				alertContainer.appendChild(alertDiv);
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Data Perizinan Gagal Ditambahkan!',
+				  })
 			}
 		})
 		.catch(error => {
 			console.error("Error saat melakukan POST data:", error);
 		});
-}
+
+		currentDate.setDate(currentDate.getDate() + 1); // Pindah ke tanggal berikutnya
+}}
 
 // Event listener untuk tombol "Submit Perizinan"
 const submitButton = document.querySelector('#submitButton');
@@ -84,8 +98,22 @@ submitButton.addEventListener('click', () => {
 
 	// Untuk Cek apakah formnya valid atau tidak
 	if (form.checkValidity()) {
-		// Panggil fungsi submitPerizinan
-		submitPerizinan();
+		// Tampilkan SweetAlert untuk konfirmasi
+		Swal.fire({
+			title: 'Submit Perizinan',
+			text: 'Apakah anda yakin ingin submit perizinan?',
+			icon: 'question',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes',
+			cancelButtonText: 'No'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				// Panggil fungsi submitPerizinan
+				submitPerizinan();
+			}
+		});
 	} else {
 		form.reportValidity();
 	}

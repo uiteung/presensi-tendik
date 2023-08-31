@@ -99,9 +99,9 @@ CihuyDomReady(() => {
 				const date = new Date(masukEntry.Datetime).toLocaleDateString();
 				const jamMasuk = new Date(masukEntry.Datetime).toLocaleTimeString();
                 const jamPulang = pulangEntry ? new Date(pulangEntry.datetime).toLocaleTimeString() : '';
-                const Durasi = pulangEntry ? pulangEntry.durasi : '-';
+                const Durasi = pulangEntry ? pulangEntry.durasi : '0 Jam 0 Menit 0 Detik';
                 const persentaseStatus = pulangEntry ? parseFloat(pulangEntry.persentase) : 0;
-                const Persentase = pulangEntry ? pulangEntry.persentase : '-';
+                const Persentase = pulangEntry ? pulangEntry.persentase : '0%';
                 const lampiranContent = lampiran ? lampiran : '<p>Tidak Ada Catatan</p>';
 
                 // Pengkondisian Badge Keterangan
@@ -117,7 +117,7 @@ CihuyDomReady(() => {
                 } else if (ketMasuk === 'izin') {
                 ketBadgeMasuk = '<span class=badge-warning" style="font-size: 10px; background-color: #ff8700; color: white; padding: 5px 10px; border-radius: 5px;">Masuk Izin</span>'
                 } else {
-                ketBadgeMasuk = "<span>Belum Absen Masuk</span>";
+                ketBadgeMasuk = "<span>Belum Presensi Masuk</span>";
                 }
 
                 // Pengkondisian Badge Keterangan
@@ -129,7 +129,7 @@ CihuyDomReady(() => {
                 } else if (ketPulang === 'Lebih Lama') {
                 ketBadgePulang = '<span class=badge-danger" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Pulang Lebih Lama</span>';
                 } else {
-                ketBadgePulang = "<span>Belum Absen Pulang</span>";
+                ketBadgePulang = "<span>Belum Presensi Pulang</span>";
                 }
 
                 let statusKerja = '';

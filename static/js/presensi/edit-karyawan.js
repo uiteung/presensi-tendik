@@ -1,4 +1,3 @@
-// Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
 
 var header = new Headers();
@@ -10,7 +9,7 @@ const requestOptions = {
 	headers: header
 };
 
-let employeeData; // Declare employeeData at a higher scope
+let employeeData;
 
 // Ambil _id dari URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -22,7 +21,7 @@ fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/getkaryawan/${_id}`
 	})
 	.then((data) => {
 		if (data && data.data) {
-			employeeData = data.data; // Data karyawan langsung diambil dari data.data
+			employeeData = data.data;
 
 			// Tampilkan data karyawan ke dalam form
 			document.getElementById("employeeNameInput").value = employeeData.nama;
@@ -38,6 +37,7 @@ fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/getkaryawan/${_id}`
 	});
 
 // Event listener untuk tombol "Submit Perizinan"
+const submitButton = document.querySelector('#submitButton');
 submitButton.addEventListener('click', () => {
 	const employeeName = document.getElementById('employeeNameInput').value;
 	const employeePosition = document.getElementById('employeePositionInput').value;
@@ -51,7 +51,7 @@ submitButton.addEventListener('click', () => {
 
 	// Compare updated data with existing data
 	if (isDataChanged(employeeData, updatedData)) {
-		updateEmployeeData(updatedData);
+		showConfirmationAlert(updatedData);
 	} else {
 		showNoChangeAlert();
 	}
@@ -66,22 +66,35 @@ function isDataChanged(existingData, newData) {
 	);
 }
 
+// Fungsi untuk menampilkan alert konfirmasi perubahan data
+function showConfirmationAlert(data) {
+	Swal.fire({
+		title: 'Perubahan Data Karyawan',
+		text: "Apakah anda yakin ingin melakukan perubahan?",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Yes',
+		cancelButtonText: 'No'
+	}).then((result) => {
+		if (result.isConfirmed) {
+			updateEmployeeData(data);
+		}
+	});
+}
+
 // Fungsi untuk menampilkan alert jika tidak ada perubahan pada data
 function showNoChangeAlert() {
-	const alertContainer = document.querySelector('#alertContainer');
-	const alertDiv = document.createElement('div');
-	alertDiv.classList.add('alert', 'alert-warning', 'mt-3');
-	alertDiv.textContent = 'Maaf, Tidak ada Perubahan Pada Data';
-	alertContainer.appendChild(alertDiv);
-
-	// Hapus alert setelah beberapa detik
-	setTimeout(() => {
-		alertContainer.removeChild(alertDiv);
-	}, 5000); // Menghapus alert setelah 3 detik (3000 milidetik)
+	Swal.fire({
+		icon: 'warning',
+		title: 'Maaf, Tidak Ada Perubahan Data',
+		showConfirmButton: false,
+		timer: 1500
+	});
 }
 
 // Untuk Update data ke data presensi
-// Fungsi untuk mengirim data perizinan ke API
 function updateEmployeeData(data) {
 	fetch(`https://hris_backend.ulbi.ac.id/presensi/datakaryawan/updatedata/${_id}`, {
 		method: "PATCH",
@@ -92,26 +105,26 @@ function updateEmployeeData(data) {
 		.then(data => {
 			if (data.success) {
 				// Menampilkan Data Alert Success
-				const alertContainer = document.querySelector('#alertContainer');
-				const alertDiv = document.createElement('div');
-				alertDiv.classList.add('alert', 'alert-success', 'mt-3');
-				alertDiv.textContent = 'Data Berhasil Ditambahkan';
-				alertContainer.appendChild(alertDiv);
-			
-				// Alihkan ke halaman sakit-izin.html setelah alert muncul
-				setTimeout(() => {
+				Swal.fire({
+					icon: 'success',
+					title: 'Data Karyawan Berhasil Diperbarui',
+					showConfirmButton: false,
+					timer: 1500
+				}).then(() => {
 					window.location.href = 'seluruh-karyawan.html';
-				}, 1000); // Mengalihkan setelah 2 detik (2000 milidetik)
+				});
+
+				window.location.href = 'seluruh-karyawan.html';
 			} else {
 				// Menampilkan Data Alert Error
-				const alertContainer = document.querySelector('#alertContainer');
-				const alertDiv = document.createElement(`div`);
-				alertDiv.classList.add('alert', 'alert-danger', 'mt-3');
-				alertDiv.textContent = 'Data Gagal Ditambahkan';
-				alertContainer.appendChild(alertDiv);
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Data Karyawan Gagal Diperbarui!',
+				});
 			}
 		})
 		.catch(error => {
-			console.error("Error saat melakukan POST data:", error);
+			console.error("Error saat melakukan PATCH data:", error);
 		});
 }

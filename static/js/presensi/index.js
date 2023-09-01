@@ -29,13 +29,31 @@ export_button.addEventListener('click', () => {
 
 const exportPdfButton = document.getElementById('exportPdfBtn');
 exportPdfButton.addEventListener('click', () => {
-  const doc = new jsPDF({ orientation: 'landscape' });
-
-  // You might need to adjust these values for styling and layout
-  doc.text('Data Rekap Presensi', 10, 10);
-  doc.autoTable({ html: '#example' });
-
-  doc.save('Data Rekap Presensi.pdf');
+	const doc = new jsPDF({ orientation: 'landscape' });
+	doc.text('Rekap Presensi', 10, 10);
+	const rows = document.getElementById('example').querySelectorAll('tr');
+	const tableData = [];
+	const headers = ['Nama', 'Posisi', 'Status', 'Tanggal', 'Durasi', 'Persentase Durasi', 'Keterangan', 'Link Dokumen'];
+	tableData.push(headers);
+	rows.forEach(row => {
+		const rowData = [];
+		row.querySelectorAll('td').forEach(cell => {
+			rowData.push(cell.innerText);
+		});
+		tableData.push(rowData);
+	});
+	const colWidths = [40, 30, 30, 30, 30, 30 ,30, 40]; // Set the column widths (you can adjust these values)
+	const rowHeight = 10; 	// Set the row height (you can adjust this value)
+	doc.autoTable({
+		head: [headers],
+		body: tableData.slice(1), // Exclude headers from the body
+		columnStyles: { 0: { columnWidth: colWidths[0] }, 1: { columnWidth: colWidths[1] }, 2: { columnWidth: colWidths[2] }, 3: { columnWidth: colWidths[3] }, 4: { columnWidth: colWidths[4] }, 5: { columnWidth: colWidths[5] }, 6: { columnWidth: colWidths[6] }, 7: { columnWidth: colWidths[7] }, 8: { columnWidth: colWidths[8] } },
+		margin: { top: 20 }, // Adjust top margin for better layout
+		rowPageBreak: 'avoid', // Avoid breaking rows between pages
+		headStyles: { fillColor: [41, 128, 185] }, // Set header fill color
+		styles: { fontSize: 10, cellPadding: 3, valign: 'middle', halign: 'center', minCellHeight: rowHeight },
+	});
+	doc.save('Rekap Presensi.pdf');
 });
 
 // Untuk Membuat Pagination

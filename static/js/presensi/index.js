@@ -13,7 +13,7 @@ const requestOptions = {
   headers: header
 };
 
-// Untuk membuat interaksi button export to excel dan pdf
+// Untuk membuat interaksi button export to excel
 function html_table_to_excel(type) {
   var data = document.getElementById('example');
   var file = XLSX.utils.table_to_book(data, { sheet: "sheet1" });
@@ -27,6 +27,7 @@ export_button.addEventListener('click', () => {
   html_table_to_excel('xlsx');
 })
 
+// Untuk membuat interaksi button export to PDF
 const exportPdfButton = document.getElementById('exportPdfBtn');
 exportPdfButton.addEventListener('click', () => {
 	const doc = new jsPDF({ orientation: 'landscape' });
@@ -43,7 +44,6 @@ exportPdfButton.addEventListener('click', () => {
 		tableData.push(rowData);
 	});
 	const colWidths = [40, 30, 30, 30, 30, 30 ,30, 40]; // Set the column widths (you can adjust these values)
-	const rowHeight = 10; 	// Set the row height (you can adjust this value)
 	doc.autoTable({
 		head: [headers],
 		body: tableData.slice(1), // Exclude headers from the body
@@ -51,7 +51,7 @@ exportPdfButton.addEventListener('click', () => {
 		margin: { top: 20 }, // Adjust top margin for better layout
 		rowPageBreak: 'avoid', // Avoid breaking rows between pages
 		headStyles: { fillColor: [41, 128, 185] }, // Set header fill color
-		styles: { fontSize: 10, cellPadding: 3, valign: 'middle', halign: 'center', minCellHeight: rowHeight },
+		styles: { fontSize: 7, cellPadding: 3, valign: 'middle', halign: 'justify'},
 	});
 	doc.save('Rekap Presensi.pdf');
 });

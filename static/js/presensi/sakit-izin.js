@@ -27,34 +27,39 @@ function html_table_to_excel(type) {
 	html_table_to_excel('xlsx');
   })
   
-//   const exportPdfButton = document.getElementById('exportPdfBtn');
-//   exportPdfButton.addEventListener('click', () => {
-// 	  const doc = new jsPDF({ orientation: 'landscape' });
-// 	  doc.text('Rekap Perizinan', 10, 10);
-// 	  const rows = document.getElementById('example').querySelectorAll('tr');
-// 	  const tableData = [];
-// 	  const headers = ['Nama', 'Posisi', 'Tanggal', 'Keterangan', 'Link Dokumen'];
-// 	  tableData.push(headers);
-// 	  rows.forEach(row => {
-// 		  const rowData = [];
-// 		  row.querySelectorAll('td').forEach(cell => {
-// 			  rowData.push(cell.innerText);
-// 		  });
-// 		  tableData.push(rowData);
-// 	  });
-// 	  const colWidths = [40, 30, 30, 30]; // Set the column widths (you can adjust these values)
-// 	  const rowHeight = 10; 	// Set the row height (you can adjust this value)
-// 	  doc.autoTable({
-// 		  head: [headers],
-// 		  body: tableData.slice(1), // Exclude headers from the body
-// 		  columnStyles: { 0: { columnWidth: colWidths[0] }, 1: { columnWidth: colWidths[1] }, 2: { columnWidth: colWidths[2] }, 3: { columnWidth: colWidths[3] }, 4: { columnWidth: colWidths[4] }},
-// 		  margin: { top: 20 }, // Adjust top margin for better layout
-// 		  rowPageBreak: 'auto', // Avoid breaking rows between pages
-// 		  headStyles: { fillColor: [41, 128, 185] }, // Set header fill color
-// 		  styles: { fontSize: 10, cellPadding: 3, valign: 'middle', halign: 'center', minCellHeight: rowHeight },
-// 	  });
-// 	  doc.save('Rekap Perizinan.pdf');
+// const exportPdfButton = document.getElementById('exportPdfBtn');
+// exportPdfButton.addEventListener('click', async () => {
+//   const doc = new jsPDF({ orientation: 'landscape' });
+//   doc.text('Rekap Perizinan', 10, 10);
+
+//   // Ensure that jQuery is properly included and the DataTables plugin is loaded.
+//   const table = $('#example').DataTable();
+//   const tableData = table.rows({ search: 'applied' }).data().toArray();
+//   const headers = ['Nama', 'Posisi', 'Tanggal', 'Keterangan'];
+
+//   doc.autoTable({
+//     head: [headers],
+//     body: tableData,
+//     margin: { top: 20 },
+//     headStyles: {
+//       fillColor: [41, 128, 185],
+//       textColor: [255, 255, 255],
+//       fontSize: 8,
+//     },
+//     styles: {
+//       fontSize: 7,
+//       cellPadding: 3,
+//       valign: 'middle',
+//       halign: 'center',
+//       overflow: 'linebreak',
+//     },
+//     startY: 20,
+//     pageBreak: 'auto',
 //   });
+
+//   doc.save('Rekap Perizinan.pdf');
+// });
+
 
 // Untuk Membuat Pagination
 CihuyDomReady(() => {

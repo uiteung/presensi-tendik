@@ -26,40 +26,17 @@ function html_table_to_excel(type) {
   export_button.addEventListener('click', () => {
 	html_table_to_excel('xlsx');
   })
-  
+
 // const exportPdfButton = document.getElementById('exportPdfBtn');
-// exportPdfButton.addEventListener('click', async () => {
-//   const doc = new jsPDF({ orientation: 'landscape' });
-//   doc.text('Rekap Perizinan', 10, 10);
-
-//   // Ensure that jQuery is properly included and the DataTables plugin is loaded.
-//   const table = $('#example').DataTable();
-//   const tableData = table.rows({ search: 'applied' }).data().toArray();
-//   const headers = ['Nama', 'Posisi', 'Tanggal', 'Keterangan'];
-
-//   doc.autoTable({
-//     head: [headers],
-//     body: tableData,
-//     margin: { top: 20 },
-//     headStyles: {
-//       fillColor: [41, 128, 185],
-//       textColor: [255, 255, 255],
-//       fontSize: 8,
-//     },
-//     styles: {
-//       fontSize: 7,
-//       cellPadding: 3,
-//       valign: 'middle',
-//       halign: 'center',
-//       overflow: 'linebreak',
-//     },
-//     startY: 20,
-//     pageBreak: 'auto',
-//   });
-
-//   doc.save('Rekap Perizinan.pdf');
+// exportPdfButton.addEventListener('click', () => {
+//   exportTableToPdf();
 // });
 
+// function exportTableToPdf() {
+//   const doc = new jsPDF();
+//   doc.autoTable({ html: '#example' }); // Replace '#example' with the ID of your table
+//   doc.save('Rekap Perizinan.pdf');
+// }
 
 // Untuk Membuat Pagination
 CihuyDomReady(() => {

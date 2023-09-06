@@ -31,7 +31,7 @@ exportPdfButton.addEventListener('click', () => {
 	doc.text('Rekap Belum Presensi Harian', 10, 10);
 	const rows = document.getElementById('exampleBelum').querySelectorAll('tr');
 	const tableData = [];
-	const headers = ['Nama', 'Posisi', 'Status', 'Tanggal', 'Keterangan', 'Link Dokumen'];
+	const headers = ['Nama', 'Nomor HP', 'Posisi', 'Staus'];
 	tableData.push(headers);
 	rows.forEach(row => {
 		const rowData = [];
@@ -40,12 +40,12 @@ exportPdfButton.addEventListener('click', () => {
 		});
 		tableData.push(rowData);
 	});
-	const colWidths = [60, 40, 40, 40, 40, 40]; // Set the column widths (you can adjust these values)
+	const colWidths = [60, 40, 100, 60]; // Set the column widths (you can adjust these values)
 	const rowHeight = 10; 	// Set the row height (you can adjust this value)
 	doc.autoTable({
 		head: [headers],
 		body: tableData.slice(1), // Exclude headers from the body
-		columnStyles: { 0: { columnWidth: colWidths[0] }, 1: { columnWidth: colWidths[1] }, 2: { columnWidth: colWidths[2] }, 3: { columnWidth: colWidths[3] }, 4: { columnWidth: colWidths[4] }, 5: { columnWidth: colWidths[5] } },
+		columnStyles: { 0: { columnWidth: colWidths[0] }, 1: { columnWidth: colWidths[1] }, 2: { columnWidth: colWidths[2] }, 3: { columnWidth: colWidths[3] }, 4: { columnWidth: colWidths[4] }},
 		margin: { top: 20 }, // Adjust top margin for better layout
 		rowPageBreak: 'avoid', // Avoid breaking rows between pages
 		headStyles: { fillColor: [41, 128, 185] }, // Set header fill color

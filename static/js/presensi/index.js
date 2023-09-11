@@ -201,7 +201,7 @@ CihuyDomReady(() => {
 
       // Update Element HTML dengan Rata-Rata Durasi dan Persentase Durasi
       document.getElementById("averageDuration").textContent = `Rata-Rata Durasi : ${averages.averageDuration.toFixed(2)} detik`;
-      document.getElementById("averagePercentage").textContent = `Rata-Rata Persentase Durasi : ${averages.averagePercentage.toFixed(2)} detik`;
+      document.getElementById("averagePercentage").textContent = `Rata-Rata Persentase Durasi : ${averages.averagePercentage.toFixed(2)} %`;
     })
     .catch(error => {
       console.log('error', error);

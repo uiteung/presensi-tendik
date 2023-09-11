@@ -13,6 +13,34 @@ const requestOptions = {
 	headers: header
 };
 
+// Fungsi untuk menghitung rata-rata durasi dan persentase durasi
+function calculateAverages(data) {
+	const totalDuration = data.reduce((total, pulangEntry) => {
+	  if (pulangEntry.durasi) {
+		const durationParts = pulangEntry.durasi.split(" ");
+		const hours = parseInt(durationParts[0]) || 0;
+		const minutes = parseInt(durationParts[2]) || 0;
+		const seconds = parseInt(durationParts[4]) || 0;
+		const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+		return total + totalSeconds;
+	  } else {
+		return total;
+	  }
+	}, 0);
+	const totalPercentage = data.reduce((total, pulangEntry) => {
+	  if (pulangEntry.durasi) {
+		const percentage = parseFloat(pulangEntry.durasi.replace("%", ""));
+		return total + percentage;
+	  } else {
+		return total;
+	  }
+	}, 0);
+	const averageDuration = totalDuration / data.length;
+	const averagePercentage = totalPercentage / data.length;
+  
+	return { averageDuration, averagePercentage };
+}
+
 // Untuk membuat interaksi button export to excel dan pdf
 function html_table_to_excel(type) {
 	var data = document.getElementById('exampleMasuk');
@@ -180,6 +208,13 @@ CihuyDomReady(() => {
 
 			displayData(halamannow);
 			updatePagination();
+
+			// Untuk Hitung Rata-rata Durasi dan Persentase
+			const averages = calculateAverages(combinedData);
+
+			// Update Element HTML dengan Rata-Rata Durasi dan Persentase Durasi
+			document.getElementById("averageDuration").textContent = `Rata-Rata Durasi : ${averages.averageDuration.toFixed(2)} detik`;
+			document.getElementById("averagePercentage").textContent = `Rata-Rata Persentase Durasi : ${averages.averagePercentage.toFixed(2)} %`;
 		})
 		.catch(error => {
 			console.log('error', error);

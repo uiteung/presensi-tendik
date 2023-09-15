@@ -13,33 +13,77 @@ const requestOptions = {
   headers: header
 };
 
-// Fungsi untuk menghitung rata-rata durasi dan persentase durasi
-function calculateAverages(data) {
-  const totalDuration = data.reduce((total, pulangEntry) => {
-    if (pulangEntry.durasi) {
-      const durationParts = pulangEntry.durasi.split(" ");
-      const hours = parseInt(durationParts[0]) || 0;
-      const minutes = parseInt(durationParts[2]) || 0;
-      const seconds = parseInt(durationParts[4]) || 0;
-      const totalSeconds = hours * 3600 + minutes * 60 + seconds;
-      return total + totalSeconds;
-    } else {
-      return total;
-    }
-  }, 0);
-  const totalPercentage = data.reduce((total, pulangEntry) => {
-    if (pulangEntry.durasi) {
-      const percentage = parseFloat(pulangEntry.durasi.replace("%", ""));
-      return total + percentage;
-    } else {
-      return total;
-    }
-  }, 0);
-  const averageDuration = totalDuration / data.length;
-  const averagePercentage = totalPercentage / data.length;
+// // Fungsi untuk parse durasi ke format " X Jam Y Menit Z Detik" dan mengembalikan total durasi dalam detik
+// function parseDuration(durationStr) {
+//   const parts = durationStr.split(" ");
+//   let totalSeconds = 0;
 
-  return { averageDuration, averagePercentage };
-}
+//   for (let i = 0; i < parts.length; i++) {
+//     const part = parts[i];
+//     if (part.includes("Jam")) {
+//       totalSeconds += parseInt(part) * 3600;
+//     } else if (part.includes("Menit")) {
+//       totalSeconds += parseInt(part) * 60;
+//     } else if (part.includes("Detik")) {
+//       totalSeconds += parseInt(part);
+//     }
+//   }
+
+//   return totalSeconds;
+// }
+
+// // Fungsi untuk merubah format durasi
+// function formatDuration(durationInSeconds) {
+//   const hours = Math.floor(durationInSeconds / 3600);
+//   const minutes = Math.floor(durationInSeconds / 60);
+//   const seconds = Math.floor(durationInSeconds % 60);
+
+//   return `${hours} Jam ${minutes} Menit ${seconds} Detik`;
+// }
+
+// // Function to calculate and update the average duration and average percentage duration
+// function calculateAndSetAverage() {
+//   const tableRows = CihuyQuerySelector("#tablebody tr");
+//   let totalDurationInSeconds = 0;
+//   let totalPercentage = 0;
+
+//   tableRows.forEach((row) => {
+//     const durationCell = row.querySelector("td:nth-child(5)"); // Assuming duration is in the 5th column
+//     const percentageCell = row.querySelector("td:nth-child(6)"); // Assuming percentage is in the 6th column
+
+//     if (durationCell && percentageCell) {
+//       const durationStr = durationCell.textContent;
+//       const percentageStr = percentageCell.textContent;
+
+//       // Parse duration in the format "X Jam Y Menit Z Detik" and calculate total duration in seconds
+//       const durationInSeconds = parseDuration(durationStr);
+//       totalDurationInSeconds += durationInSeconds;
+
+//       // Parse percentage and calculate total percentage
+//       const percentage = parseFloat(percentageStr.replace("%", ""));
+//       totalPercentage += percentage;
+//     }
+//   });
+
+//   // Calculate the average duration in seconds and format it as "X Jam Y Menit Z Detik"
+//   const averageDurationInSeconds = totalDurationInSeconds / tableRows.length;
+//   const averageDurationStr = formatDuration(averageDurationInSeconds);
+
+//   // Calculate the average percentage
+//   const averagePercentage = totalPercentage / tableRows.length;
+
+//   // Update the footer cells with average values
+//   const averageDurationCell = CihuyId("averageDuration");
+//   const averagePercentageCell = CihuyId("averagePercentage");
+
+//   if (averageDurationCell) {
+//     averageDurationCell.textContent = `Rata-Rata Durasi: ${averageDurationStr}`;
+//   }
+
+//   if (averagePercentageCell) {
+//     averagePercentageCell.textContent = `Rata-Rata Persentase Durasi: ${averagePercentage.toFixed(2)}%`;
+//   }
+// }
 
 // Untuk membuat interaksi button export to excel
 function html_table_to_excel(type) {
@@ -192,16 +236,13 @@ CihuyDomReady(() => {
       })
       document.getElementById("tablebody").innerHTML = tableData;
 
+      // Call the calculateAndSetAverage function to calculate and update the average on page load
+      calculateAndSetAverage();
+      
       // Untuk Memunculkan Pagination Halamannya
       displayData(halamannow);
 			updatePagination();
 
-      // Untuk Hitung Rata-rata Durasi dan Persentase
-      const averages = calculateAverages(combinedData);
-
-      // Update Element HTML dengan Rata-Rata Durasi dan Persentase Durasi
-      document.getElementById("averageDuration").textContent = `Rata-Rata Durasi : ${averages.averageDuration.toFixed(2)} detik`;
-      document.getElementById("averagePercentage").textContent = `Rata-Rata Persentase Durasi : ${averages.averagePercentage.toFixed(2)} %`;
     })
     .catch(error => {
       console.log('error', error);

@@ -236,8 +236,8 @@ CihuyDomReady(() => {
       })
       document.getElementById("tablebody").innerHTML = tableData;
 
-      // Call the calculateAndSetAverage function to calculate and update the average on page load
-      calculateAndSetAverage();
+      // // Call the calculateAndSetAverage function to calculate and update the average on page load
+      // calculateAndSetAverage();
       
       // Untuk Memunculkan Pagination Halamannya
       displayData(halamannow);

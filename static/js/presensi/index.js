@@ -13,78 +13,6 @@ const requestOptions = {
   headers: header
 };
 
-// // Fungsi untuk parse durasi ke format " X Jam Y Menit Z Detik" dan mengembalikan total durasi dalam detik
-// function parseDuration(durationStr) {
-//   const parts = durationStr.split(" ");
-//   let totalSeconds = 0;
-
-//   for (let i = 0; i < parts.length; i++) {
-//     const part = parts[i];
-//     if (part.includes("Jam")) {
-//       totalSeconds += parseInt(part) * 3600;
-//     } else if (part.includes("Menit")) {
-//       totalSeconds += parseInt(part) * 60;
-//     } else if (part.includes("Detik")) {
-//       totalSeconds += parseInt(part);
-//     }
-//   }
-
-//   return totalSeconds;
-// }
-
-// // Fungsi untuk merubah format durasi
-// function formatDuration(durationInSeconds) {
-//   const hours = Math.floor(durationInSeconds / 3600);
-//   const minutes = Math.floor(durationInSeconds / 60);
-//   const seconds = Math.floor(durationInSeconds % 60);
-
-//   return `${hours} Jam ${minutes} Menit ${seconds} Detik`;
-// }
-
-// // Function to calculate and update the average duration and average percentage duration
-// function calculateAndSetAverage() {
-//   const tableRows = CihuyQuerySelector("#tablebody tr");
-//   let totalDurationInSeconds = 0;
-//   let totalPercentage = 0;
-
-//   tableRows.forEach((row) => {
-//     const durationCell = row.querySelector("td:nth-child(5)"); // Assuming duration is in the 5th column
-//     const percentageCell = row.querySelector("td:nth-child(6)"); // Assuming percentage is in the 6th column
-
-//     if (durationCell && percentageCell) {
-//       const durationStr = durationCell.textContent;
-//       const percentageStr = percentageCell.textContent;
-
-//       // Parse duration in the format "X Jam Y Menit Z Detik" and calculate total duration in seconds
-//       const durationInSeconds = parseDuration(durationStr);
-//       totalDurationInSeconds += durationInSeconds;
-
-//       // Parse percentage and calculate total percentage
-//       const percentage = parseFloat(percentageStr.replace("%", ""));
-//       totalPercentage += percentage;
-//     }
-//   });
-
-//   // Calculate the average duration in seconds and format it as "X Jam Y Menit Z Detik"
-//   const averageDurationInSeconds = totalDurationInSeconds / tableRows.length;
-//   const averageDurationStr = formatDuration(averageDurationInSeconds);
-
-//   // Calculate the average percentage
-//   const averagePercentage = totalPercentage / tableRows.length;
-
-//   // Update the footer cells with average values
-//   const averageDurationCell = CihuyId("averageDuration");
-//   const averagePercentageCell = CihuyId("averagePercentage");
-
-//   if (averageDurationCell) {
-//     averageDurationCell.textContent = `Rata-Rata Durasi: ${averageDurationStr}`;
-//   }
-
-//   if (averagePercentageCell) {
-//     averagePercentageCell.textContent = `Rata-Rata Persentase Durasi: ${averagePercentage.toFixed(2)}%`;
-//   }
-// }
-
 // Untuk membuat interaksi button export to excel
 function html_table_to_excel(type) {
   var data = document.getElementById('example');
@@ -97,16 +25,16 @@ export_button.addEventListener('click', () => {
   html_table_to_excel('xlsx');
 })
 
-// Function to export data to PDF
-function html_table_to_pdf() {
-  const doc = new jsPDF();
-  doc.autoTable({ html: '#example' });
-  doc.save('Data_Rekap_Presensi.pdf');
-}
-const exportPdfBtn = document.getElementById('exportPdfBtn');
-exportPdfBtn.addEventListener('click', () => {
-  html_table_to_pdf();
-});
+// // Function to export data to PDF
+// function html_table_to_pdf() {
+//   const doc = new jsPDF();
+//   doc.autoTable({ html: '#example' });
+//   doc.save('Data_Rekap_Presensi.pdf');
+// }
+// const exportPdfBtn = document.getElementById('exportPdfBtn');
+// exportPdfBtn.addEventListener('click', () => {
+//   html_table_to_pdf();
+// });
 
 // Untuk Membuat Pagination
 CihuyDomReady(() => {

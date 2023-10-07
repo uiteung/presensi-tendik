@@ -199,7 +199,9 @@ document.getElementById("tablebody").addEventListener("click", (event) => {
 		Swal.fire({
 			title: 'Deleted!',
 			text: 'Data Perizinan Berhasil Dihapus.',
-			icon: 'success'
+			icon: 'success',
+			showConfirmButton: false,
+			timer: 1500
 		  }).then(() => {
 			// Reload the page after successful deletion
 			location.reload();

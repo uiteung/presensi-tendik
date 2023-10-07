@@ -65,7 +65,8 @@ function submitPerizinan() {
 				// Menampilkan Data Alert Success
 				Swal.fire({
 					icon: 'success',
-					title: 'Data Perizinan Berhasil Ditambahkan',
+					title: 'Sukses!',
+					text: 'Data Perizinan Berhasil Ditambahkan',
 					showConfirmButton: false,
 					timer: 1500
 				  }).then(() =>{

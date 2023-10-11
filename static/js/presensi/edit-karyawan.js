@@ -80,6 +80,23 @@ function showConfirmationAlert(data) {
 	}).then((result) => {
 		if (result.isConfirmed) {
 			updateEmployeeData(data);
+			// Menampilkan Data Alert Success
+			Swal.fire({
+				icon: 'success',
+				title: 'Sukses!',
+				text: 'Data Karyawan Berhasil Diperbarui',
+				showConfirmButton: false,
+				timer: 1500
+			}).then(() => {
+				window.location.href = 'seluruh-karyawan.html';
+			});
+		} else {
+			// Menampilkan Data Alert Error
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Data Karyawan Gagal Diperbarui!',
+			});
 		}
 	});
 }
@@ -100,30 +117,6 @@ function updateEmployeeData(data) {
 		headers: header,
 		body: JSON.stringify(data)
 	})
-		.then(response => response.json())
-		.then(data => {
-			if (data.success) {
-				// Menampilkan Data Alert Success
-				Swal.fire({
-					icon: 'success',
-					title: 'Sukses!',
-					text: 'Data Karyawan Berhasil Diperbarui',
-					showConfirmButton: false,
-					timer: 1500
-				}).then(() => {
-					window.location.href = 'seluruh-karyawan.html';
-				});
-
-				window.location.href = 'seluruh-karyawan.html';
-			} else {
-				// Menampilkan Data Alert Error
-				Swal.fire({
-					icon: 'error',
-					title: 'Oops...',
-					text: 'Data Karyawan Gagal Diperbarui!',
-				});
-			}
-		})
 		.catch(error => {
 			console.error("Error saat melakukan PATCH data:", error);
 		});

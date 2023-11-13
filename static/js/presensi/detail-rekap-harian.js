@@ -1,6 +1,7 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady, CihuyQuerySelector } from "https://c-craftjs.github.io/table/table.js";
 import { getBadgeMarkupDetail, getStatusBadgeMarkupDetail } from "../style/badge.js"
+import { html_table_to_excel } from "../style/xlsx-pdf.js"
 
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
@@ -41,18 +42,6 @@ function calculateAverages(data) {
   
 	return { averageDuration, averagePercentage };
 }
-
-// Untuk membuat interaksi button export to excel dan pdf
-function html_table_to_excel(type) {
-	var data = document.getElementById('exampleMasuk');
-	var file = XLSX.utils.table_to_book(data, { sheet: "sheet1" });
-	XLSX.write(file, { bookType: type, bookSST: true, type: 'base64' });
-	XLSX.writeFile(file, 'Rekap Presensi Masuk Harian.' + type);
-}
-const export_button = document.getElementById('exportExcelBtnMasuk');
-export_button.addEventListener('click', () => {
-	html_table_to_excel('xlsx');
-})
 
 const exportPdfButton = document.getElementById('exportPdfBtnMasuk');
 exportPdfButton.addEventListener('click', () => {

@@ -1,5 +1,7 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady, CihuyQuerySelector } from "https://c-craftjs.github.io/table/table.js";
+import { html_table_to_excel } from "../style/xlsx-pdf.js";
+import { getBadgeMarkup, getStatusBadgeMarkup } from "../style/badge.js"
 
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
@@ -13,18 +15,7 @@ const requestOptions = {
   headers: header
 };
 
-// Untuk membuat interaksi button export to excel
-function html_table_to_excel(type) {
-  var data = document.getElementById('example');
-  var file = XLSX.utils.table_to_book(data, { sheet: "sheet1" });
-  XLSX.write(file, { bookType: type, bookSST: true, type: 'base64' });
-  XLSX.writeFile(file, 'Data Rekap Presensi.' + type);
-}
-const export_button = document.getElementById('exportExcelBtn');
-export_button.addEventListener('click', () => {
-  html_table_to_excel('xlsx');
-})
-
+// Untuk Get All data Presensi
 CihuyDomReady(() => {
   const tablebody = CihuyId("tablebody");
   const buttonsebelumnya = CihuyId("prevPageBtn");
@@ -193,34 +184,5 @@ CihuyDomReady(() => {
   // Fungsi Untuk Update Pagination
   function updatePagination() {
     halamansaatini.textContent = `Halaman ${halamannow}`;
-  }
-
-  // Function to get badge markup based on the status
-  function getBadgeMarkup(status) {
-    switch (status) {
-      case 'Lebih Cepat':
-        return '<span class="badge-green" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Lebih Cepat</span>';
-      case 'Tepat Waktu':
-        return '<span class="badge-blue" style="font-size: 10px; background-color: #0d6efd; color: white; padding: 5px 10px; border-radius: 5px;">Tepat Waktu</span>';
-      case 'Terlambat':
-        return '<span class="badge-danger" style="font-size: 10px; background-color: #bb2124; color: white; padding: 5px 10px; border-radius: 5px;">Terlambat</span>';
-      case 'Sakit':
-        return '<span class="badge-warning" style="font-size: 10px; background-color: #ffcc00; color: white; padding: 5px 10px; border-radius: 5px;">Sakit</span>';
-      case 'izin':
-        return '<span class="badge-warning" style="font-size: 10px; background-color: #ff8700; color: white; padding: 5px 10px; border-radius: 5px;">Izin</span>';
-      default:
-        return "<span>Belum Presensi</span>";
-    }
-  }
-
-  // Function to get badge markup based on the status
-  function getStatusBadgeMarkup(persentaseStatus) {
-    if (persentaseStatus >= 100) {
-      return '<span class="badge-danger" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Tuntas</span>';
-    } else if (persentaseStatus < 100) {
-      return '<span class="badge-danger" style="font-size: 10px; background-color: #bb2124; color: white; padding: 5px 10px; border-radius: 5px;">Belum Tuntas</span>';
-    } else {
-      return '';
-    }
   }
 });

@@ -1,7 +1,7 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady, CihuyQuerySelector } from "https://c-craftjs.github.io/table/table.js";
 import { getBadgeMarkupDetail, getStatusBadgeMarkupDetail } from "../style/badge.js"
-import { html_table_to_excel } from "../style/xlsx-pdf.js"
+import { calculateAverages } from "../style/math.js";
 
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
@@ -15,34 +15,7 @@ const requestOptions = {
 	headers: header
 };
 
-// Fungsi untuk menghitung rata-rata durasi dan persentase durasi
-function calculateAverages(data) {
-	const totalDuration = data.reduce((total, pulangEntry) => {
-	  if (pulangEntry.durasi) {
-		const durationParts = pulangEntry.durasi.split(" ");
-		const hours = parseInt(durationParts[0]) || 0;
-		const minutes = parseInt(durationParts[2]) || 0;
-		const seconds = parseInt(durationParts[4]) || 0;
-		const totalSeconds = hours * 3600 + minutes * 60 + seconds;
-		return total + totalSeconds;
-	  } else {
-		return total;
-	  }
-	}, 0);
-	const totalPercentage = data.reduce((total, pulangEntry) => {
-	  if (pulangEntry.durasi) {
-		const percentage = parseFloat(pulangEntry.durasi.replace("%", ""));
-		return total + percentage;
-	  } else {
-		return total;
-	  }
-	}, 0);
-	const averageDuration = totalDuration / data.length;
-	const averagePercentage = totalPercentage / data.length;
-  
-	return { averageDuration, averagePercentage };
-}
-
+// Untuk Export PDF
 const exportPdfButton = document.getElementById('exportPdfBtnMasuk');
 exportPdfButton.addEventListener('click', () => {
 	const doc = new jsPDF({ orientation: 'landscape' });
@@ -72,6 +45,7 @@ exportPdfButton.addEventListener('click', () => {
 	doc.save('Rekap Presensi Masuk Harian.pdf');
 });
 
+// Untuk Get All Data Presensi Detail
 CihuyDomReady(() => {
     const tablebody = CihuyId("tablebodyMasuk");
     const buttonsebelumnya = CihuyId("prevPageBtnMasuk");
@@ -179,6 +153,7 @@ CihuyDomReady(() => {
                 });
         });
 
+	// Untuk function tampil data
     function displayData(page) {
         const rows = CihuyQuerySelector("#tablebodyMasuk tr");
         const startIndex = (page - 1) * itemperpage;
@@ -193,10 +168,12 @@ CihuyDomReady(() => {
         }
     }
 
+	// Untuk Update Nomor Pagination Tabel
     function updatePagination() {
         halamansaatini.textContent = `Halaman ${halamannow}`;
     }
 
+	// Untuk Button Halaman Sebelumnya
     buttonsebelumnya.addEventListener("click", () => {
         if (halamannow > 1) {
             halamannow--;
@@ -205,6 +182,7 @@ CihuyDomReady(() => {
         }
     });
 
+	// Untuk Button Halaman Selanjutnya
     buttonselanjutnya.addEventListener("click", () => {
         const totalPages = Math.ceil(tablebody.querySelectorAll("#tablebodyMasuk tr").length / itemperpage);
         if (halamannow < totalPages) {

@@ -27,17 +27,6 @@ function html_table_to_excel(type) {
 	html_table_to_excel('xlsx');
   })
 
-// const exportPdfButton = document.getElementById('exportPdfBtn');
-// exportPdfButton.addEventListener('click', () => {
-//   exportTableToPdf();
-// });
-
-// function exportTableToPdf() {
-//   const doc = new jsPDF();
-//   doc.autoTable({ html: '#example' }); // Replace '#example' with the ID of your table
-//   doc.save('Rekap Perizinan.pdf');
-// }
-
 // Untuk Membuat Pagination
 CihuyDomReady(() => {
 	const tablebody = CihuyId("tablebody");

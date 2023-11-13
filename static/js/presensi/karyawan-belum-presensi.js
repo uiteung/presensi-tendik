@@ -1,6 +1,7 @@
 import { token } from "../controller/cookies.js";
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady, CihuyQuerySelector } from "https://c-craftjs.github.io/table/table.js";
+import { html_table_to_excel } from "../style/xlsx-pdf.js";
 
 var header = new Headers();
 header.append("login", token);
@@ -11,15 +12,7 @@ const requestOptions = {
 	headers: header
 };
 
-// Untuk membuat interaksi button export to excel dan pdf
-function html_table_to_excel(type) {
-	var data = document.getElementById('exampleBelum');
-	var file = XLSX.utils.table_to_book(data, { sheet: "sheet1" });
-
-	XLSX.write(file, { bookType: type, bookSST: true, type: 'base64' });
-	XLSX.writeFile(file, 'Rekap Belum Presensi Harian.' + type);
-}
-
+// Untuk Export PDF
 const export_button = document.getElementById('exportExcelBtnBelum');
 export_button.addEventListener('click', () => {
 	html_table_to_excel('xlsx');

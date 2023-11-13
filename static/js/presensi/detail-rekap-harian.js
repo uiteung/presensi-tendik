@@ -99,17 +99,17 @@ CihuyDomReady(() => {
                 .then((result) => result.json())
                 .then((pulangData) => {
                     // Combine data based on name and matching date
-                    const combinedData = masukData.data.map((masukEntry) => {
-                        const matchingPulangEntry = pulangData.data.find((pulangEntry) =>
-                            pulangEntry.biodata.nama === masukEntry.biodata.nama &&
-                            new Date(pulangEntry.datetime).toLocaleDateString() === new Date(masukEntry.Datetime).toLocaleDateString()
-                        );
-
-                        return {
-                            masuk: masukEntry,
-                            pulang: matchingPulangEntry,
-                        };
-                    });
+					const combinedData = masukData.data.map((masukEntry) => {
+						const matchingPulangEntry = pulangData.data && pulangData.data.find((pulangEntry) =>
+							pulangEntry.biodata.nama === masukEntry.biodata.nama &&
+							new Date(pulangEntry.datetime).toLocaleDateString() === new Date(masukEntry.Datetime).toLocaleDateString()
+						);
+					
+						return {
+							masuk: masukEntry,
+							pulang: matchingPulangEntry,
+						};
+					});
 
                     // Sort descending data
                     combinedData.sort((a, b) => new Date(b.masuk.Datetime) - new Date(a.masuk.Datetime));

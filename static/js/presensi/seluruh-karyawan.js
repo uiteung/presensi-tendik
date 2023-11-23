@@ -138,6 +138,9 @@ document.getElementById("tablebody").addEventListener("click", (event) => {
   }
 
 // Untuk membuat interaksi button export to excel dan pdf
+const title = document.getElementById('titleTextBox').value;
+const filename = document.getElementById('filenameTextBox').value;
+
 function html_table_to_excel(type) {
 	var data = document.getElementById('example');
 	var file = XLSX.utils.table_to_book(data, { sheet: "sheet1" });
@@ -156,10 +159,10 @@ exportPdfButton.addEventListener('click', () => {
 	const doc = new jsPDF();
 
 	// You might need to adjust these values for styling and layout
-	doc.text('Data Rekap Presensi', 10, 10);
+	doc.text(title, 10, 10);
 	doc.autoTable({ html: '#example' });
 
-	doc.save('Data Rekap Presensi.pdf');
+	doc.save(`${filename}.pdf`);
 });
 
 function displayData(page) {

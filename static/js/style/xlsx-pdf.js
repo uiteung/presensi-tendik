@@ -14,6 +14,11 @@ export_button.addEventListener('click', () => {
 const exportPdfButton = document.getElementById('exportPdfBtn');
 
 exportPdfButton.addEventListener('click', () => {
+  // Menambahkan aturan CSS untuk menyembunyikan elemen dengan id 'linkDokumenTh'
+  const style = document.styleSheets[0];
+  style.insertRule('#linkDokumenTh, #DurasiTh, #actionTh, #footerTh { display: none; }', 0);
+  style.insertRule('table { text-align: center; align-items: center; }', 1);
+
   // Get values from text boxes
   const title = document.getElementById('titleTextBox').value;
   const filename = document.getElementById('filenameTextBox').value;

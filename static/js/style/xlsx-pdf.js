@@ -12,12 +12,17 @@ export_button.addEventListener('click', () => {
 });
 
 const exportPdfButton = document.getElementById('exportPdfBtn');
+
 exportPdfButton.addEventListener('click', () => {
+  // Get values from text boxes
+  const title = document.getElementById('titleTextBox').value;
+  const filename = document.getElementById('filenameTextBox').value;
+
   const doc = new jsPDF();
   // You might need to adjust these values for styling and layout
-  doc.text('Data Rekap Presensi', 10, 10);
+  doc.text(title, 10, 10);
   doc.autoTable({ html: '#example' });
-  doc.save('Data Rekap Presensi.pdf');
+  doc.save(`${filename}.pdf`);
 });
 
 // Helper function to convert data to array buffer

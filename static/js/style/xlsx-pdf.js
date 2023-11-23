@@ -19,9 +19,20 @@ exportPdfButton.addEventListener('click', () => {
   const filename = document.getElementById('filenameTextBox').value;
 
   const doc = new jsPDF();
+
+  // Specify theme for the table header
+  const tableOptions = {
+    html: '#example',
+    theme: 'grid',
+    styles: { 
+      fontSize: 5,
+      overflow: 'linebreak'
+    },
+  };
+
   // You might need to adjust these values for styling and layout
   doc.text(title, 10, 10);
-  doc.autoTable({ html: '#example' });
+  doc.autoTable(tableOptions);
   doc.save(`${filename}.pdf`);
 });
 

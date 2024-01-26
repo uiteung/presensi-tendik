@@ -55,3 +55,15 @@ export function getStatusBadgeMarkupDetail(persentaseStatus) {
         return '';
     }
 }
+
+export function getBadgeCommit(jumlah) {
+  if (jumlah == 7) {
+    return '<span class="badge-green" style="font-size: 10px; background-color: #22bb33; color: white; padding: 5px 10px; border-radius: 5px;">Cukup</span>';
+  } else if (jumlah > 7) {
+    return '<span class="badge-blue" style="font-size: 10px; background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px;">Sangat Baik</span>';
+  } else if (jumlah < 7) {
+    return '<span class="badge-danger" style="font-size: 10px; background-color: #bb2124; color: white; padding: 5px 10px; border-radius: 5px;">Kurang</span>';
+  } else if (jumlah == 0) {
+    return '<span class="badge-warning" style="font-size: 10px; background-color: #ff8700; color: white; padding: 5px 10px; border-radius: 5px;">Belum Commit</span>';
+  }
+}

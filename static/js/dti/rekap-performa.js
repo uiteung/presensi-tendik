@@ -1,6 +1,5 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady } from "https://c-craftjs.github.io/table/table.js";
-// import { html_table_to_excel } from "../style/xlsx-pdf.js";
 import { getBadgeMarkup, getBadgeCommit } from "../style/badge.js"
 
 // Untuk Autentifikasi Login User Tertentu
@@ -76,7 +75,7 @@ CihuyDomReady(() => {
   const buttonsebelumnya = CihuyId("prevPageBtn");
   const buttonselanjutnya = CihuyId("nextPageBtn");
   const halamansaatini = CihuyId("currentPage");
-  const itemperpage = 8;
+  const itemperpage =6;
   let halamannow = 1;
   let filteredData = []; // To store the filtered data for search
   let totalData = 0;
@@ -120,8 +119,8 @@ CihuyDomReady(() => {
 
   // Fungsi Untuk Menampilkan Data
   function displayData(page) {
-    const mulaiindex = (page - 1) * 8;
-    const akhirindex = mulaiindex + 8;
+    const mulaiindex = (page - 1) * itemperpage;
+    const akhirindex = mulaiindex + itemperpage;
     const rowsToShow = filteredData.slice(mulaiindex, akhirindex);
 
     let tableData = "";

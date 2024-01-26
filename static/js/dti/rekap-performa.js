@@ -62,7 +62,7 @@ function checkAndUpdateRekap() {
   }
 }
 
-setInterval(checkAndUpdateRekap, 60000);
+setInterval(checkAndUpdateRekap, 7200000);
 
 // Event listener for the "Tambah Karyawan" button
 const submitButton = document.querySelector('#UpdateButton');

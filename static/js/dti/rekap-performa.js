@@ -23,10 +23,22 @@ function updateRekap() {
   .then(data => {
     if (data.success) {
       // Display success SweetAlert
+
       Swal.fire({
-        icon: 'success',
+        icon : 'success',
         title: 'Data Rekap Hari ini Berhasil Diupdate!',
-      }).then(() => {
+        backdrop: `
+          rgba(0,0,123,0.4)
+          url("/static/img/nyan-cat.gif")
+          left top
+          no-repeat
+        `
+      }).
+      // Swal.fire({
+      //   icon: 'success',
+      //   title: 'Data Rekap Hari ini Berhasil Diupdate!',
+      // }).
+      then(() => {
         // Refresh the page after successful addition
         window.location.href = 'harian-commit.html';
       });
@@ -88,7 +100,6 @@ CihuyDomReady(() => {
           // Sortir array combinedData berdasarkan tanggal masuk
           rkp.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-            console.log(rkp)
           // Inisialisasi data tabel
           totalData = rkp.length;
           filteredData = rkp;

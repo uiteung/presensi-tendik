@@ -33,8 +33,6 @@ CihuyDomReady(() => {
         let rkp = rekapharian.data
           // Sortir array combinedData berdasarkan tanggal masuk
           rkp.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-            console.log(rkp)
           // Inisialisasi data tabel
           totalData = rkp.length;
           filteredData = rkp;

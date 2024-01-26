@@ -1,5 +1,8 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady } from "https://c-craftjs.github.io/table/table.js";
+// import { html_table_to_excel } from "../style/xlsx-pdf.js";
+import { getBadgeMarkup, getBadgeCommit } from "../style/badge.js"
+
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
 
@@ -12,8 +15,6 @@ const requestOptions = {
   headers: header
 };
 
-
-// Function to add employee data
 function updateRekap() {
   fetch('https://hris_backend.ulbi.ac.id/api/v2/commits/performance', {
     method: 'POST',
@@ -28,7 +29,7 @@ function updateRekap() {
         title: 'Data Rekap Hari ini Berhasil Diupdate!',
       }).then(() => {
         // Refresh the page after successful addition
-        window.location.href = 'rekap-performaDTI.html';
+        window.location.href = 'harian-commit.html';
       });
     } else {
       // Display error SweetAlert
@@ -47,15 +48,7 @@ function updateRekap() {
 // Event listener for the "Tambah Karyawan" button
 const submitButton = document.querySelector('#UpdateButton');
 submitButton.addEventListener('click', () => {
-// Check if any of the fields is empty
-if (!employeeName || !employeePosition || !employeeWhatsapp) {
-  Swal.fire({
-    icon: 'warning',
-    title: 'Oops...',
-    text: 'Semua field harus diisi!',
-  });
-  return; // Stop further processing
-}
+// Check if any of the fields is emp
 
 
 // Display SweetAlert for confirmation
@@ -96,12 +89,11 @@ CihuyDomReady(() => {
           // Sortir array combinedData berdasarkan tanggal masuk
           rkp.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-          
             console.log(rkp)
           // Inisialisasi data tabel
           totalData = rkp.length;
           filteredData = rkp;
-          
+
           // Untuk Memunculkan Pagination Halamannya
           displayData(halamannow);
           updatePagination();
@@ -153,6 +145,7 @@ CihuyDomReady(() => {
       // Pengkondisian Badge Keterangan
       let ketBadgeMasuk = getBadgeMarkup(ketMasuk);
       let ketBadgePulang = getBadgeMarkup(ketPulang);
+      let BadgeCommit = getBadgeCommit(combinedEntry.total);
 
     //   let statusKerja = getStatusBadgeMarkup(persentaseStatus);
 
@@ -177,6 +170,9 @@ CihuyDomReady(() => {
               </td>
               <td style="text-align: center; vertical-align: middle">
                   <p class="fw-normal mb-1">${jmlCommit}</p>
+              </td>
+              <td style="text-align: center; vertical-align: middle">
+              <p class="fw-normal mb-1">${BadgeCommit}</p>
               </td>
               <td>
               <p class="fw-normal mb-1">${jamPulang}</p>

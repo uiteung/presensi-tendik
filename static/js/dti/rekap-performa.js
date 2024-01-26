@@ -1,8 +1,5 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
-import { CihuyDomReady, CihuyQuerySelector } from "https://c-craftjs.github.io/table/table.js";
-// import { html_table_to_excel } from "../style/xlsx-pdf.js";
-import { getBadgeMarkup, getStatusBadgeMarkup } from "../style/badge.js"
-
+import { CihuyDomReady } from "https://c-craftjs.github.io/table/table.js";
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
 
@@ -14,6 +11,70 @@ const requestOptions = {
   method: "GET",
   headers: header
 };
+
+
+// Function to add employee data
+function updateRekap() {
+  fetch('https://hris_backend.ulbi.ac.id/api/v2/commits/performance', {
+    method: 'POST',
+    headers: header,
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // Display success SweetAlert
+      Swal.fire({
+        icon: 'success',
+        title: 'Data Rekap Hari ini Berhasil Diupdate!',
+      }).then(() => {
+        // Refresh the page after successful addition
+        window.location.href = 'rekap-performaDTI.html';
+      });
+    } else {
+      // Display error SweetAlert
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Data rekap Gagal Diupdate!',
+      });
+    }
+  })
+  .catch(error => {
+    console.error("Error while updating data:", error);
+  });
+}
+
+// Event listener for the "Tambah Karyawan" button
+const submitButton = document.querySelector('#UpdateButton');
+submitButton.addEventListener('click', () => {
+// Check if any of the fields is empty
+if (!employeeName || !employeePosition || !employeeWhatsapp) {
+  Swal.fire({
+    icon: 'warning',
+    title: 'Oops...',
+    text: 'Semua field harus diisi!',
+  });
+  return; // Stop further processing
+}
+
+
+// Display SweetAlert for confirmation
+Swal.fire({
+  title: 'Update Rekap Harian',
+  text: 'Anda Yakin Ingin Mengupdate data?',
+  icon: 'question',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes',
+  cancelButtonText: 'No'
+}).then((result) => {
+  if (result.isConfirmed) {
+    // Call function to add employee data
+    updateRekap();
+  }
+});
+});
 
 
 // Untuk Get All data Presensi

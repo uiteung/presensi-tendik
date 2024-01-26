@@ -29,9 +29,6 @@ function updateRekap() {
         title: 'Data Rekap Hari ini Berhasil Diupdate!',
         backdrop: `
           rgba(0,0,123,0.4)
-          url("/static/img/nyan-cat.gif")
-          left top
-          no-repeat
         `
       }).
       // Swal.fire({
@@ -55,6 +52,17 @@ function updateRekap() {
     console.error("Error while updating data:", error);
   });
 }
+
+function checkAndUpdateRekap() {
+  const currentUTC7Time = new Date().toLocaleString("en-US", {timeZone: "Asia/Jakarta"});
+  const currentHour = new Date(currentUTC7Time).getHours();
+
+  if (currentHour === 18) {
+    updateRekap();
+  }
+}
+
+setInterval(checkAndUpdateRekap, 60000);
 
 // Event listener for the "Tambah Karyawan" button
 const submitButton = document.querySelector('#UpdateButton');

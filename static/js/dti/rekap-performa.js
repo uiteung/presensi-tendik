@@ -148,9 +148,13 @@ CihuyDomReady(() => {
       const email = combinedEntry.email
       const date = new Date(combinedEntry.date).toLocaleDateString();
       const jamMasuk = combinedEntry.presensi.presensiMasuk ? new Date(combinedEntry.presensi.presensiMasuk).toLocaleTimeString(): '' ;
-      const jamPulang = combinedEntry.presensi.presensiPulang ? new Date(combinedEntry.presensi.presensPulang).toLocaleTimeString() : '';
+      let jamPulang = combinedEntry.presensi.presensiPulang ? new Date(combinedEntry.presensi.presensPulang).toLocaleTimeString() : '';
     //   const Persentase = pulangEntry ? pulangEntry.persentase : '0%';
     //   const lampiranContent = lampiran ? lampiran : '<p>Tidak Ada Catatan</p>';
+
+      if (jamPulang == "Invalid Date") {
+        jamPulang = "Belum Pulang"
+      }
 
       // Pengkondisian Badge Keterangan
       let ketBadgeMasuk = getBadgeMarkup(ketMasuk);

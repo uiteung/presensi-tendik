@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="description"
+      content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5" />
+    <meta name="author" content="AdminKit" />
+    <meta
+      name="keywords"
+      content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      rel="shortcut icon"
+      href="../static/img/enam_berlian-removebg-preview.png" />
+
+    <link
+      rel="canonical"
+      href="https://demo-basic.adminkit.io/pages-profile.html" />
+
+    <title>KPI DTI | ULBI</title>
+
+    <!-- Import CSS yang diperlukan -->
+    <link href="../static/css/app.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar Start -->
+      <nav id="sidebar" class="sidebar js-sidebar">
+        <div class="sidebar-content js-simplebar">
+          <a class="sidebar-brand" href="../index.html">
+            <span class="align-middle"
+              ><span class="align-middle">
+                <img
+                  src="../static/img/LOGO ULBI - WIDE BACKGROUNG NEVY (1).png"
+                  alt=""
+                  style="width: 150px; margin-left: 25px" /></span
+            ></span>
+          </a>
+
+          <ul class="sidebar-nav">
+            <li class="sidebar-header">Dashboard</li>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="../index.html">
+                <i class="align-middle" data-feather="sliders"></i>
+                <span class="align-middle">Dashboard Presensi</span>
+              </a>
+            </li>
+
+            <!-- <li class="sidebar-item">
+              <a class="sidebar-link" href="presensi-keluar.html">
+                <i class="align-middle" data-feather="sliders"></i>
+                <span class="align-middle">Presensi Keluar</span>
+              </a>
+            </li> -->
+
+            <li class="sidebar-item">
+              <!-- <a class="sidebar-link" href="../app/rekapan-presensi.html"> -->
+              <a class="sidebar-link" href="sakit-izin.html">
+                <i class="align-middle" data-feather="mail"></i>
+                <span class="align-middle">Sakit/Izin</span>
+              </a>
+            </li>
+
+            <li class="sidebar-header">Data Karyawan</li>
+
+            <!-- <li class="sidebar-item">
+              <a class="sidebar-link" href="../app/presensi-divisi.html">
+                <i class="align-middle" data-feather="users"></i>
+                <span class="align-middle">Presensi Divisi</span>
+                <span
+                  style="
+                    font-size: 7px;
+                    background-color: #ffc107;
+                    color: black;
+                    padding: 3px 3px;
+                    border-radius: 5px;
+                  "
+                  >Maintenance</span
+                >
+              </a>
+            </li> -->
+
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="../app/seluruh-karyawan.html">
+                <i class="align-middle" data-feather="grid"></i>
+                <span class="align-middle">Data Seluruh Karyawan</span>
+              </a>
+            </li>
+
+            <li class="sidebar-header">Rekapan Presensi Karyawan</li>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="../app/rekap-harian.html">
+                <i class="align-middle" data-feather="bar-chart-2"></i>
+                <span class="align-middle">Rekap Harian</span>
+              </a>
+            </li>
+
+            <li class="sidebar-header">Rekapan Performa Staff DTI</li>
+            
+            <li class="sidebar-item">
+                <!-- <a class="sidebar-link" href="../app/rekapan-presensi.html"> -->
+                <a class="sidebar-link" href="harian-commit.html">
+                  <i class="align-middle" data-feather="file-plus"></i>
+                  <span class="align-middle">Performa Staff TLH DTI                  
+                    <i class="fa fa-fw fa-check-square-o" style="background-color: #ffffff; color: rgb(255, 0, 0); padding: 2px 5px; border-radius: 5px; font-size: 10px;">Maintenance</i></span>
+                </a>
+              </li>
+
+              <li class="sidebar-item active">
+                <!-- <a class="sidebar-link" href="../app/rekapan-presensi.html"> -->
+                <a class="sidebar-link" href="rekap-performaDTI.html">
+                  <i class="align-middle" data-feather="package"></i>
+                  <span class="align-middle">Rekapan Commit
+                    <i class="fa fa-fw fa-check-square-o" style="background-color: #ffffff; color: rgb(255, 0, 0); padding: 2px 5px; border-radius: 5px; font-size: 10px;">Maintenance</i>
+                  </span>
+                </a>
+              </li>
+          </ul>
+
+          <div class="sidebar-cta">
+            <div class="sidebar-cta-content">
+              <strong class="d-inline-block mb-2">Presensi Karyawan</strong>
+              <div class="mb-3 text-sm" style="font-size: 13px">
+                Dashboard Presensi Karyawan terintegrasi dengan ITeung. Silahkan
+                absen tepat waktu dengan cara Chat Kontak Iteung.
+              </div>
+              <a
+                class="btn btn-success"
+                style="padding: 5px 55px"
+                href="https://api.whatsapp.com/send?phone=628112000279"
+                role="button">
+                Iteung
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <!-- Sidebar End -->
+
+      <div class="main">
+        <!-- Header Start -->
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+          <a class="sidebar-toggle js-sidebar-toggle">
+            <i class="hamburger align-self-center"></i>
+          </a>
+
+          <div class="navbar-collapse collapse">
+            <ul class="navbar-nav navbar-align">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-icon dropdown-toggle d-inline-block d-sm-none"
+                  href="#"
+                  data-bs-toggle="dropdown">
+                  <i class="align-middle" data-feather="settings"></i>
+                </a>
+
+                <a
+                  class="nav-link dropdown-toggle d-none d-sm-inline-block"
+                  href="#"
+                  data-bs-toggle="dropdown">
+                  <img
+                    src="../static/img/avatars/admin.png"
+                    class="avatar img-fluid rounded me-1" />
+                  <span class="text-dark">Admin</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <a class="dropdown-item" href="https://euis.ulbi.ac.id"
+                    >Log out</a
+                  >
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <!-- Main Content Start -->
+        <main class="content">
+            <div class="container-fluid p-0">
+              <h5 class="right-aligned" style="float: right">
+                <a href="index.html">Home</a> / Rekap Commit 24 Jam
+              </h5>
+              <h1 class="h3 mb-3"><b>Dashboard Rekapitulasi Commit 24 Jam</b></h1>
+              <div class="col-md-6">
+                <input type="hidden" id="titleTextBox" value="Dashboard Presensi Karyawan" disabled>
+                <input type="hidden" id="filenameTextBox" value="presensi_karyawan">
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <hr />
+                      <table
+                        id="example"
+                        class="table table-striped"
+                        style="width: 100%">
+                        <thead>
+                          <tr style="text-align: center; vertical-align: middle">
+                            <th id="namaTh">Username / Email</th>
+                            <th id="statusTh">Repository</th>
+                            <th id="tanggalTh">Message</th>
+                            <th id="DurasiTh">Ref</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tablebody">
+                          <!-- Isi Tabel -->
+                        </tbody>
+                        <tfoot>
+                          <tr id="footerTh" style="text-align: center; vertical-align: middle">
+                            <th id="namaTh">Username / Email</th>
+                            <th id="statusTh">Repository</th>
+                            <th id="tanggalTh">Message</th>
+                            <th id="DurasiTh">Ref</th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="pagination">
+                            <button id="prevPageBtn" class="btn btn-primary">
+                              Previous
+                            </button>
+                            <span id="currentPage" class="mx-2">Page 1</span>
+                            <button id="nextPageBtn" class="btn btn-primary">
+                              Next
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+          <!-- Main Content End -->
+  
+          <!-- Footer Start -->
+          <footer class="footer">
+            <div class="container-fluid">
+              <div class="row text-muted">
+                <div class="col-6 text-start">
+                  <p class="mb-0">
+                    <a class="text-muted"><strong>DTI ULBI</strong></a> &copy;
+                  </p>
+                </div>
+              </div>
+            </div>
+          </footer>
+          <!-- Footer End -->
+        </div>
+      </div>
+
+    <!-- Spinner Start -->
+    <div class="loader"></div>
+    <!-- Spinner End -->
+    <!-- Library Untuk Export to Pdf -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+    <!-- Library Javascript Terkait -->
+    <script src="../static/js/style/style.js" defer></script>
+    <script src="../static/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script type="module" src="../static/js/dti/rekap-today.js"></script>
+    <!-- <script src="../static/js/style/table-sorting.js" type="module"></script> -->
+    <!-- <script type="module" src="../static/js/dti/rekap-performa.js"></script> -->
+    <script src="../static/js/presensi/controller/cihuyred.js" type="module"></script>
+  </body>
+</html>

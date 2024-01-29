@@ -53,17 +53,17 @@ function updateRekap() {
   });
 }
 
-function checkAndUpdateRekap() {
-  const currentUTC7Time = new Date().toLocaleString("en-US", {timeZone: "Asia/Jakarta"});
-  const currentHour = new Date(currentUTC7Time).getHours();
+const currentUTC7Time = new Date().toLocaleString("en-US", { timeZone: "Asia/Jakarta" });
+const currentTime = new Date(currentUTC7Time);
+const currentHour = currentTime.getHours();
+const currentMinutes = currentTime.getMinutes();
 
-  if (currentHour === 18) {
-    updateRekap();
-  }
+console.log(`Current Time: ${currentHour}:${currentMinutes}`);
+
+if (currentHour === 18 && currentMinutes === 0) {
+  // Perform your task when it's 16:00 (4:00 PM)
+  updateRekap();
 }
-
-setInterval(checkAndUpdateRekap, 7200000);
-
 // Event listener for the "Tambah Karyawan" button
 const submitButton = document.querySelector('#UpdateButton');
 submitButton.addEventListener('click', () => {

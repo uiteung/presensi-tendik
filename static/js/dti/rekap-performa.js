@@ -1,6 +1,6 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady } from "https://c-craftjs.github.io/table/table.js";
-import { getBadgeMarkup, getBadgeCommit } from "../style/badge.js"
+import { getBadgeMarkup, getBadgeCommit, getBadgePulang } from "../style/badge.js"
 
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
@@ -156,17 +156,12 @@ CihuyDomReady(() => {
       const email = combinedEntry.email
       const date = new Date(combinedEntry.date).toLocaleDateString();
       const jamMasuk = combinedEntry.presensi.presensiMasuk ? new Date(combinedEntry.presensi.presensiMasuk).toLocaleTimeString(): '' ;
-      let jamPulang = combinedEntry.presensi.presensiPulang ? new Date(combinedEntry.presensi.presensPulang).toLocaleTimeString() : '';
+      let jamPulang = combinedEntry.presensi.presensiPulang ? new Date(combinedEntry.presensi.presensiPulang).toLocaleTimeString(): '' ;
     //   const Persentase = pulangEntry ? pulangEntry.persentase : '0%';
     //   const lampiranContent = lampiran ? lampiran : '<p>Tidak Ada Catatan</p>';
-
-      if (jamPulang == "Invalid Date") {
-        jamPulang = "Belum Pulang"
-      }
-
       // Pengkondisian Badge Keterangan
       let ketBadgeMasuk = getBadgeMarkup(ketMasuk);
-      let ketBadgePulang = getBadgeMarkup(ketPulang);
+      let ketBadgePulang = getBadgePulang(ketPulang);
       let BadgeCommit = getBadgeCommit(combinedEntry.total);
 
     //   let statusKerja = getStatusBadgeMarkup(persentaseStatus);

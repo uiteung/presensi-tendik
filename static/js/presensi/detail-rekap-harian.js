@@ -88,7 +88,11 @@ CihuyDomReady(() => {
                         const lampiran = masukEntry.lampiran;
                         const ketMasuk = masukEntry?.ket;
                         const ketPulang = pulangEntry?.ket;
-                        const date = new Date(masukEntry.Datetime).toLocaleDateString();
+                        const date = new Date(masukEntry.Datetime).toLocaleDateString('id-ID', {
+                            day : 'numeric',
+                            month : 'long',
+                            year : 'numeric'
+                        });
                         const jamMasuk = new Date(masukEntry.Datetime).toLocaleTimeString();
                         const jamPulang = pulangEntry ? new Date(pulangEntry.datetime).toLocaleTimeString() : '';
                         const Durasi = pulangEntry ? pulangEntry.durasi : '0 Jam 0 Menit 0 Detik';
@@ -110,7 +114,7 @@ CihuyDomReady(() => {
                                             <p class="fw-bold mb-1">${nama}</p>
                                             <p class="text-muted mb-0">${masukEntry.phone_number}</p>
                                         </div>
-                                    </div>
+                                    </div>s
                                 </td>
                                 <td>
                                     <p class="fw-normal mb-1">${masukEntry.biodata.jabatan}</p>

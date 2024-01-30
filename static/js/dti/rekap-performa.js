@@ -1,6 +1,8 @@
+// Import function & library yang dibutuhkan
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady } from "https://c-craftjs.github.io/table/table.js";
-import { getBadgeMarkup, getBadgeCommit, getBadgePulang } from "../style/badge.js"
+import { getBadgeMarkup, getBadgeCommit, getBadgePulang } from "../style/badge.js";
+import { UrlGetAllCommitsRekapHarian, UrlGetAllPerforma } from "../controller/template.js";
 
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
@@ -15,7 +17,7 @@ const requestOptions = {
 };
 
 function updateRekap() {
-  fetch('https://hris_backend.ulbi.ac.id/api/v2/commits/performance', {
+  fetch(UrlGetAllPerforma, {
     method: 'POST',
     headers: header,
   })
@@ -101,7 +103,7 @@ CihuyDomReady(() => {
   let totalData = 0;
 
   // Ambil data masuk
-  fetch("https://hris_backend.ulbi.ac.id/api/v2/commits/rekapharian", requestOptions)
+  fetch(UrlGetAllCommitsRekapHarian, requestOptions)
     .then((result) => result.json())
     .then((rekapharian) => {
         let rkp = rekapharian.data

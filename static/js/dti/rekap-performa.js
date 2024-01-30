@@ -154,7 +154,11 @@ CihuyDomReady(() => {
       const ketPulang = combinedEntry.presensi.ketPulang;
       const jmlCommit = combinedEntry.total
       const email = combinedEntry.email
-      const date = new Date(combinedEntry.date).toLocaleDateString();
+      const date = new Date(combinedEntry.date).toLocaleDateString('id-ID', {
+        day : 'numeric',
+        month : 'long',
+        year : 'numeric'
+      });
       const jamMasuk = combinedEntry.presensi.presensiMasuk ? new Date(combinedEntry.presensi.presensiMasuk).toLocaleTimeString(): '' ;
       let jamPulang = combinedEntry.presensi.presensiPulang ? new Date(combinedEntry.presensi.presensiPulang).toLocaleTimeString(): '' ;
     //   const Persentase = pulangEntry ? pulangEntry.persentase : '0%';
@@ -176,26 +180,26 @@ CihuyDomReady(() => {
                       </div>
                   </div>
               </td>
-              <td>
-              <p class="fw-normal mb-1">${jamMasuk}</p>
+              <td style="text-align: center; vertical-align: middle">
+                <p class="fw-normal mb-1">${jamMasuk}</p>
               </td>
               <td style="text-align: center; vertical-align: middle">
-              <p class="fw-normal mb-1"><b>${ketBadgeMasuk}</b></p>
+                <p class="fw-normal mb-1"><b>${ketBadgeMasuk}</b></p>
               </td>
-              <td>
+              <td style="text-align: center; vertical-align: middle">
                   <p class="fw-normal mb-1">${date}</p>
               </td>
               <td style="text-align: center; vertical-align: middle">
                   <p class="fw-normal mb-1">${jmlCommit}</p>
               </td>
               <td style="text-align: center; vertical-align: middle">
-              <p class="fw-normal mb-1">${BadgeCommit}</p>
-              </td>
-              <td>
-              <p class="fw-normal mb-1">${jamPulang}</p>
+                <p class="fw-normal mb-1">${BadgeCommit}</p>
               </td>
               <td style="text-align: center; vertical-align: middle">
-              <p class="fw-normal mb-1"><b>${ketBadgePulang}</b></p>
+                <p class="fw-normal mb-1">${jamPulang}</p>
+              </td>
+              <td style="text-align: center; vertical-align: middle">
+                <p class="fw-normal mb-1"><b>${ketBadgePulang}</b></p>
               </td>
           </tr>
       `;

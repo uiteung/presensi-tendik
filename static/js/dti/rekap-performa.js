@@ -66,6 +66,9 @@ if (currentHour === 18 && currentMinutes === 0) {
   // Perform your task when it's 16:00 (4:00 PM)
   updateRekap();
 }
+
+
+setInterval(updateRekap, 300000)
 // Event listener for the "Tambah Karyawan" button
 const submitButton = document.querySelector('#UpdateButton');
 submitButton.addEventListener('click', () => {

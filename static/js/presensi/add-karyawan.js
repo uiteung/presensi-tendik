@@ -1,13 +1,15 @@
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
+import { UrlPostDataKaryawan } from "../controller/template.js";
 
+// Untuk header
 var header = new Headers();
 header.append("login", token);
 header.append("Content-Type", "application/json");
 
 // Function to add employee data
 function addEmployee(postData) {
-    fetch('https://hris_backend.ulbi.ac.id/presensi/datakaryawan/postdata', {
+    fetch(UrlPostDataKaryawan, {
       method: 'POST',
       headers: header,
       body: JSON.stringify(postData)

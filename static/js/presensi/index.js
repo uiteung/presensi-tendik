@@ -1,10 +1,9 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady, CihuyQuerySelector } from "https://c-craftjs.github.io/table/table.js";
-import { html_table_to_excel } from "../style/xlsx-pdf.js";
+// import { html_table_to_excel } from "../style/xlsx-pdf.js";
 import { getBadgeMarkup, getStatusBadgeMarkup } from "../style/badge.js"
-
-// Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
+import { UrlGetAllPresensi, UrlGetAllPresensiPulang } from "../controller/template.js";
 
 var header = new Headers();
 header.append("login", token);
@@ -27,11 +26,11 @@ CihuyDomReady(() => {
   let totalData = 0;
 
   // Ambil data masuk
-  fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
+  fetch(UrlGetAllPresensi, requestOptions)
     .then((result) => result.json())
     .then((masukData) => {
       // Ambil data pulang
-      fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi/pulang", requestOptions)
+      fetch(UrlGetAllPresensiPulang, requestOptions)
         .then((result) => result.json())
         .then((pulangData) => {
           // Gabungkan data berdasarkan nama dan tanggal yang sesuai

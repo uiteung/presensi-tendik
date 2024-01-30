@@ -2,6 +2,7 @@ import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady, CihuyQuerySelector } from "https://c-craftjs.github.io/table/table.js";
 import { getBadgeMarkupDetail, getStatusBadgeMarkupDetail } from "../style/badge.js"
 import { calculateAverages } from "../style/math.js";
+import { UrlGetAllMasukHarian, UrlGetAllPulangHarian } from "../controller/template.js";
 
 // Untuk Autentifikasi Login User Tertentu
 import { token } from "../controller/cookies.js";
@@ -15,36 +16,6 @@ const requestOptions = {
 	headers: header
 };
 
-// Untuk Export PDF
-const exportPdfButton = document.getElementById('exportPdfBtnMasuk');
-exportPdfButton.addEventListener('click', () => {
-	const doc = new jsPDF({ orientation: 'landscape' });
-	doc.text('Rekap Presensi Masuk Harian', 10, 10);
-	const rows = document.getElementById('exampleMasuk').querySelectorAll('tr');
-	const tableData = [];
-	const headers = ['Nama', 'Posisi', 'Status', 'Tanggal', 'Keterangan', 'Link Dokumen'];
-	tableData.push(headers);
-	rows.forEach(row => {
-		const rowData = [];
-		row.querySelectorAll('td').forEach(cell => {
-			rowData.push(cell.innerText);
-		});
-		tableData.push(rowData);
-	});
-	const colWidths = [60, 40, 40, 40, 40, 40]; // Set the column widths (you can adjust these values)
-	const rowHeight = 10; 	// Set the row height (you can adjust this value)
-	doc.autoTable({
-		head: [headers],
-		body: tableData.slice(1), // Exclude headers from the body
-		columnStyles: { 0: { columnWidth: colWidths[0] }, 1: { columnWidth: colWidths[1] }, 2: { columnWidth: colWidths[2] }, 3: { columnWidth: colWidths[3] }, 4: { columnWidth: colWidths[4] }, 5: { columnWidth: colWidths[5] } },
-		margin: { top: 20 }, // Adjust top margin for better layout
-		rowPageBreak: 'avoid', // Avoid breaking rows between pages
-		headStyles: { fillColor: [41, 128, 185] }, // Set header fill color
-		styles: { fontSize: 10, cellPadding: 3, valign: 'middle', halign: 'center', minCellHeight: rowHeight },
-	});
-	doc.save('Rekap Presensi Masuk Harian.pdf');
-});
-
 // Untuk Get All Data Presensi Detail
 CihuyDomReady(() => {
     const tablebody = CihuyId("tablebodyMasuk");
@@ -55,11 +26,11 @@ CihuyDomReady(() => {
     let halamannow = 1;
 
     // Fetch Masuk Data
-    fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi/masukharian", requestOptions)
+    fetch(UrlGetAllMasukHarian, requestOptions)
         .then((result) => result.json())
         .then((masukData) => {
             // Fetch Pulang Data
-            fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi/pulangharian", requestOptions)
+            fetch(UrlGetAllPulangHarian, requestOptions)
                 .then((result) => result.json())
                 .then((pulangData) => {
                     // Combine data based on name and matching date

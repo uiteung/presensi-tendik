@@ -1,4 +1,5 @@
 import { token } from "../controller/cookies.js";
+import { UrlGetKaryawanById, UrlPutDataKaryawan } from "../controller/template.js";
 
 var header = new Headers();
 header.append("login", token);
@@ -14,8 +15,10 @@ let employeeData;
 // Ambil _id dari URL
 const urlParams = new URLSearchParams(window.location.search);
 const _id = urlParams.get('_id');
+const GetKaryawanById = UrlGetKaryawanById + `/${_id}`;
+const PutDataKaryawan = UrlGetKaryawanById + `/${_id}`;
 
-fetch(`https://hris_backend.ulbi.ac.id/presensi/datapresensi/getkaryawan/${_id}`, requestOptions)
+fetch(GetKaryawanById, requestOptions)
 	.then((result) => {
 		return result.json();
 	})
@@ -112,7 +115,7 @@ function showNoChangeAlert() {
 
 // Untuk Update data ke data presensi
 function updateEmployeeData(data) {
-	fetch(`https://hris_backend.ulbi.ac.id/presensi/datakaryawan/updatedata/${_id}`, {
+	fetch(PutDataKaryawan, {
 		method: "PATCH",
 		headers: header,
 		body: JSON.stringify(data)

@@ -3,7 +3,7 @@ import { CihuyDomReady, CihuyQuerySelector } from "https://c-craftjs.github.io/t
 // import { html_table_to_excel } from "../style/xlsx-pdf.js";
 import { getBadgeMarkup, getStatusBadgeMarkup } from "../style/badge.js"
 import { token } from "../controller/cookies.js";
-import { UrlGetAllPresensi, UrlGetAllPresensiPulang } from "../controller/template.js";
+import { UrlGetAllMasukHarian, UrlGetAllPulangHarian } from "../controller/template.js";
 
 var header = new Headers();
 header.append("login", token);
@@ -26,11 +26,11 @@ CihuyDomReady(() => {
   let totalData = 0;
 
   // Ambil data masuk
-  fetch(UrlGetAllPresensi, requestOptions)
+  fetch(UrlGetAllMasukHarian, requestOptions)
     .then((result) => result.json())
     .then((masukData) => {
       // Ambil data pulang
-      fetch(UrlGetAllPresensiPulang, requestOptions)
+      fetch(UrlGetAllPulangHarian, requestOptions)
         .then((result) => result.json())
         .then((pulangData) => {
           // Gabungkan data berdasarkan nama dan tanggal yang sesuai

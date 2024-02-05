@@ -97,3 +97,47 @@ table.dataTable thead .sorting_desc_disabled:before {
     transform: rotate(1turn);
   }
 }
+
+/* Custom styling for the option values */
+option {
+  background-color: #f2f2f2;
+}
+
+.table-container {
+  width: 100%;
+  overflow: scroll;
+  border: 1px solid #fff;
+}
+
+/* Basic styling for the table */
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-container th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table-container th {
+  background-color: #f2f2f2;
+}
+
+.table-container th:nth-child(1),
+.table-container td:nth-child(1){
+  position: sticky;
+  border: #f2f2f2;
+  left: 0;
+  z-index: 2;
+}
+
+.table-container th:nth-child(1){
+  background: #f2f2f2;
+}
+
+.table-container td:nth-child(1){
+  background: #fff;
+}

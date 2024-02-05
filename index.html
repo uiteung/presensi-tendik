@@ -224,15 +224,6 @@
                   <i class="align-middle" data-feather="layout"></i>
                     Export To Excel
                 </button>
-                 <button
-                  type="button"
-                  id="exportPdfBtn"
-                  class="btn btn-danger me-2"
-                  style="color: white">
-                  <i class="align-middle" data-feather="file"></i>
-                    Export To PDF
-                  <i class="fa fa-fw fa-check-square-o" style="background-color: #ffffff; color: rgb(255, 0, 0); padding: 2px 5px; border-radius: 5px; font-size: 10px;">Maintenance</i>
-                </button>
               </div>
             </div>
             <div class="row justify-content-center">
@@ -290,48 +281,40 @@
                     </div>
 
                     <hr />
-                    <table
-                      id="example"
-                      class="table table-striped"
-                      style="width: 100%">
-                      <thead>
-                        <tr style="text-align: center; vertical-align: middle">
-                          <th id="namaTh">Nama</th>
-                          <th id="posisiTh">Posisi</th>
-                          <th id="statusTh">Status</th>
-                          <th id="tanggalTh">Tanggal</th>
-                          <th id="DurasiTh">Durasi</th>
-                          <th id="pctDurasiTh">Persentase Durasi</th>
-                          <th id="keteranganTh">Keterangan</th>
-                          <th id="linkDokumenTh">Link Dokumen</th>
-                        </tr>
-                      </thead>
-                      <tbody id="tablebody">
-                        <!-- Isi Tabel -->
-                      </tbody>
-                      <tfoot>
-                        <!-- <tr id="averageDurationRow" style="text-align: center; vertical-align: middle">
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td id="averageDuration"><b>Rata-Rata Durasi</b></td>
-                          <td id="averagePercentage"><b>Rata-Rata Persentase Durasi</b></td>
-                        </tr> -->
-                        <tr id="footerTh" style="text-align: center; vertical-align: middle">
-                          <th id="namaTh">Nama</th>
-                          <th id="posisiTh">Posisi</th>
-                          <th id="statusTh">Status</th>
-                          <th id="tanggalTh">Tanggal</th>
-                          <th id="DurasiTh">Durasi</th>
-                          <th id="pctDurasiTh">Persentase Durasi</th>
-                          <th id="keteranganTh">Keterangan</th>
-                          <th id="linkDokumenTh">Link Dokumen</th>
-                        </tr>
-                      </tfoot>
-                    </table>
+                    <div class="table-container">
+                      <table
+                        id="example"  
+                        class="table table-striped"
+                        style="width: 100%">
+                        <thead>
+                          <tr style="text-align: center; vertical-align: middle">
+                            <th id="namaTh">Nama</th>
+                            <th id="posisiTh">Posisi</th>
+                            <th id="statusTh">Status</th>
+                            <th id="tanggalTh">Tanggal</th>
+                            <th id="DurasiTh">Durasi</th>
+                            <th id="pctDurasiTh">Persentase Durasi</th>
+                            <th id="keteranganTh">Keterangan</th>
+                            <th id="linkDokumenTh">Link Dokumen</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tablebody">
+                          <!-- Isi Tabel -->
+                        </tbody>
+                        <tfoot>
+                          <tr id="footerTh" style="text-align: center; vertical-align: middle">
+                            <th id="namaTh">Nama</th>
+                            <th id="posisiTh">Posisi</th>
+                            <th id="statusTh">Status</th>
+                            <th id="tanggalTh">Tanggal</th>
+                            <th id="DurasiTh">Durasi</th>
+                            <th id="pctDurasiTh">Persentase Durasi</th>
+                            <th id="keteranganTh">Keterangan</th>
+                            <th id="linkDokumenTh">Link Dokumen</th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="pagination">

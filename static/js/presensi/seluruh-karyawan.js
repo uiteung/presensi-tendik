@@ -29,6 +29,7 @@ fetch("https://hris_backend.ulbi.ac.id/presensi/datakaryawan", requestOptions)
 		data.data.map((values) => {
 			tableData += `
 				<tr>
+					<td hidden></td>
 					<td>
 						<p class="fw-normal mb-1">${values.nama}</p>
 					</td>

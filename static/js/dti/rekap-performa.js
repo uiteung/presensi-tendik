@@ -177,6 +177,7 @@ CihuyDomReady(() => {
 
       tableData += `
           <tr>
+              <td hidden></td>
               <td>
                   <div class="d-flex align-items-center">
                       <div class="ms-3">

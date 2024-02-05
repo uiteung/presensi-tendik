@@ -48,6 +48,7 @@ CihuyDomReady(() => {
 					karyawanBelumPresensi.map((values) => {
 						tableData += `
                         <tr>
+							<td hidden></td>
                             <td>
                                 <p class="fw-normal mb-1">${values.nama}</p>
                             </td>

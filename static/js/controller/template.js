@@ -7,7 +7,7 @@ export let UrlGetAllCommitsRekapHarian = "https://hris_backend.ulbi.ac.id/api/v2
 export let UrlGetAllPerforma = "https://hris_backend.ulbi.ac.id/api/v2/commits/performance";
 
 // Endpoint Get By Id
-export let UrlGetKaryawanById = "https://hris_backend.ulbi.ac.id/presensi/datapresensi/getkaryawan/";
+export let UrlGetKaryawanById = "https://hris_backend.ulbi.ac.id/presensi/datapresensi/getkaryawan";
 
 // Endpoint Post
 export let UrlPostDataKaryawan = "https://hris_backend.ulbi.ac.id/presensi/datakaryawan/postdata";

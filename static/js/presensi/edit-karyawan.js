@@ -90,9 +90,10 @@ function showConfirmationAlert(data) {
 				text: 'Data Karyawan Berhasil Diperbarui',
 				showConfirmButton: false,
 				timer: 1500
-			}).then(() => {
-				window.location.href = 'seluruh-karyawan.html';
 			});
+			// .then(() => {
+			// 	window.location.href = 'seluruh-karyawan.html';
+			// });
 		} else {
 			// Menampilkan Data Alert Error
 			Swal.fire({
@@ -116,7 +117,7 @@ function showNoChangeAlert() {
 // Untuk Update data ke data presensi
 function updateEmployeeData(data) {
 	fetch(PutDataKaryawan, {
-		method: "PATCH",
+		method: "PUT",
 		headers: header,
 		body: JSON.stringify(data)
 	})

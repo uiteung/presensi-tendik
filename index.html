@@ -230,52 +230,22 @@
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <div class="row no-gutters">
-                      <div class="col-auto date-filter" style="width: 20%">
-                        <label for="startDate" class="form-label"
-                          >Tanggal Mulai</label
-                        >
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="startDate"
-                          name="startDate" />
-                      </div>
-                      <div class="col-auto date-filter" style="width: 20%">
-                        <label for="endDate" class="form-label"
-                          >Tanggal Akhir</label
-                        >
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="endDate"
-                          name="endDate" />
-                      </div>
-                      <div class="col-auto date-filter" style="width: 20%">
-                        <button
-                          type="button"
-                          id="filterButton"
-                          class="btn btn-info mt-4"
-                          style="height: 40px">
-                          <i
-                            class="align-middle me-1"
-                            data-feather="search"></i>
-                          Filter Berdasarkan Tanggal
-                        </button>
-                      </div>
+                    <div class="row no-gutters" style="height: 40px">
+                      <h1 class="h3 mb-3">Tabel Presensi Masuk Karyawan</h1>
                       <div
                         class="col-md-3"
+                        id="filterButtonMasuk"
                         style="
                           position: absolute;
                           top: 0;
                           right: 0;
                           width: 15%;
-                          margin-top: 40px;
+                          margin-top: 20px;
                         ">
                         <input
                           type="text"
                           class="form-control"
-                          id="searchInput"
+                          id="searchInputMasuk"
                           placeholder="Cari" />
                       </div>
                     </div>
@@ -283,36 +253,38 @@
                     <hr />
                     <div class="table-container">
                       <table
-                        id="example"  
+                        id="exampleMasuk"
                         class="table table-striped"
                         style="width: 100%">
                         <thead>
                           <tr style="text-align: center; vertical-align: middle">
                             <th hidden></th>
-                            <th id="namaTh">Nama</th>
-                            <th id="posisiTh">Posisi</th>
-                            <th id="statusTh">Status</th>
-                            <th id="tanggalTh">Tanggal</th>
-                            <th id="DurasiTh">Durasi</th>
-                            <th id="pctDurasiTh">Persentase Durasi</th>
-                            <th id="keteranganTh">Keterangan</th>
-                            <th id="linkDokumenTh">Link Dokumen</th>
+                            <th>Nama</th>
+                            <th>Posisi</th>
+                            <th>Status</th>
+                            <th>Tanggal</th>
+                            <th>Durasi</th>
+                            <th>Persentase Durasi</th>
+                            <th>Keterangan</th>
+                            <th>Link Dokumen</th>
                           </tr>
                         </thead>
-                        <tbody id="tablebody">
-                          <!-- Isi Tabel -->
+                        <tbody id="tablebodyMasuk">
+                          <script
+                            src="../static/js/presensi/detail-rekap-harian.js"
+                            type="module"></script>
                         </tbody>
                         <tfoot>
-                          <tr id="footerTh" style="text-align: center; vertical-align: middle">
+                          <tr style="text-align: center; vertical-align: middle">
                             <th hidden></th>
-                            <th id="namaTh">Nama</th>
-                            <th id="posisiTh">Posisi</th>
-                            <th id="statusTh">Status</th>
-                            <th id="tanggalTh">Tanggal</th>
-                            <th id="DurasiTh">Durasi</th>
-                            <th id="pctDurasiTh">Persentase Durasi</th>
-                            <th id="keteranganTh">Keterangan</th>
-                            <th id="linkDokumenTh">Link Dokumen</th>
+                            <th>Nama</th>
+                            <th>Posisi</th>
+                            <th>Status</th>
+                            <th>Tanggal</th>
+                            <th>Durasi</th>
+                            <th>Persentase Durasi</th>
+                            <th>Keterangan</th>
+                            <th>Link Dokumen</th>
                           </tr>
                         </tfoot>
                       </table>
@@ -320,11 +292,15 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="pagination">
-                          <button id="prevPageBtn" class="btn btn-primary">
+                          <button
+                            id="prevPageBtnMasuk"
+                            class="btn btn-primary">
                             Previous
                           </button>
-                          <span id="currentPage" class="mx-2">Page 1</span>
-                          <button id="nextPageBtn" class="btn btn-primary">
+                          <span id="currentPageMasuk" class="mx-2">Halaman 1</span>
+                          <button
+                            id="nextPageBtnMasuk"
+                            class="btn btn-primary">
                             Next
                           </button>
                         </div>

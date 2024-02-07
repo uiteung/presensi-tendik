@@ -86,7 +86,7 @@ CihuyDomReady(() => {
                                             <p class="fw-bold mb-1">${nama}</p>
                                             <p class="text-muted mb-0">${masukEntry.phone_number}</p>
                                         </div>
-                                    </div>s
+                                    </div>
                                 </td>
                                 <td>
                                     <p class="fw-normal mb-1">${masukEntry.biodata.jabatan}</p>

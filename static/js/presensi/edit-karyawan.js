@@ -117,7 +117,7 @@ function showNoChangeAlert() {
 // Untuk Update data ke data presensi
 function updateEmployeeData(data) {
 	fetch(PutDataKaryawan, {
-		method: "PUT",
+		method: "PATCH",
 		headers: header,
 		body: JSON.stringify(data)
 	})

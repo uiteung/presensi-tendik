@@ -174,12 +174,8 @@ CihuyDomReady(() => {
           <tr>
               <td hidden></td>
               <td style="text-align: center; vertical-align: middle">
-                  <div class="d-flex align-items-center">
-                      <div class="ms-3">
-                          <p class="fw-bold mb-1">${nama}</p>
-                          <p class="text-muted mb-0">${email}</p>
-                      </div>
-                  </div>
+                  <p class="fw-bold mb-1">${nama}</p>
+                  <p class="text-muted mb-0">${email}</p>
               </td>
               <td style="text-align: center; vertical-align: middle">
                   <p class="fw-normal mb-1">${date}</p>

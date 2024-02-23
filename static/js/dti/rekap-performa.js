@@ -32,12 +32,8 @@ function updateRekap() {
         backdrop: `
           rgba(0,0,123,0.4)
         `
-      }).
-      // Swal.fire({
-      //   icon: 'success',
-      //   title: 'Data Rekap Hari ini Berhasil Diupdate!',
-      // }).
-      then(() => {
+      })
+      .then(() => {
         // Refresh the page after successful addition
         window.location.href = 'harian-commit.html';
       });
@@ -187,25 +183,21 @@ CihuyDomReady(() => {
                   </div>
               </td>
               <td style="text-align: center; vertical-align: middle">
-                <p class="fw-normal mb-1">${jamMasuk}</p>
+                  <p class="fw-normal mb-1">${date}</p>
               </td>
               <td style="text-align: center; vertical-align: middle">
+                <p class="fw-normal mb-1">${jamMasuk}</p>
                 <p class="fw-normal mb-1"><b>${ketBadgeMasuk}</b></p>
               </td>
               <td style="text-align: center; vertical-align: middle">
-                  <p class="fw-normal mb-1">${date}</p>
+                <p class="fw-normal mb-1">${jamPulang}</p>
+                <p class="fw-normal mb-1"><b>${ketBadgePulang}</b></p>
               </td>
               <td style="text-align: center; vertical-align: middle">
                   <p class="fw-normal mb-1">${jmlCommit}</p>
               </td>
               <td style="text-align: center; vertical-align: middle">
                 <p class="fw-normal mb-1">${BadgeCommit}</p>
-              </td>
-              <td style="text-align: center; vertical-align: middle">
-                <p class="fw-normal mb-1">${jamPulang}</p>
-              </td>
-              <td style="text-align: center; vertical-align: middle">
-                <p class="fw-normal mb-1"><b>${ketBadgePulang}</b></p>
               </td>
           </tr>
       `;

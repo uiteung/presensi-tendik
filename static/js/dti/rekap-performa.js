@@ -196,9 +196,6 @@ CihuyDomReady(() => {
                   <p class="fw-normal mb-1">${jmlCommit}</p>
               </td>
               <td style="text-align: center; vertical-align: middle">
-                  <p class="fw-normal mb-1"></p>
-              </td>
-              <td style="text-align: center; vertical-align: middle">
                 <p class="fw-normal mb-1">${BadgeCommit}</p>
               </td>
           </tr>

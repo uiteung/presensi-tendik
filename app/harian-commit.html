@@ -250,31 +250,27 @@
                           <tr style="text-align: center; vertical-align: middle">
                               <th hidden></th>
                               <th id="namaTh">Nama</th>
-                              <th id="posisiTh">Presensi Masuk</th>
-                              <th id="statusTh">Status</th>
                               <th id="tanggalTh">Tanggal</th>
-                              <th id="DurasiTh">Jumlah Commit</th>
-                              <th id="pctDurasiTh">Status Commit</th>
-                              <th id="keteranganTh">Presensi Pulang</th>
-                              <th id="linkDokumenTh">Status</th>
+                              <th id="masukTh">Presensi Masuk</th>
+                              <th id="pulangTh">Presensi Pulang</th>
+                              <th id="commitTh">Jumlah Commit</th>
+                              <th id="sttCommitTh">Status Commit</th>
                           </tr>
                         </thead>
-                        <tbody id="tablebody">
-                          <script
-                            src="../static/js/presensi/sakit-izin.js"
-                            type="module"></script>
-                        </tbody>
+
+                        <!-- Fetch Data Performa DTI Start -->
+                        <tbody id="tablebody"></tbody>
+                        <!-- Fetch Data Performa DTI End -->
+                        
                         <tfoot>
                           <tr style="text-align: center; vertical-align: middle">
                               <th hidden></th>
                               <th id="namaTh">Nama</th>
-                              <th id="posisiTh">Presensi Masuk</th>
-                              <th id="tanggalTh">Status</th>
-                              <th id="keteranganTh">Tanggal</th>
-                              <th id="linkDokumenTh">Jumlah Commit</th>
-                              <th id="actionTh">Status Commit</th>                                              
-                              <th id="actionTh">Presensi Pulang</th>                                              
-                              <th id="actionTh">Status</th>                                              
+                              <th id="tanggalTh">Tanggal</th>
+                              <th id="masukTh">Presensi Masuk</th>
+                              <th id="pulangTh">Presensi Pulang</th>
+                              <th id="commitTh">Jumlah Commit</th>
+                              <th id="sttCommitTh">Status Commit</th>                                              
                             </tr>
                         </tfoot>
                       </table>
@@ -329,6 +325,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <!-- <script src="../static/js/style/table-sorting.js" type="module"></script> -->
     <script type="module" src="../static/js/dti/rekap-performa.js"></script>
-    <script src="../static/js/controller/cihuyred.js" type="module"></script>
+    <!-- <script src="../static/js/controller/cihuyred.js" type="module"></script> -->
   </body>
 </html>

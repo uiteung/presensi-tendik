@@ -31,3 +31,4 @@ export let UrlPutDataKaryawan = "https://hris_backend.ulbi.ac.id/presensi/dataka
 
 // Endpoint Delete
 export let UrlDeleteKaryawan = "https://hris_backend.ulbi.ac.id/presensi/datakaryawan/deletedata";
+export let UrlDeletePresensi = "https://hris_backend.ulbi.ac.id/presensi/datapresensi/deletedata";

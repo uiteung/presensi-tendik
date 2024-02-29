@@ -1,18 +1,6 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady, CihuyQuerySelector } from "https://c-craftjs.github.io/table/table.js";
-import { html_table_to_excel } from "../style/xlsx-pdf.js";
-
-// Untuk Autentifikasi Login User Tertentu
-import { token } from "../controller/cookies.js";
-
-var header = new Headers();
-header.append("login", token);
-header.append("Content-Type", "application/json");
-
-const requestOptions = {
-	method: "GET",
-	headers: header
-};
+import { UrlGetAllPresensi, UrlDeletePresensi, requestOptionsDelete, requestOptionsGet } from "../controller/template.js";
 
 // Untuk Membuat Pagination
 CihuyDomReady(() => {
@@ -23,7 +11,7 @@ CihuyDomReady(() => {
 	const itemperpage = 8;
 	let halamannow = 1;
 
-	fetch("https://hris_backend.ulbi.ac.id/presensi/datapresensi", requestOptions)
+	fetch(UrlGetAllPresensi, requestOptionsGet)
 		.then((result) => {
 			return result.json();
 		})
@@ -95,6 +83,7 @@ CihuyDomReady(() => {
 			console.log('error', error);
 		});
 
+	// Function untuk Pagination
 	function displayData(page) {
 		const baris = CihuyQuerySelector("#tablebody tr");
 		const mulaiindex = (page - 1) * itemperpage;
@@ -139,7 +128,6 @@ document.getElementById("tablebody").addEventListener("click", (event) => {
 	if (target.classList.contains("btn-danger")) {
 	  const _id = target.getAttribute("data-entry-id");
 	  if (_id) {
-		// Display SweetAlert confirmation dialog
 		Swal.fire({
 		  title: 'Hapus Data Perizinan?',
 		  text: "Data tidak akan dapat mengembalikan ini!",
@@ -150,7 +138,6 @@ document.getElementById("tablebody").addEventListener("click", (event) => {
 		  confirmButtonText: 'Yes'
 		}).then((result) => {
 		  if (result.isConfirmed) {
-			// User confirmed, call the function to handle deletion
 			deleteData(_id);
 		  }
 		});
@@ -160,19 +147,12 @@ document.getElementById("tablebody").addEventListener("click", (event) => {
   
   // Function to delete data
   function deleteData(_id) {
-	const deleteUrl = `https://hris_backend.ulbi.ac.id/presensi/datapresensi/deletedata/${_id}`;
+	const deleteUrl = UrlDeletePresensi + `/${_id}`;
 	
-	fetch(deleteUrl, {
-	  method: "DELETE",
-	  headers: header
-	})
+	fetch(deleteUrl, requestOptionsDelete)
 	  .then((response) => response.json())
 	  .then((data) => {
-		// Handle successful deletion
 		console.log("Data deleted:", data);
-		// You might want to update the table or handle other UI updates here
-		
-		// Display success SweetAlert
 		Swal.fire({
 			title: 'Deleted!',
 			text: 'Data Perizinan Berhasil Dihapus.',
@@ -180,14 +160,11 @@ document.getElementById("tablebody").addEventListener("click", (event) => {
 			showConfirmButton: false,
 			timer: 1500
 		  }).then(() => {
-			// Reload the page after successful deletion
 			location.reload();
 		  });
 		})
 	  	.catch((error) => {
 			console.error("Error deleting data:", error);
-			
-			// Display error SweetAlert
 			Swal.fire(
 			'Error!',
 			'Data Perizinan Gagal Dihapus',

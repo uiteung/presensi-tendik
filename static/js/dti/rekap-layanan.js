@@ -1,6 +1,11 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady, CihuyQuerySelector } from "https://c-craftjs.github.io/table/table.js";
 import { UrlGetAllLayanan } from "../controller/template.js";
+import { token } from "../controller/cookies.js";
+
+var header = new Headers();
+header.append("login", token);
+header.append("Content-Type", "application/json");
 
 // Request Options for Get
 const requestOptions = {

@@ -13,7 +13,6 @@ const requestOptions = {
   headers: header
 };
 
-
 // Untuk Membuat Pagination
 CihuyDomReady(() => {
 	const tablebody = CihuyId("tablebody");
@@ -28,6 +27,9 @@ fetch(UrlGetAllLayanan, requestOptions)
 		return result.json();
 	})
 	.then((data) => {
+        // Mengurutkan data dari yang paling akhir
+        data.data.reverse();
+        
 		let tableData = "";
 		data.data.map((values) => {
 			tableData += `

@@ -1,5 +1,13 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady, CihuyQuerySelector } from "https://c-craftjs.github.io/table/table.js";
+import { UrlGetAllLayanan } from "../controller/template.js";
+
+// Request Options for Get
+const requestOptions = {
+  method: "GET",
+  headers: header
+};
+
 
 // Untuk Membuat Pagination
 CihuyDomReady(() => {
@@ -10,7 +18,7 @@ CihuyDomReady(() => {
 	const itemperpage = 5;
 	let halamannow = 1;
 
-fetch(AllBank, requestOptionsGet)
+fetch(UrlGetAllLayanan, requestOptions)
 	.then((result) => {
 		return result.json();
 	})
@@ -21,16 +29,21 @@ fetch(AllBank, requestOptionsGet)
                         <tr>
                         <td hidden></td>
                         <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${values.name_rek}</p>
+                            <p class="fw-normal mb-1">${values.petugas}</p>
+                            <p class="fw-normal mb-1">${values.nopetugas}</p>
                         </td>
                         <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${values.no_rek}</p>
+                            <p class="fw-normal mb-1">${values.nama}</p>
+                            <p class="fw-normal mb-1">${values.phone}</p>
                         </td>
                         <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${values.bank}</p>
+                            <p class="fw-normal mb-1">${values.solusi}</p>
                         </td>
                         <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${getBadgeBank(values.status)}</p>
+                            <p class="fw-normal mb-1">${values.komentar}</p>
+                        </td>
+                        <td style="text-align: center; vertical-align: middle">
+                            <p class="fw-normal mb-1">${values.rating}</p>
                         </td>
                     </tr>`;
 		});

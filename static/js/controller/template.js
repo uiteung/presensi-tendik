@@ -19,6 +19,7 @@ export let UrlGetAllPresensiPulang = "https://hris_backend.ulbi.ac.id/presensi/d
 export let UrlGetAllCommitsRekapHarian = "https://hris_backend.ulbi.ac.id/api/v2/commits/rekapharian";
 export let UrlGetAllPerforma = "https://hris_backend.ulbi.ac.id/api/v2/commits/performance";
 export let UrlGetAllKaryawan = "https://hris_backend.ulbi.ac.id/presensi/datakaryawan";
+export let UrlGetAllLayanan = "https://hris_backend.ulbi.ac.id/api/v2/ux/uxlaporan";
 
 // Endpoint Get By Id
 export let UrlGetKaryawanById = "https://hris_backend.ulbi.ac.id/presensi/datapresensi/getkaryawan";

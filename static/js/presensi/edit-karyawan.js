@@ -16,7 +16,7 @@ let employeeData;
 const urlParams = new URLSearchParams(window.location.search);
 const _id = urlParams.get('_id');
 const GetKaryawanById = UrlGetKaryawanById + `/${_id}`;
-const PutDataKaryawan = UrlGetKaryawanById + `/${_id}`;
+const PutDataKaryawan = UrlPutDataKaryawan + `/${_id}`;
 
 fetch(GetKaryawanById, requestOptions)
 	.then((result) => {
